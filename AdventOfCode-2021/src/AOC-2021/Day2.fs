@@ -34,5 +34,6 @@ module Day2
         let positionProduct = finalPosition.Position * finalPosition.Depth
 
         // Display result
-        printfn "\nFinal Position: %A" <| finalPosition
+        printfn "\n\nDay 2 Result:"
+        printfn "\n\nFinal Position: %A" <| finalPosition
         printfn "\nPosition Product: %s" <| positionProduct.ToString("N0")
