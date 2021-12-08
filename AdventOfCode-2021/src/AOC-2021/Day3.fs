@@ -2,6 +2,9 @@ module Day3
     open System
 
     module Part1 =
+        let getDay3Data =
+            System.IO.File.ReadLines(".\Data\input3.txt")
+
         let mapLines (lines: seq<string>) =
             lines 
                 |> Seq.map(fun (line) -> line.ToCharArray())
@@ -12,6 +15,7 @@ module Day3
                                 | '1' -> 1uy 
                                 | _ -> 0uy ))
 
+        // Thank you stack overflow!
         let pivotLines mappedLines =
             mappedLines 
                 |> Seq.collect Seq.indexed
@@ -19,12 +23,10 @@ module Day3
                 |> Seq.map (snd >> Seq.map snd)
 
     let Execute: unit =
-        let lines = System.IO.File.ReadLines(".\Data\input3.txt")
-
-        let mappedLines = Part1.mapLines lines
-
-        // Thank you stack overflow!
-        let pivotedLines = Part1.pivotLines mappedLines
+        let pivotedLines = 
+            Part1.getDay3Data
+            |> Part1.mapLines 
+            |> Part1.pivotLines
             
         printfn "\n\nDay 3 Result:\n"
 
