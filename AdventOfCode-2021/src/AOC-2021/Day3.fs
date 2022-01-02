@@ -22,11 +22,18 @@ module Day3
                 |> Seq.groupBy fst
                 |> Seq.map (snd >> Seq.map snd)
 
+        let combineBits bitArrays =
+            bitArrays 
+                |> Seq.map(Seq.countBy(fun y -> y))
+                |> Seq.map(fun x -> x |> Seq.reduce(fun accum elem -> if snd accum > snd elem then accum else elem))
+                |> Seq.map(fun x -> fst x)
+                
     let Execute: unit =
         let pivotedLines = 
             Part1.getDay3Data
             |> Part1.mapLines 
             |> Part1.pivotLines
+            |> Part1.combineBits
             
         printfn "\n\nDay 3 Result:\n"
 
