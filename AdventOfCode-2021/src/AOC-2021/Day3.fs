@@ -27,15 +27,35 @@ module Day3
                 |> Seq.map(Seq.countBy(fun y -> y))
                 |> Seq.map(fun x -> x |> Seq.reduce(fun accum elem -> if snd accum > snd elem then accum else elem))
                 |> Seq.map(fun x -> fst x)
-                
+
+        let binaryArrayToNumber array =
+            array
+                |> Seq.indexed
+                |> Seq.reduce(fun accum elem -> 
+                    match fst elem with
+                        | 1 -> (1, snd accum * 16uy + snd elem * 8uy)
+                        | 2 -> (2, snd accum + snd elem * 4uy)
+                        | 3 -> (3, snd accum + snd elem * 2uy)
+                        | 4 -> (4, snd accum + snd elem * 1uy)
+                        | _ -> (0, snd accum))
+                |> snd
+                        
     let Execute: unit =
         let pivotedLines = 
             Part1.getDay3Data
             |> Part1.mapLines 
             |> Part1.pivotLines
             |> Part1.combineBits
-            
+            |> Seq.toArray
+
+        let numericValue =
+            pivotedLines
+            |> Part1.binaryArrayToNumber
+
         printfn "\n\nDay 3 Result:\n"
 
+        // printfn "%A" pivotedLines
+
+        printfn "%A" numericValue
         // Show Data
-        pivotedLines |> Seq.iter(fun(x) -> printfn "%A" x)
+        // pivotedLines |> Seq.iter(fun(x) -> printfn "%A" x)
