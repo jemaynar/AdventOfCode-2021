@@ -52,10 +52,7 @@ module Day3
             pivotedLines
             |> Part1.binaryArrayToNumber
 
+        // Show Data
         printfn "\n\nDay 3 Result:\n"
 
-        // printfn "%A" pivotedLines
-
-        printfn "%A" numericValue
-        // Show Data
-        // pivotedLines |> Seq.iter(fun(x) -> printfn "%A" x)
+        pivotedLines |> Seq.map(fun x -> string x) |> Seq.fold (+) "" |> printfn "Binary: %A Numeric: %A" <| numericValue
