@@ -1,16 +1,16 @@
 module Day3
     open System
 
-    module Part1 =
-        let getDay3Data =
-            System.IO.File.ReadLines(".\Data\input3.txt")
+    let getData = 
+        System.IO.File.ReadLines(".\Data\input3.txt")
 
+    module Part1 =
         let mapLines (lines: seq<string>) =
             lines
                 |> Seq.map(fun line -> line.ToCharArray())
                 |> Seq.map(fun charArray -> 
                     charArray 
-                        |> Seq.map(fun x -> 
+                        |> Array.map(fun x -> 
                             match x with 
                                 | '1' -> 1 
                                 | _ -> 0 ))
@@ -23,10 +23,12 @@ module Day3
                 |> Seq.map (snd >> Seq.map snd)
 
         let private mostCommon accum elem =
-            if snd accum > snd elem then accum else elem
+            if snd accum > snd elem then accum
+            elif snd accum = snd elem then fst elem, 1
+            else elem
 
         let private leastCommon accum elem =
-            if snd accum < snd elem then accum else elem
+            if snd accum <= snd elem then accum else elem
 
         let private combineBits bitArrays reducerFunc =
             bitArrays 
@@ -58,9 +60,15 @@ module Day3
                         | 11 -> (4, snd accum + snd elem * 1)
                         | _ -> (0, snd accum))
                 |> snd
-                        
+
+    module Part2 =
+        let filterByArrayIndex arrayOfCharArrays idx filter = 
+            arrayOfCharArrays
+            |> Seq.map(Array.ofSeq)
+            |> Seq.filter(fun x -> x.[idx] = filter)
+
     let Execute: unit =
-        let Day3Data = Part1.getDay3Data
+        let Day3Data = getData
 
         let gammaRateBinary = 
             Day3Data
@@ -83,7 +91,7 @@ module Day3
         let powerConsumption = numericGammaRate * numericEpsilonRate;
 
         // Show Data
-        printfn "\n\nDay 3 Result:\n"
+        printfn "\n\nDay 3 / Part 1 Result:\n"
 
         gammaRateBinary |> printfn "%A"
         gammaRateBinary |> Seq.map(fun x -> string x) |> Seq.fold (+) "" |> printfn "Gamma Rate -> Binary: %A Numeric: %A" <| numericGammaRate
@@ -91,5 +99,34 @@ module Day3
         epsilonRateBinary |> printfn "%A"
         epsilonRateBinary |> Seq.map(fun x -> string x) |> Seq.fold (+) "" |> printfn "Epsilon Rate -> Binary: %A Numeric: %A" <| numericEpsilonRate
 
-        powerConsumption |> printfn "PowerConsumption: %A"
+        powerConsumption |> printfn "Power Consumption: %A"
+
+        printfn "\n\nDay 3 / Part 2 Result:\n"
+
+        Day3Data |> printfn "%A"
+
+        let mostCommonBits = 
+            Day3Data
+            |> Part1.mapLines
+            |> Part1.pivotLines
+            |> Part1.combineMostCommonBits
+            |> Seq.toArray
+
+        mostCommonBits |> printfn "\nMost Common Bits: %A"
+
+        let lines = 
+            Day3Data
+            |> Part1.mapLines
+
+        let filteredByFirstBit =
+            Part2.filterByArrayIndex lines 0 mostCommonBits[0]
+
+        filteredByFirstBit |> printfn "\nFiltered By First Bit: %A"
+
+        let numericOxygenGeneratorRating = 1
+        let numericCo2ScrubberRating = 1
+
+        let lifeSupportRating = numericOxygenGeneratorRating * numericCo2ScrubberRating
+
+        lifeSupportRating |> printfn "Life Support Rating: %A"
         
