@@ -120,7 +120,8 @@ module Day3
 
         let filteredByFirstBit =
             Part2.filterByArrayIndex lines 0 mostCommonBits[0]
-
+            |> Seq.map(fun x -> x |> Seq.map(fun e -> string e) |> Seq.fold (+) "")
+        
         filteredByFirstBit |> printfn "\nFiltered By First Bit: %A"
 
         let numericOxygenGeneratorRating = 1
