@@ -5,7 +5,7 @@ module Day3
         System.IO.File.ReadLines(".\Data\input3.txt")
         
     let nestedArrayToArrayOfStrings (arrayOfArrays) =
-        arrayOfArrays |> Seq.map(fun x -> x |> Seq.map(fun e -> string e) |> Seq.fold (+) "")
+        arrayOfArrays |> Seq.map(fun x -> x |> Seq.map(string) |> Seq.fold (+) "")
 
     module Part1 =
         let mapLines (lines: seq<string>) =
@@ -104,10 +104,10 @@ module Day3
         printfn "\n\nDay 3 / Part 1 Result:\n"
 
         gammaRateBinary |> printfn "%A"
-        gammaRateBinary |> Seq.map(fun x -> string x) |> Seq.fold (+) "" |> printfn "Gamma Rate -> Binary: %A Numeric: %A" <| numericGammaRate
+        gammaRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Gamma Rate -> Binary: %A Numeric: %A" <| numericGammaRate
 
         epsilonRateBinary |> printfn "%A"
-        epsilonRateBinary |> Seq.map(fun x -> string x) |> Seq.fold (+) "" |> printfn "Epsilon Rate -> Binary: %A Numeric: %A" <| numericEpsilonRate
+        epsilonRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Epsilon Rate -> Binary: %A Numeric: %A" <| numericEpsilonRate
 
         powerConsumption |> printfn "Power Consumption: %A"
 
