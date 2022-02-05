@@ -3,6 +3,9 @@ module Day3
 
     let getData = 
         System.IO.File.ReadLines(".\Data\input3.txt")
+        
+    let nestedArrayToArrayOfStrings (arrayOfArrays) =
+        arrayOfArrays |> Seq.map(fun x -> x |> Seq.map(fun e -> string e) |> Seq.fold (+) "")
 
     module Part1 =
         let mapLines (lines: seq<string>) =
@@ -120,7 +123,7 @@ module Day3
 
         let filteredByFirstBit =
             Part2.filterByArrayIndex lines 0 mostCommonBits[0]
-            |> Seq.map(fun x -> x |> Seq.map(fun e -> string e) |> Seq.fold (+) "")
+            |> nestedArrayToArrayOfStrings
         
         filteredByFirstBit |> printfn "\nFiltered By First Bit: %A"
 
