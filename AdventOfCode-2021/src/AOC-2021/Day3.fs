@@ -123,7 +123,7 @@ module Day3
 
         let filteredByFirstBit =
             Part2.filterByArrayIndex lines 0 mostCommonBits[0]
-            |> nestedArrayToArrayOfStrings
+            |> nestedArrayToArrayOfStrings |> Seq.toArray
         
         filteredByFirstBit |> printfn "\nFiltered By First Bit: %A"
 
