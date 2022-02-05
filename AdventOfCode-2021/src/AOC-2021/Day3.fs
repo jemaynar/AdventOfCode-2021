@@ -69,6 +69,13 @@ module Day3
             arrayOfCharArrays
             |> Seq.map(Array.ofSeq)
             |> Seq.filter(fun x -> x.[idx] = filter)
+            
+        let calculateMostCommonBits (arrayOfBinaryStrings) =
+            arrayOfBinaryStrings
+            |> Part1.mapLines
+            |> Part1.pivotLines
+            |> Part1.combineMostCommonBits
+            |> Seq.toArray
 
     let Execute: unit =
         let Day3Data = getData
@@ -108,12 +115,8 @@ module Day3
 
         Day3Data |> printfn "%A"
 
-        let mostCommonBits = 
-            Day3Data
-            |> Part1.mapLines
-            |> Part1.pivotLines
-            |> Part1.combineMostCommonBits
-            |> Seq.toArray
+        let mostCommonBits =
+            Day3Data |> Part2.calculateMostCommonBits
 
         mostCommonBits |> printfn "\nMost Common Bits: %A"
 
@@ -125,7 +128,7 @@ module Day3
             Part2.filterByArrayIndex lines 0 mostCommonBits[0]
             |> nestedArrayToArrayOfStrings |> Seq.toArray
         
-        filteredByFirstBit |> printfn "\nFiltered By First Bit: %A"
+        filteredByFirstBit |> printfn "\nFiltered By First Bit of mostCommonBits: %A"
 
         let numericOxygenGeneratorRating = 1
         let numericCo2ScrubberRating = 1
