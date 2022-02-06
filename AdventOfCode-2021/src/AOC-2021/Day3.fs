@@ -112,6 +112,9 @@ module Day3
                 |> combineMostCommonBits
                 |> Seq.toArray
                 
+        let calculateLifeSupportRating oxygenGeneratorRating co2ScrubberRating =
+            oxygenGeneratorRating * co2ScrubberRating
+                
         let Execute: unit =
             printfn "\n\nDay 3 / Part 2 Result:\n"
 
@@ -135,7 +138,8 @@ module Day3
             let numericOxygenGeneratorRating = 1
             let numericCo2ScrubberRating = 1
 
-            let lifeSupportRating = numericOxygenGeneratorRating * numericCo2ScrubberRating
+            let lifeSupportRating:int =
+                calculateLifeSupportRating numericOxygenGeneratorRating numericCo2ScrubberRating
 
             lifeSupportRating |> printfn "Life Support Rating: %A"
 
