@@ -3,7 +3,7 @@ module Day1
 
     module Part1 =
         let sumData (rows: seq<string>): int = 
-            rows |> Seq.map(fun(x) -> Convert.ToInt32(x)) 
+            rows |> Seq.map(Convert.ToInt32) 
                 |> Seq.pairwise 
                 |> Seq.map(fun (previous, next) -> if next > previous then 1 else 0)
                 |> Seq.sum
@@ -17,7 +17,7 @@ module Day1
                 |> Seq.sum
 
     let Execute =
-        let lines = System.IO.File.ReadLines(".\Data\input1.txt")
+        let lines = Common.getData ".\Data\input1.txt"
 
         // Show Data
         // lines |> Seq.iter(fun(x) -> printfn "%s" x)

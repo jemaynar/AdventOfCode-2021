@@ -1,8 +1,8 @@
 module Day3
     open System
 
-    let getData = 
-        System.IO.File.ReadLines(".\Data\input3.txt")
+    let getData =
+        Common.getData ".\Data\input3.txt"
         
     let nestedArrayToArrayOfStrings (arrayOfArrays) =
         arrayOfArrays |> Seq.map(fun x -> x |> Seq.map(string) |> Seq.fold (+) "")

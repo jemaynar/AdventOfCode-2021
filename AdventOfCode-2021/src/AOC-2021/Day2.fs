@@ -19,7 +19,7 @@ module Day2
         let displayCoordinate x = printfn "%A" <| x
 
     let Execute =
-        let lines = System.IO.File.ReadLines(".\Data\input2.txt")
+        let lines = Common.getData ".\Data\input2.txt"
 
         // Parse all data
         let allCoordinates = lines |> Seq.map(fun(x) -> Coordinate.parsePositionData(x))

@@ -1,8 +1,4 @@
-﻿open System
-open Day2
-open Day3
-
-[<EntryPoint>]
+﻿[<EntryPoint>]
 let main argv =
     Day1.Execute
     Day2.Execute
