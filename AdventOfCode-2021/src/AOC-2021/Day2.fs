@@ -22,12 +22,12 @@ module Day2
         let lines = Common.getData ".\Data\input2.txt"
 
         // Parse all data
-        let allCoordinates = lines |> Seq.map(fun(x) -> Coordinate.parsePositionData(x))
+        let allCoordinates = lines |> Seq.map(Coordinate.parsePositionData)
 
         // Show Data
         // allCoordinates |> Seq.iter(Coordinate.displayCoordinate)
 
-        // Reduce all coordinates (using sumPosotionData function)
+        // Reduce all coordinates (using sumPositionData function)
         let finalPosition = allCoordinates |> Seq.reduce(Coordinate.sumCoordinate)
 
         // Multiply Position by Depth.

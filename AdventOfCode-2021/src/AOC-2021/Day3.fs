@@ -37,7 +37,7 @@ module Day3
             bitArrays 
                 |> Seq.map(Seq.countBy(fun y -> y))
                 |> Seq.map(fun x -> x |> Seq.reduce(reducerFunc))
-                |> Seq.map(fun x -> fst x)
+                |> Seq.map(fst)
 
         let combineMostCommonBits array = 
              array |> combineBits <| mostCommon
