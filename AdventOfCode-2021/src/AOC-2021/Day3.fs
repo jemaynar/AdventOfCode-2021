@@ -19,10 +19,6 @@ module Day3
                             | _ -> 0 ))
 
     module Part1 =
-        let mapLines (lines: seq<string>) =
-            lines
-                |> toSequenceOfBitArrays
-
         // Thank you stack overflow!
         let pivotLines mappedLines =
             mappedLines 
@@ -87,7 +83,7 @@ module Day3
 
         let gammaRateBinary = 
             Day3Data
-                |> Part1.mapLines 
+                |> toSequenceOfBitArrays 
                 |> Part1.pivotLines
                 |> Part1.combineMostCommonBits
                 |> Seq.toArray
@@ -96,7 +92,7 @@ module Day3
 
         let epsilonRateBinary =
             Day3Data
-                |> Part1.mapLines
+                |> toSequenceOfBitArrays
                 |> Part1.pivotLines
                 |> Part1.combineLeastCommonBits
                 |> Seq.toArray
