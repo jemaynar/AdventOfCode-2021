@@ -25,46 +25,46 @@ module Day3
             |> Seq.groupBy fst
             |> Seq.map (snd >> Seq.map snd)
 
-    module Part1 =
-        let private mostCommon accum elem =
-            if snd accum > snd elem then accum
-            elif snd accum = snd elem then fst elem, 1
-            else elem
+    let private mostCommon accum elem =
+        if snd accum > snd elem then accum
+        elif snd accum = snd elem then fst elem, 1
+        else elem
 
-        let private leastCommon accum elem =
-            if snd accum <= snd elem then accum else elem
+    let private leastCommon accum elem =
+        if snd accum <= snd elem then accum else elem
 
-        let private combineBits bitArrays reducerFunc =
-            bitArrays 
-                |> Seq.map(Seq.countBy(fun y -> y))
-                |> Seq.map(fun x -> x |> Seq.reduce(reducerFunc))
-                |> Seq.map(fst)
+    let private combineBits bitArrays reducerFunc =
+        bitArrays 
+            |> Seq.map(Seq.countBy(fun y -> y))
+            |> Seq.map(fun x -> x |> Seq.reduce(reducerFunc))
+            |> Seq.map(fst)
 
-        let combineMostCommonBits array = 
-             array |> combineBits <| mostCommon
+    let combineMostCommonBits array = 
+         array |> combineBits <| mostCommon
 
-        let combineLeastCommonBits array = 
-             array |> combineBits <| leastCommon
+    let combineLeastCommonBits array = 
+         array |> combineBits <| leastCommon
 
-        let bitsToNumber array =
-            array
-                |> Seq.indexed
-                |> Seq.reduce(fun accum elem -> 
-                    match fst elem with
-                        | 1 -> (1, snd accum * 2048 + snd elem * 1024)
-                        | 2 -> (2, snd accum + snd elem * 512)
-                        | 3 -> (3, snd accum + snd elem * 256)
-                        | 4 -> (4, snd accum + snd elem * 128)
-                        | 5 -> (4, snd accum + snd elem * 64)
-                        | 6 -> (4, snd accum + snd elem * 32)
-                        | 7 -> (4, snd accum + snd elem * 16)
-                        | 8 -> (4, snd accum + snd elem * 8)
-                        | 9 -> (4, snd accum + snd elem * 4)
-                        | 10 -> (4, snd accum + snd elem * 2)
-                        | 11 -> (4, snd accum + snd elem * 1)
-                        | _ -> (0, snd accum))
-                |> snd
-                
+    let bitsToNumber sequenceOfBits =
+        sequenceOfBits
+            |> Seq.indexed
+            |> Seq.reduce(fun accum elem -> 
+                match fst elem with
+                    | 1 -> (1, snd accum * 2048 + snd elem * 1024)
+                    | 2 -> (2, snd accum + snd elem * 512)
+                    | 3 -> (3, snd accum + snd elem * 256)
+                    | 4 -> (4, snd accum + snd elem * 128)
+                    | 5 -> (4, snd accum + snd elem * 64)
+                    | 6 -> (4, snd accum + snd elem * 32)
+                    | 7 -> (4, snd accum + snd elem * 16)
+                    | 8 -> (4, snd accum + snd elem * 8)
+                    | 9 -> (4, snd accum + snd elem * 4)
+                    | 10 -> (4, snd accum + snd elem * 2)
+                    | 11 -> (4, snd accum + snd elem * 1)
+                    | _ -> (0, snd accum))
+            |> snd
+    
+    module Part1 =                
         let Execute: unit =
             let Day3Data = getData
 
@@ -109,7 +109,7 @@ module Day3
             arrayOfBinaryStrings
                 |> toSequenceOfBitArrays
                 |> pivotSequenceOfBitArrays
-                |> Part1.combineMostCommonBits
+                |> combineMostCommonBits
                 |> Seq.toArray
                 
         let Execute: unit =
