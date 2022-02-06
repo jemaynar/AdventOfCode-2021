@@ -1,22 +1,24 @@
 module Day3
     open System
 
-    let getData =
-        Common.getData ".\Data\input3.txt"
+    let getData = Common.getData ".\Data\input3.txt"
+    
+    let toSequenceOfBitArrays(lines: seq<string>) =
+        lines
+            |> Seq.map(fun line -> line.ToCharArray())
+            |> Seq.map(fun charArray -> 
+                charArray 
+                    |> Array.map(fun x -> 
+                        match x with 
+                            | '1' -> 1 
+                            | _ -> 0 ))
         
-    let nestedArrayToArrayOfStrings (arrayOfArrays) =
-        arrayOfArrays |> Seq.map(fun x -> x |> Seq.map(string) |> Seq.fold (+) "")
+    let toArrayOfBinaryStrings (arrayOfBitArrays) =
+        arrayOfBitArrays |> Seq.map(fun x -> x |> Seq.map(string) |> Seq.fold (+) "")
 
     module Part1 =
         let mapLines (lines: seq<string>) =
-            lines
-                |> Seq.map(fun line -> line.ToCharArray())
-                |> Seq.map(fun charArray -> 
-                    charArray 
-                        |> Array.map(fun x -> 
-                            match x with 
-                                | '1' -> 1 
-                                | _ -> 0 ))
+            lines |> toSequenceOfBitArrays
 
         // Thank you stack overflow!
         let pivotLines mappedLines =
@@ -72,7 +74,7 @@ module Day3
             
         let calculateMostCommonBits (arrayOfBinaryStrings) =
             arrayOfBinaryStrings
-            |> Part1.mapLines
+            |> toSequenceOfBitArrays
             |> Part1.pivotLines
             |> Part1.combineMostCommonBits
             |> Seq.toArray
@@ -120,13 +122,11 @@ module Day3
 
         mostCommonBits |> printfn "\nMost Common Bits: %A"
 
-        let lines = 
-            Day3Data
-            |> Part1.mapLines
+        let lines = Day3Data |> toSequenceOfBitArrays
 
         let filteredByFirstBit =
             Part2.filterByArrayIndex lines 0 mostCommonBits[0]
-            |> nestedArrayToArrayOfStrings |> Seq.toArray
+            |> toArrayOfBinaryStrings |> Seq.toArray
         
         filteredByFirstBit |> printfn "\nFiltered By First Bit of mostCommonBits: %A"
 
