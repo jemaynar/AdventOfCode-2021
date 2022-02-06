@@ -64,6 +64,40 @@ module Day3
                         | 11 -> (4, snd accum + snd elem * 1)
                         | _ -> (0, snd accum))
                 |> snd
+                
+        let Execute: unit =
+            let Day3Data = getData
+
+            let gammaRateBinary = 
+                Day3Data
+                    |> toSequenceOfBitArrays 
+                    |> pivotLines
+                    |> combineMostCommonBits
+                    |> Seq.toArray
+
+            let numericGammaRate = gammaRateBinary |> bitsToNumber
+
+            let epsilonRateBinary =
+                Day3Data
+                    |> toSequenceOfBitArrays
+                    |> pivotLines
+                    |> combineLeastCommonBits
+                    |> Seq.toArray
+
+            let numericEpsilonRate = epsilonRateBinary |> bitsToNumber
+
+            let powerConsumption = numericGammaRate * numericEpsilonRate;
+
+            // Show Data
+            printfn "\n\nDay 3 / Part 1 Result:\n"
+
+            gammaRateBinary |> printfn "%A"
+            gammaRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Gamma Rate -> Binary: %A Numeric: %A" <| numericGammaRate
+
+            epsilonRateBinary |> printfn "%A"
+            epsilonRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Epsilon Rate -> Binary: %A Numeric: %A" <| numericEpsilonRate
+
+            powerConsumption |> printfn "Power Consumption: %A"
 
     module Part2 =
         let filterByArrayIndex arrayOfCharArrays idx filter = 
@@ -77,62 +111,34 @@ module Day3
                 |> Part1.pivotLines
                 |> Part1.combineMostCommonBits
                 |> Seq.toArray
+                
+        let Execute: unit =
+            printfn "\n\nDay 3 / Part 2 Result:\n"
+
+            let Day3Data = getData
+
+            Day3Data |> Seq.toArray |> printfn "%A"
+
+            let mostCommonBits = Day3Data |> calculateMostCommonBits
+
+            mostCommonBits |> printfn "\nMost Common Bits: %A"
+
+            let lines = Day3Data |> toSequenceOfBitArrays
+
+            let filteredByFirstBit =
+                filterByArrayIndex lines 0 mostCommonBits[0]
+                    |> toArrayOfBinaryStrings
+                    |> Seq.toArray
+            
+            filteredByFirstBit |> printfn "\nFiltered By First Bit of mostCommonBits: %A"
+
+            let numericOxygenGeneratorRating = 1
+            let numericCo2ScrubberRating = 1
+
+            let lifeSupportRating = numericOxygenGeneratorRating * numericCo2ScrubberRating
+
+            lifeSupportRating |> printfn "Life Support Rating: %A"
 
     let Execute: unit =
-        let Day3Data = getData
-
-        let gammaRateBinary = 
-            Day3Data
-                |> toSequenceOfBitArrays 
-                |> Part1.pivotLines
-                |> Part1.combineMostCommonBits
-                |> Seq.toArray
-
-        let numericGammaRate = gammaRateBinary |> Part1.bitsToNumber
-
-        let epsilonRateBinary =
-            Day3Data
-                |> toSequenceOfBitArrays
-                |> Part1.pivotLines
-                |> Part1.combineLeastCommonBits
-                |> Seq.toArray
-
-        let numericEpsilonRate = epsilonRateBinary |> Part1.bitsToNumber
-
-        let powerConsumption = numericGammaRate * numericEpsilonRate;
-
-        // Show Data
-        printfn "\n\nDay 3 / Part 1 Result:\n"
-
-        gammaRateBinary |> printfn "%A"
-        gammaRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Gamma Rate -> Binary: %A Numeric: %A" <| numericGammaRate
-
-        epsilonRateBinary |> printfn "%A"
-        epsilonRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Epsilon Rate -> Binary: %A Numeric: %A" <| numericEpsilonRate
-
-        powerConsumption |> printfn "Power Consumption: %A"
-
-        printfn "\n\nDay 3 / Part 2 Result:\n"
-
-        Day3Data |> printfn "%A"
-
-        let mostCommonBits = Day3Data |> Part2.calculateMostCommonBits
-
-        mostCommonBits |> printfn "\nMost Common Bits: %A"
-
-        let lines = Day3Data |> toSequenceOfBitArrays
-
-        let filteredByFirstBit =
-            Part2.filterByArrayIndex lines 0 mostCommonBits[0]
-                |> toArrayOfBinaryStrings
-                |> Seq.toArray
-        
-        filteredByFirstBit |> printfn "\nFiltered By First Bit of mostCommonBits: %A"
-
-        let numericOxygenGeneratorRating = 1
-        let numericCo2ScrubberRating = 1
-
-        let lifeSupportRating = numericOxygenGeneratorRating * numericCo2ScrubberRating
-
-        lifeSupportRating |> printfn "Life Support Rating: %A"
-        
+        Part1.Execute
+        Part2.Execute
