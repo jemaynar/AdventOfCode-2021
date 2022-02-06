@@ -1,8 +1,13 @@
 module Day3
     open System
 
-    let getData = Common.getData ".\Data\input3.txt"
-    
+    let getData =
+        Common.getData ".\Data\input3.txt"
+        
+    let toArrayOfBinaryStrings (arrayOfBitArrays) =
+        arrayOfBitArrays
+            |> Seq.map(fun x -> x |> Seq.map(string) |> Seq.fold (+) "")
+
     let toSequenceOfBitArrays(lines: seq<string>) =
         lines
             |> Seq.map(fun line -> line.ToCharArray())
@@ -12,13 +17,11 @@ module Day3
                         match x with 
                             | '1' -> 1 
                             | _ -> 0 ))
-        
-    let toArrayOfBinaryStrings (arrayOfBitArrays) =
-        arrayOfBitArrays |> Seq.map(fun x -> x |> Seq.map(string) |> Seq.fold (+) "")
 
     module Part1 =
         let mapLines (lines: seq<string>) =
-            lines |> toSequenceOfBitArrays
+            lines
+                |> toSequenceOfBitArrays
 
         // Thank you stack overflow!
         let pivotLines mappedLines =
@@ -69,34 +72,34 @@ module Day3
     module Part2 =
         let filterByArrayIndex arrayOfCharArrays idx filter = 
             arrayOfCharArrays
-            |> Seq.map(Array.ofSeq)
-            |> Seq.filter(fun x -> x.[idx] = filter)
+                |> Seq.map(Array.ofSeq)
+                |> Seq.filter(fun x -> x.[idx] = filter)
             
         let calculateMostCommonBits (arrayOfBinaryStrings) =
             arrayOfBinaryStrings
-            |> toSequenceOfBitArrays
-            |> Part1.pivotLines
-            |> Part1.combineMostCommonBits
-            |> Seq.toArray
+                |> toSequenceOfBitArrays
+                |> Part1.pivotLines
+                |> Part1.combineMostCommonBits
+                |> Seq.toArray
 
     let Execute: unit =
         let Day3Data = getData
 
         let gammaRateBinary = 
             Day3Data
-            |> Part1.mapLines 
-            |> Part1.pivotLines
-            |> Part1.combineMostCommonBits
-            |> Seq.toArray
+                |> Part1.mapLines 
+                |> Part1.pivotLines
+                |> Part1.combineMostCommonBits
+                |> Seq.toArray
 
         let numericGammaRate = gammaRateBinary |> Part1.bitsToNumber
 
         let epsilonRateBinary =
             Day3Data
-            |> Part1.mapLines
-            |> Part1.pivotLines
-            |> Part1.combineLeastCommonBits
-            |> Seq.toArray
+                |> Part1.mapLines
+                |> Part1.pivotLines
+                |> Part1.combineLeastCommonBits
+                |> Seq.toArray
 
         let numericEpsilonRate = epsilonRateBinary |> Part1.bitsToNumber
 
@@ -117,8 +120,7 @@ module Day3
 
         Day3Data |> printfn "%A"
 
-        let mostCommonBits =
-            Day3Data |> Part2.calculateMostCommonBits
+        let mostCommonBits = Day3Data |> Part2.calculateMostCommonBits
 
         mostCommonBits |> printfn "\nMost Common Bits: %A"
 
@@ -126,7 +128,8 @@ module Day3
 
         let filteredByFirstBit =
             Part2.filterByArrayIndex lines 0 mostCommonBits[0]
-            |> toArrayOfBinaryStrings |> Seq.toArray
+                |> toArrayOfBinaryStrings
+                |> Seq.toArray
         
         filteredByFirstBit |> printfn "\nFiltered By First Bit of mostCommonBits: %A"
 
