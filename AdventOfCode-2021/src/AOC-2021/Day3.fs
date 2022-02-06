@@ -17,15 +17,15 @@ module Day3
                         match x with 
                             | '1' -> 1 
                             | _ -> 0 ))
+            
+    // Thank you stack overflow!
+    let pivotSequenceOfBitArrays (sequenceOfBitArrays: seq<int[]>) =
+        sequenceOfBitArrays 
+            |> Seq.collect Seq.indexed
+            |> Seq.groupBy fst
+            |> Seq.map (snd >> Seq.map snd)
 
     module Part1 =
-        // Thank you stack overflow!
-        let pivotLines (sequenceOfBitArrays: seq<int[]>) =
-            sequenceOfBitArrays 
-                |> Seq.collect Seq.indexed
-                |> Seq.groupBy fst
-                |> Seq.map (snd >> Seq.map snd)
-
         let private mostCommon accum elem =
             if snd accum > snd elem then accum
             elif snd accum = snd elem then fst elem, 1
@@ -71,7 +71,7 @@ module Day3
             let gammaRateBinary = 
                 Day3Data
                     |> toSequenceOfBitArrays 
-                    |> pivotLines
+                    |> pivotSequenceOfBitArrays
                     |> combineMostCommonBits
                     |> Seq.toArray
 
@@ -80,7 +80,7 @@ module Day3
             let epsilonRateBinary =
                 Day3Data
                     |> toSequenceOfBitArrays
-                    |> pivotLines
+                    |> pivotSequenceOfBitArrays
                     |> combineLeastCommonBits
                     |> Seq.toArray
 
@@ -108,7 +108,7 @@ module Day3
         let calculateMostCommonBits (arrayOfBinaryStrings) =
             arrayOfBinaryStrings
                 |> toSequenceOfBitArrays
-                |> Part1.pivotLines
+                |> pivotSequenceOfBitArrays
                 |> Part1.combineMostCommonBits
                 |> Seq.toArray
                 
