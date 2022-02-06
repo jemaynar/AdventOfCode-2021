@@ -4,12 +4,12 @@ module Day3
     let getData =
         Common.getData ".\Data\input3.txt"
         
-    let toArrayOfBinaryStrings (arrayOfBitArrays) =
-        arrayOfBitArrays
+    let toArrayOfBinaryStrings (sequenceOfBitArrays: seq<int[]>) =
+        sequenceOfBitArrays
             |> Seq.map(fun x -> x |> Seq.map(string) |> Seq.fold (+) "")
 
-    let toSequenceOfBitArrays(lines: seq<string>) =
-        lines
+    let toSequenceOfBitArrays (sequenceOfBinaryStrings: seq<string>) =
+        sequenceOfBinaryStrings
             |> Seq.map(fun line -> line.ToCharArray())
             |> Seq.map(fun charArray -> 
                 charArray 
@@ -20,8 +20,8 @@ module Day3
 
     module Part1 =
         // Thank you stack overflow!
-        let pivotLines mappedLines =
-            mappedLines 
+        let pivotLines (sequenceOfBitArrays: seq<int[]>) =
+            sequenceOfBitArrays 
                 |> Seq.collect Seq.indexed
                 |> Seq.groupBy fst
                 |> Seq.map (snd >> Seq.map snd)
