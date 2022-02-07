@@ -122,6 +122,7 @@ module Day3
                     let rows = filterByArrayIndex dataParam index filterBits[index]
                     Some(rows, (rows, index + 1)))
             |> Seq.last
+            |> Seq.last
                         
         let calculateLifeSupportRating oxygenGeneratorRating co2ScrubberRating =
             oxygenGeneratorRating * co2ScrubberRating
@@ -149,15 +150,15 @@ module Day3
             
             filteredByFirstBit |> printfn "\nFiltered By First Bit of mostCommonBits: %A"
 
-            let oxygenGeneratorRating = lines |> calculateOxygenGeneratorRating |> Seq.toArray
+            let oxygenGeneratorRatingBinary = lines |> calculateOxygenGeneratorRating
+            let oxygenGeneratorRatingNumeric = oxygenGeneratorRatingBinary |> bitsToNumber            
+            oxygenGeneratorRatingBinary |> printfn "\nOxyGenGeneratorRating: %A"
+            oxygenGeneratorRatingBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Oxygen Generator Rating -> Binary: %A Numeric: %A" <| oxygenGeneratorRatingNumeric
             
-            oxygenGeneratorRating |> printfn "\nOxyGenGeneratorRating: %A"
-            
-            let numericOxygenGeneratorRating = 1 // data |> toSequenceOfBitArrays |> calculateOxygenGeneratorRating |> toArrayOfBinaryStrings |> Seq.toArray |> bitsToNumber
             let numericCo2ScrubberRating = 1
 
             let lifeSupportRating:int =
-                calculateLifeSupportRating numericOxygenGeneratorRating numericCo2ScrubberRating
+                calculateLifeSupportRating oxygenGeneratorRatingNumeric numericCo2ScrubberRating
 
             lifeSupportRating |> printfn "Life Support Rating: %A"
 
