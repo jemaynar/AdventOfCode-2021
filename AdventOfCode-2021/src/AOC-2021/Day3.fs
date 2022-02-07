@@ -105,28 +105,42 @@ module Day3
                 |> Seq.map(Array.ofSeq)
                 |> Seq.filter(fun x -> x.[idx] = filter)
             
-        let calculateMostCommonBits (arrayOfBinaryStrings) =
-            arrayOfBinaryStrings
-                |> toSequenceOfBitArrays
+        let calculateMostCommonBits (sequenceOfBitArrays: seq<int[]>) =
+            sequenceOfBitArrays
                 |> pivotSequenceOfBitArrays
                 |> combineMostCommonBits
                 |> Seq.toArray
                 
+        let calculateOxygenGeneratorRating (data: seq<int[]>) =
+            (data, 0)
+            |> Seq.unfold (fun tuple ->
+                let dataParam = fst tuple
+                let index = snd tuple
+                if dataParam = Seq.empty || dataParam |> Seq.length = 1 then None
+                else
+                    let filterBits = dataParam |> calculateMostCommonBits
+                    let rows = filterByArrayIndex dataParam index filterBits[index]
+                    Some(rows, (rows, index + 1)))
+            |> Seq.last
+                        
         let calculateLifeSupportRating oxygenGeneratorRating co2ScrubberRating =
             oxygenGeneratorRating * co2ScrubberRating
                 
         let Execute: unit =
             printfn "\n\nDay 3 / Part 2 Result:\n"
 
-            let Day3Data = getData
+            let data = getData
 
-            Day3Data |> Seq.toArray |> printfn "%A"
+            data |> Seq.toArray |> printfn "%A"
 
-            let mostCommonBits = Day3Data |> calculateMostCommonBits
+            let mostCommonBits =
+                data
+                    |> toSequenceOfBitArrays
+                    |> calculateMostCommonBits
 
             mostCommonBits |> printfn "\nMost Common Bits: %A"
 
-            let lines = Day3Data |> toSequenceOfBitArrays
+            let lines = data |> toSequenceOfBitArrays
 
             let filteredByFirstBit =
                 filterByArrayIndex lines 0 mostCommonBits[0]
@@ -135,7 +149,11 @@ module Day3
             
             filteredByFirstBit |> printfn "\nFiltered By First Bit of mostCommonBits: %A"
 
-            let numericOxygenGeneratorRating = 1
+            let oxygenGeneratorRating = lines |> calculateOxygenGeneratorRating |> Seq.toArray
+            
+            oxygenGeneratorRating |> printfn "\nOxyGenGeneratorRating: %A"
+            
+            let numericOxygenGeneratorRating = 1 // data |> toSequenceOfBitArrays |> calculateOxygenGeneratorRating |> toArrayOfBinaryStrings |> Seq.toArray |> bitsToNumber
             let numericCo2ScrubberRating = 1
 
             let lifeSupportRating:int =
