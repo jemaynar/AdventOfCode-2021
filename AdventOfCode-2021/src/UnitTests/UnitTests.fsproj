@@ -9,4 +9,8 @@
       <ProjectReference Include="..\AOC-2021\AOC-2021.fsproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="xunit" Version="2.4.1" />
+    </ItemGroup>
+
 </Project>
