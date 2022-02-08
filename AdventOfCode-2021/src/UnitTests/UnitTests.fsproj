@@ -5,4 +5,8 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AOC-2021\AOC-2021.fsproj" />
+    </ItemGroup>
+
 </Project>
