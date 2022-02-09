@@ -174,5 +174,5 @@ module Day3
             lifeSupportRating |> printfn "Life Support Rating: %A"
 
     let Execute: unit =
-        // Part1.Execute
+        Part1.Execute
         Part2.Execute
