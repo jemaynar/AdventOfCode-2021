@@ -24,7 +24,8 @@ module Day3
             |> Seq.collect Seq.indexed
             |> Seq.groupBy fst
             |> Seq.map (snd >> Seq.map snd)
-
+            |> Seq.map(Seq.toArray)
+            
     let private mostCommon accum elem =
         if snd accum > snd elem then accum
         elif snd accum = snd elem then fst elem, 1

@@ -42,7 +42,7 @@ module UnitTests.Day3Tests
     let ``pivotSequenceOfBitArrays: a sequence 2 elements the first of 12 0's and the second of 12 1's is transformed to 12 arrays containing [| 0; 1 |]`` () =
         let sequenceOfArrayOfInts = seq { for x in 0 .. 1 -> [| for i in 1 .. 12 -> x |] } 
         
-        let result = Day3.pivotSequenceOfBitArrays sequenceOfArrayOfInts |> Seq.map(Seq.toArray)
+        let result = Day3.pivotSequenceOfBitArrays sequenceOfArrayOfInts
         
         let expectedResult = seq { for x in 1 .. 12 -> [| 0; 1 |] }
         Assert.Equal<IEnumerable<int[]>>(result, expectedResult)
