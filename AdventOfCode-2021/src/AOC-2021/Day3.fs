@@ -26,7 +26,7 @@ module Day3
             
     let private mostCommon accum elem =
         if snd accum > snd elem then accum
-        elif snd accum = snd elem then fst elem, 1
+        elif snd accum = snd elem then 1, 1
         else elem
 
     let private leastCommon accum elem =
@@ -40,10 +40,10 @@ module Day3
             |> Seq.map(fun x -> x |> Seq.reduce(reducerFunc))
             |> Seq.map(fst)
 
-    let combineMostCommonBits array = 
+    let mostCommonBit array = 
          array |> combineBits <| mostCommon
 
-    let combineLeastCommonBits array = 
+    let leastCommonBit array = 
          array |> combineBits <| leastCommon
 
     let bitsToNumber sequenceOfBits =
@@ -61,7 +61,7 @@ module Day3
                 Day3Data
                     |> toSequenceOfBitArrays 
                     |> pivotSequenceOfBitArrays
-                    |> combineMostCommonBits
+                    |> mostCommonBit
                     |> Seq.toArray
 
             let numericGammaRate = gammaRateBinary |> bitsToNumber
@@ -70,7 +70,7 @@ module Day3
                 Day3Data
                     |> toSequenceOfBitArrays
                     |> pivotSequenceOfBitArrays
-                    |> combineLeastCommonBits
+                    |> leastCommonBit
                     |> Seq.toArray
 
             let numericEpsilonRate = epsilonRateBinary |> bitsToNumber
@@ -94,16 +94,16 @@ module Day3
                 |> Seq.map(Array.ofSeq)
                 |> Seq.filter(fun x -> x.[idx] = filter)
             
-        let calculateMostCommonBits (sequenceOfBitArrays: seq<int[]>) =
+        let mostCommonBits (sequenceOfBitArrays: seq<int[]>) =
             sequenceOfBitArrays
                 |> pivotSequenceOfBitArrays
-                |> combineMostCommonBits
+                |> mostCommonBit
                 |> Seq.toArray
                 
-        let calculateLeastCommonBits (sequenceOfBitArrays: seq<int[]>) =
+        let leastCommonBits (sequenceOfBitArrays: seq<int[]>) =
             sequenceOfBitArrays
                 |> pivotSequenceOfBitArrays
-                |> combineLeastCommonBits
+                |> leastCommonBit
                 |> Seq.toArray
                 
         let calculateOxygenGeneratorRating (data: seq<int[]>) =
@@ -113,7 +113,7 @@ module Day3
                 let index = snd tuple
                 if dataParam = Seq.empty || dataParam |> Seq.length = 1 then None
                 else
-                    let filterBits = dataParam |> calculateMostCommonBits
+                    let filterBits = dataParam |> mostCommonBits
                     let rows = filterByArrayIndex dataParam index filterBits[index]
                     Some(rows, (rows, index + 1)))
             |> Seq.last
@@ -126,7 +126,7 @@ module Day3
                 let index = snd tuple
                 if dataParam = Seq.empty || dataParam |> Seq.length = 1 then None
                 else
-                    let filterBits = dataParam |> calculateLeastCommonBits
+                    let filterBits = dataParam |> leastCommonBits
                     filterBits |> printfn "LeastCommonBits: %A"
                     let rows = filterByArrayIndex dataParam index filterBits[index]
                     Some(rows, (rows, index + 1)))
