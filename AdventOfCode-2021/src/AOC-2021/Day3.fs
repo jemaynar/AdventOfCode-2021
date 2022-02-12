@@ -1,6 +1,4 @@
 module Day3
-    open System
-
     let getData =
         Common.getData ".\Data\input3.txt"
         
@@ -50,24 +48,12 @@ module Day3
 
     let bitsToNumber sequenceOfBits =
         sequenceOfBits
+            |> Seq.rev
             |> Seq.indexed
-            |> Seq.reduce(fun accum elem -> 
-                match fst elem with
-                    | 1 -> (1, snd accum * 2048 + snd elem * 1024)
-                    | 2 -> (2, snd accum + snd elem * 512)
-                    | 3 -> (3, snd accum + snd elem * 256)
-                    | 4 -> (4, snd accum + snd elem * 128)
-                    | 5 -> (4, snd accum + snd elem * 64)
-                    | 6 -> (4, snd accum + snd elem * 32)
-                    | 7 -> (4, snd accum + snd elem * 16)
-                    | 8 -> (4, snd accum + snd elem * 8)
-                    | 9 -> (4, snd accum + snd elem * 4)
-                    | 10 -> (4, snd accum + snd elem * 2)
-                    | 11 -> (4, snd accum + snd elem * 1)
-                    | _ -> (0, snd accum))
+            |> Seq.reduce(fun accum elem -> (fst elem, snd accum + (if snd elem = 1 then int(2.0 ** float(fst elem)) else 0)))
             |> snd
     
-    module Part1 =                
+    module Part1 =
         let Execute: unit =
             let Day3Data = getData
 
