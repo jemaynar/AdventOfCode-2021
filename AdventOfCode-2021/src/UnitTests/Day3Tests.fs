@@ -88,6 +88,22 @@ module UnitTests.Day3Tests
         Assert.Equal(32, result)
 
     [<Fact>]
+    let ``mostCommonBit: a sequence of 1 returns seq { 1 }`` () =
+        let sequenceOfBits = seq { [| 1 |] }
+        
+        let result = sequenceOfBits |> Day3.mostCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 1 |], result)
+        
+    [<Fact>]
+    let ``mostCommonBit: a sequence of 0 returns seq { 0 }`` () =
+        let sequenceOfBits = seq { [| 0 |] }
+        
+        let result = sequenceOfBits |> Day3.mostCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 0 |], result)
+
+    [<Fact>]
     let ``mostCommonBit: a sequence of 11 returns seq { 1 }`` () =
         let sequenceOfBits = seq { [| 1; 1 |] }
         
@@ -128,7 +144,7 @@ module UnitTests.Day3Tests
         Assert.Equal<IEnumerable<int>>([| 0 |], result)
         
     [<Fact>]
-    let ``mostCommonBit: a sequence of { [| 1; 1 |]; [| 1; 1 |] returns [| 1; 1 |]`` () =
+    let ``mostCommonBit: a sequence of 11; 11; returns seq { 1; 1 }`` () =
         let sequenceOfBits = seq { [| 1; 1 |]; [| 1; 1 |] }
         
         let result = sequenceOfBits |> Day3.mostCommonBit
@@ -136,17 +152,129 @@ module UnitTests.Day3Tests
         Assert.Equal<IEnumerable<int>>([| 1; 1 |], result)
         
     [<Fact>]
-    let ``mostCommonBit: a sequence of { [| 1; 0 |]; [| 1; 0 |] } returns [| 1; 1 |]`` () =
-        let sequenceOfBits = seq { [| 1; 0 |]; [| 1; 0 |] }
+    let ``mostCommonBit: a sequence of 10; 01; returns seq { 1; 1 }`` () =
+        let sequenceOfBits = seq { [| 1; 0 |]; [| 0; 1 |] }
         
         let result = sequenceOfBits |> Day3.mostCommonBit
        
         Assert.Equal<IEnumerable<int>>([| 1; 1 |], result)
         
     [<Fact>]
-    let ``mostCommonBit: a sequence of { [| 1; 0; 0 |]; [| 1; 0; 0 |] } returns [| 0; 0 |]`` () =
+    let ``mostCommonBit: a sequence of 10; 01; 00; 11; returns seq { 1; 1; 0; 1 }`` () =
+        let sequenceOfBits = seq { [| 1; 0 |]; [| 0; 1 |]; [| 0; 0 |]; [| 1; 1 |] }
+        
+        let result = sequenceOfBits |> Day3.mostCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 1; 1; 0; 1 |], result)
+        
+    [<Fact>]
+    let ``mostCommonBit: a sequence of 100; 100; returns seq { 0; 0 }`` () =
         let sequenceOfBits = seq { [| 1; 0; 0 |]; [| 1; 0; 0 |] }
         
         let result = sequenceOfBits |> Day3.mostCommonBit
        
         Assert.Equal<IEnumerable<int>>([| 0; 0 |], result)
+    
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 1 returns seq { 0 }`` () =
+        let sequenceOfBits = seq { [| 1 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 0 |], result)
+            
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 0 returns seq { 1 }`` () =
+        let sequenceOfBits = seq { [| 0 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 1 |], result)
+    
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 11 returns seq { 0 }`` () =
+        let sequenceOfBits = seq { [| 1; 1 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 0 |], result)
+        
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 10 returns seq { 0 }`` () =
+        let sequenceOfBits = seq { [| 1; 0 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 0 |], result)
+        
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 01 returns seq { 0 }`` () =
+        let sequenceOfBits = seq { [| 0; 1 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 0 |], result)
+        
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 1010 returns seq { 0 }`` () =
+        let sequenceOfBits = seq { [| 1; 0; 1; 0 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 0 |], result)
+        
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 1000 returns seq { 0 }`` () =
+        let sequenceOfBits = seq { [| 1; 0; 0; 0 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 1 |], result)
+        
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 00 returns seq { 1 }`` () =
+        let sequenceOfBits = seq { [| 0; 0 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 1 |], result)
+        
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 11; 11 returns seq { 0; 0 }`` () =
+        let sequenceOfBits = seq { [| 1; 1 |]; [| 1; 1 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 0; 0 |], result)
+        
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 10; 10 returns seq { 0; 0 }`` () =
+        let sequenceOfBits = seq { [| 1; 0 |]; [| 1; 0 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 0; 0 |], result)
+        
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 100; 100; returns seq { 1; 1 }`` () =
+        let sequenceOfBits = seq { [| 1; 0; 0 |]; [| 1; 0; 0 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 1; 1 |], result)
+        
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 11; 00; 01  returns seq { 0; 1; 0 }`` () =
+        let sequenceOfBits = seq { [| 1; 1 |]; [| 0; 0 |]; [| 0; 1 |]; }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 0; 1 ; 0 |], result)
+        
+    [<Fact>]
+    let ``leastCommonBit: a sequence of 10; 01; 00; 11; returns seq { 0; 0; 1; 0 }`` () =
+        let sequenceOfBits = seq { [| 1; 0 |]; [| 0; 1 |]; [| 0; 0 |]; [| 1; 1 |] }
+        
+        let result = sequenceOfBits |> Day3.leastCommonBit
+       
+        Assert.Equal<IEnumerable<int>>([| 0; 0; 1; 0 |], result)

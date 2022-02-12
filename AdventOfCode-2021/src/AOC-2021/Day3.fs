@@ -25,19 +25,19 @@ module Day3
             |> Seq.map(Seq.toArray)
             
     let private mostCommon accum elem =
-        if snd accum > snd elem then accum
-        elif snd accum = snd elem then 1, 1
+        if snd accum = snd elem then 1, 1
         else elem
 
     let private leastCommon accum elem =
-        if snd accum < snd elem then accum
-        elif snd accum = snd elem then fst elem, 1
-        else elem
+        if accum = (0, 0) then ((fst elem + 1) % 2, snd elem)
+        else
+            if snd accum < snd elem then ((fst accum + 1) % 2, snd accum)
+            else 0, 0
 
     let private combineBits bitArrays reducerFunc =
         bitArrays 
             |> Seq.map(Seq.countBy(fun y -> y))
-            |> Seq.map(fun x -> x |> Seq.reduce(reducerFunc))
+            |> Seq.map(fun x -> x |> Seq.fold(reducerFunc) (0, 0))
             |> Seq.map(fst)
 
     let mostCommonBit array = 
