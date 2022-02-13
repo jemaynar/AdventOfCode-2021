@@ -278,3 +278,124 @@ module UnitTests.Day3Tests
         let result = sequenceOfBits |> Day3.leastCommonBit
        
         Assert.Equal<IEnumerable<int>>([| 0; 0; 1; 0 |], result)
+
+    [<Fact>]
+    let ``Part2.filterByArrayIndex: a sequence of bits with numeric values 4, 2, 1 when filtering index 0 with value 1 returns binary 4`` () =
+        let sequenceOfBits =
+            seq {
+                [| 1; 0; 0 |] // 4
+                [| 0; 1; 0 |] // 2
+                [| 0; 0; 1 |] // 1
+            }
+
+        let result = Day3.Part2.filterByArrayIndex sequenceOfBits 0 1
+        
+        Assert.Equal<IEnumerable<int[]>>(
+            seq {
+                [| 1; 0; 0 |] // 4
+            }, result)
+        
+    [<Fact>]
+    let ``Part2.filterByArrayIndex: a sequence of bits with numeric values 4, 2, 1 when filtering index 1 with value 1 returns binary 2`` () =
+        let sequenceOfBits =
+            seq {
+                [| 1; 0; 0 |] // 4
+                [| 0; 1; 0 |] // 2
+                [| 0; 0; 1 |] // 1
+            }
+
+        let result = Day3.Part2.filterByArrayIndex sequenceOfBits 1 1
+        
+        Assert.Equal<IEnumerable<int[]>>(
+            seq {
+                [| 0; 1; 0 |] // 2
+            }, result)
+        
+    [<Fact>]
+    let ``Part2.filterByArrayIndex: a sequence of bits with numeric values 4, 2, 1 when filtering index 3 with value 1 returns binary 1`` () =
+        let sequenceOfBits =
+            seq {
+                [| 1; 0; 0 |] // 4
+                [| 0; 1; 0 |] // 2
+                [| 0; 0; 1 |] // 1
+            }
+
+        let result = Day3.Part2.filterByArrayIndex sequenceOfBits 2 1
+        
+        Assert.Equal<IEnumerable<int[]>>(
+            seq {
+                [| 0; 0; 1 |] // 1
+            }, result)
+
+    [<Fact>]
+    let ``Part2.filterByArrayIndex: a sequence of bits with numeric values 4, 2, 1 when filtering index 0 with value 0 returns binary 2 and 1`` () =
+        let sequenceOfBits =
+            seq {
+                [| 1; 0; 0 |] // 4
+                [| 0; 1; 0 |] // 2
+                [| 0; 0; 1 |] // 1
+            }
+
+        let result = Day3.Part2.filterByArrayIndex sequenceOfBits 0 0
+        
+        Assert.Equal<IEnumerable<int[]>>(
+            seq {
+                [| 0; 1; 0 |] // 2 
+                [| 0; 0; 1 |] // 1
+            }, result)
+        
+    [<Fact>]
+    let ``Part2.filterByArrayIndex: a sequence of bits with numeric values 4, 2, 1 when filtering index 1 with value 0 returns binary 4 and 1`` () =
+        let sequenceOfBits =
+            seq {
+                [| 1; 0; 0 |] // 4
+                [| 0; 1; 0 |] // 2
+                [| 0; 0; 1 |] // 1
+            }
+
+        let result = Day3.Part2.filterByArrayIndex sequenceOfBits 1 0
+        
+        Assert.Equal<IEnumerable<int[]>>(
+            seq {
+                [| 1; 0; 0 |] // 4
+                [| 0; 0; 1 |] // 1
+            }, result)
+        
+    [<Fact>]
+    let ``Part2.filterByArrayIndex: a sequence of bits with numeric values 4, 2, 1 when filtering index 3 with value 0 returns binary 4 and 2`` () =
+        let sequenceOfBits =
+            seq {
+                [| 1; 0; 0 |] // 4
+                [| 0; 1; 0 |] // 2
+                [| 0; 0; 1 |] // 1
+            }
+
+        let result = Day3.Part2.filterByArrayIndex sequenceOfBits 2 0
+        
+        Assert.Equal<IEnumerable<int[]>>(
+            seq {
+                [| 1; 0; 0 |] // 4
+                [| 0; 1; 0 |] // 2
+            }, result)
+
+    [<Fact>]
+    let ``Part2.mostCommonBits: a sequence containing a single bit sequence returns the single bit sequence`` () =
+        let singleBitSequence = seq {
+            [| 0; 1; 0; 1; 0; 1 |]
+        }
+        
+        let result = Day3.Part2.mostCommonBits singleBitSequence
+        
+        Assert.Equal<int[]>([| 0; 1; 0; 1; 0; 1 |], result)
+        
+    [<Fact>]
+    let ``Part2.mostCommonBits: a sequence containing two bit sequences where contains bits have equal frequency returns all 1s`` () =
+        let singleBitSequence = seq {
+            [| 0; 1; 0; 1; 0; 1 |]
+            [| 1; 0; 1; 0; 1; 0 |]
+        }
+        
+        let result = Day3.Part2.mostCommonBits singleBitSequence
+        
+        Assert.Equal<int[]>([| 1; 1; 1; 1; 1; 1 |], result)
+        
