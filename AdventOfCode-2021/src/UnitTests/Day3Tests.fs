@@ -379,7 +379,7 @@ module UnitTests.Day3Tests
             }, result)
 
     [<Fact>]
-    let ``Part2.mostCommonBits: a sequence containing a single bit sequence returns the single bit sequence`` () =
+    let ``Part2.mostCommonBits: a sequence containing a single bit sequence returns the original single bit sequence`` () =
         let singleBitSequence = seq {
             [| 0; 1; 0; 1; 0; 1 |]
         }
@@ -389,7 +389,7 @@ module UnitTests.Day3Tests
         Assert.Equal<int[]>([| 0; 1; 0; 1; 0; 1 |], result)
         
     [<Fact>]
-    let ``Part2.mostCommonBits: a sequence containing two bit sequences where contains bits have equal frequency returns all 1s`` () =
+    let ``Part2.mostCommonBits: a sequence containing two bit sequences where contained bits have equal frequency returns all 1s`` () =
         let singleBitSequence = seq {
             [| 0; 1; 0; 1; 0; 1 |]
             [| 1; 0; 1; 0; 1; 0 |]
