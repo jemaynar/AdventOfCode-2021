@@ -128,7 +128,7 @@ module UnitTests.Day3Tests
         Assert.Equal<IEnumerable<int>>([| 1 |], result)
         
     [<Fact>]
-    let ``mostCommonBit: a sequence of 1000 returns seq { 1 }`` () =
+    let ``mostCommonBit: a sequence of 1000 returns seq { 0 }`` () =
         let sequenceOfBits = seq { [| 1; 0; 0; 0 |] }
         
         let result = sequenceOfBits |> Day3.mostCommonBit
@@ -278,7 +278,7 @@ module UnitTests.Day3Tests
         let result = sequenceOfBits |> Day3.leastCommonBit
        
         Assert.Equal<IEnumerable<int>>([| 0; 0; 1; 0 |], result)
-
+       
     [<Fact>]
     let ``Part2.filterByArrayIndex: a sequence of bits with numeric values 4, 2, 1 when filtering index 0 with value 1 returns binary 4`` () =
         let sequenceOfBits =
@@ -400,6 +400,39 @@ module UnitTests.Day3Tests
         Assert.Equal<int[]>([| 1; 1; 1; 1; 1; 1 |], result)
         
     [<Fact>]
+    let ``Part2.mostCommonBits: a sequence containing two arrays of all 1s and one array of all 0s returns [| 1; 1; 1; 1; 1 |]`` () =
+        let singleBitSequence = seq {
+            [| 1; 1; 1; 1; 1 |]
+            [| 1; 1; 1; 1; 1 |]
+            [| 0; 0; 0; 0; 0 |]
+        }
+        
+        let result = Day3.Part2.mostCommonBits singleBitSequence
+        
+        Assert.Equal<int[]>([| 1; 1; 1; 1; 1 |], result)
+        
+    [<Fact>]
+    let ``Part2.mostCommonBits: a sequence containing the sequence of bits from the simplified sample problem returns [| 1; 0; 1; 1; 0; |]`` () =
+        let singleBitSequence = seq {
+            [| 0; 0; 1; 0; 0 |]
+            [| 1; 1; 1; 1; 0 |]
+            [| 1; 0; 1; 1; 0 |]
+            [| 1; 0; 1; 1; 1 |]
+            [| 1; 0; 1; 0; 1 |]
+            [| 0; 1; 1; 1; 1 |]
+            [| 0; 0; 1; 1; 1 |]
+            [| 1; 1; 1; 0; 0 |]
+            [| 1; 0; 0; 0; 0 |]
+            [| 1; 1; 0; 0; 1 |]
+            [| 0; 0; 0; 1; 0 |]
+            [| 0; 1; 0; 1; 0 |]
+        }
+        
+        let result = Day3.Part2.mostCommonBits singleBitSequence
+        
+        Assert.Equal<int[]>([| 1; 0; 1; 1; 0 |], result)
+        
+    [<Fact>]
     let ``Part2.leastCommonBits: a sequence containing a single bit sequence returns the not of the original single bit sequence`` () =
         let singleBitSequence = seq {
             [| 0; 1; 0; 1; 0; 1 |]
@@ -420,3 +453,77 @@ module UnitTests.Day3Tests
         
         Assert.Equal<int[]>([| 0; 0; 0; 0; 0; 0 |], result)
         
+    [<Fact>]
+    let ``Part2.leastCommonBits: a sequence containing two arrays of all 1s and one array of all 0s returns [| 0; 0; 0; 0; 0 |]`` () =
+        let singleBitSequence = seq {
+            [| 0; 0; 0; 0; 0 |]
+            [| 1; 1; 1; 1; 1 |]
+            [| 1; 1; 1; 1; 1 |]
+        }
+        
+        let result = Day3.Part2.leastCommonBits singleBitSequence
+        
+        Assert.Equal<int[]>([| 0; 0; 0; 0; 0 |], result)
+
+    [<Fact>]
+    let ``Part2.leastCommonBits: a sequence containing the sequence of bits from the simplified sample problem returns [| 1; 0; 1; 1; 0; |]`` () =
+        let singleBitSequence = seq {
+            [| 0; 0; 1; 0; 0 |]
+            [| 1; 1; 1; 1; 0 |]
+            [| 1; 0; 1; 1; 0 |]
+            [| 1; 0; 1; 1; 1 |]
+            [| 1; 0; 1; 0; 1 |]
+            [| 0; 1; 1; 1; 1 |]
+            [| 0; 0; 1; 1; 1 |]
+            [| 1; 1; 1; 0; 0 |]
+            [| 1; 0; 0; 0; 0 |]
+            [| 1; 1; 0; 0; 1 |]
+            [| 0; 0; 0; 1; 0 |]
+            [| 0; 1; 0; 1; 0 |]
+        }
+        
+        let result = Day3.Part2.leastCommonBits singleBitSequence
+        
+        Assert.Equal<int[]>([| 0; 1; 0; 0; 1 |], result)
+        
+    [<Fact>]
+    let ``Part2.calculateOxygenGeneratorRating when input data is data from Day3 Part2 description then result is 10111`` () =
+        let sampleDataInputBitStrings = seq {
+            [| 0; 0; 1; 0; 0 |]
+            [| 1; 1; 1; 1; 0 |]
+            [| 1; 0; 1; 1; 0 |]
+            [| 1; 0; 1; 1; 1 |]
+            [| 1; 0; 1; 0; 1 |]
+            [| 0; 1; 1; 1; 1 |]
+            [| 0; 0; 1; 1; 1 |]
+            [| 1; 1; 1; 0; 0 |]
+            [| 1; 0; 0; 0; 0 |]
+            [| 1; 1; 0; 0; 1 |]
+            [| 0; 0; 0; 1; 0 |]
+            [| 0; 1; 0; 1; 0 |]
+        }
+        
+        let result = Day3.Part2.calculateOxygenGeneratorRating <| sampleDataInputBitStrings
+        
+        Assert.Equal<int[]>([| 1; 0; 1; 1; 1 |], result)
+        
+    [<Fact>]
+    let ``Part2.calculateCo2ScrubberRating when input data is data from Day3 Part2 description then result is 01010`` () =
+        let sampleDataInputBitStrings = seq {
+            [| 0; 0; 1; 0; 0 |]
+            [| 1; 1; 1; 1; 0 |]
+            [| 1; 0; 1; 1; 0 |]
+            [| 1; 0; 1; 1; 1 |]
+            [| 1; 0; 1; 0; 1 |]
+            [| 0; 1; 1; 1; 1 |]
+            [| 0; 0; 1; 1; 1 |]
+            [| 1; 1; 1; 0; 0 |]
+            [| 1; 0; 0; 0; 0 |]
+            [| 1; 1; 0; 0; 1 |]
+            [| 0; 0; 0; 1; 0 |]
+            [| 0; 1; 0; 1; 0 |]
+        }
+        
+        let result = Day3.Part2.calculateCo2ScrubberRating <| sampleDataInputBitStrings
+        
+        Assert.Equal<int[]>([| 0; 1; 0; 1; 0 |], result)
