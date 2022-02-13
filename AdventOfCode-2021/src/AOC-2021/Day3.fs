@@ -89,10 +89,10 @@ module Day3
             powerConsumption |> printfn "Power Consumption: %A"
 
     module Part2 =
-        let filterByArrayIndex arrayOfCharArrays idx filter = 
+        let filterByArrayIndex arrayOfCharArrays filterIndex filterBitValue = 
             arrayOfCharArrays
                 |> Seq.map(Array.ofSeq)
-                |> Seq.filter(fun x -> x.[idx] = filter)
+                |> Seq.filter(fun x -> x.[filterIndex] = filterBitValue)
             
         let mostCommonBits (sequenceOfBitArrays: seq<int[]>) =
             sequenceOfBitArrays
