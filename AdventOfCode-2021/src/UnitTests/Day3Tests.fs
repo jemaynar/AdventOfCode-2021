@@ -399,3 +399,24 @@ module UnitTests.Day3Tests
         
         Assert.Equal<int[]>([| 1; 1; 1; 1; 1; 1 |], result)
         
+    [<Fact>]
+    let ``Part2.leastCommonBits: a sequence containing a single bit sequence returns the not of the original single bit sequence`` () =
+        let singleBitSequence = seq {
+            [| 0; 1; 0; 1; 0; 1 |]
+        }
+        
+        let result = Day3.Part2.leastCommonBits singleBitSequence
+        
+        Assert.Equal<int[]>([| 1; 0; 1; 0; 1; 0 |], result)
+        
+    [<Fact>]
+    let ``Part2.leastCommonBits: a sequence containing two bit sequences where contained bits have equal frequency returns all 0s`` () =
+        let singleBitSequence = seq {
+            [| 0; 1; 0; 1; 0; 1 |]
+            [| 1; 0; 1; 0; 1; 0 |]
+        }
+        
+        let result = Day3.Part2.leastCommonBits singleBitSequence
+        
+        Assert.Equal<int[]>([| 0; 0; 0; 0; 0; 0 |], result)
+        
