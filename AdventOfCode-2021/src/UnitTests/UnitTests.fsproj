@@ -16,6 +16,7 @@
 
     <ItemGroup>
       <Compile Include="Day3Tests.fs" />
+      <Compile Include="Day4Tests.fs" />
     </ItemGroup>
 
 </Project>
