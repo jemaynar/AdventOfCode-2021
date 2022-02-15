@@ -82,7 +82,7 @@ module Day3
             let powerConsumption = numericGammaRate * numericEpsilonRate;
 
             // Show Data
-            printfn "\n\nDay 3 / Part 1 Result:\n"
+            printfn "\nDay 3 / Part 1 Result:\n"
             gammaRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Gamma Rate -> Binary: %A Numeric: %A" <| numericGammaRate
             epsilonRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Epsilon Rate -> Binary: %A Numeric: %A" <| numericEpsilonRate
             powerConsumption |> printfn "Power Consumption: %A"
@@ -135,7 +135,7 @@ module Day3
             oxygenGeneratorRating * co2ScrubberRating
                 
         let Execute: unit =
-            printfn "\n\nDay 3 / Part 2 Result:\n"
+            printfn "\nDay 3 / Part 2 Result:\n"
 
             let data = getData
 
