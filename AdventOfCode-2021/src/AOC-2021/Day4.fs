@@ -1,18 +1,26 @@
 module Day4
+    open System
+
     type BingoCell = { IsSelected: bool; Value: byte }
     
-    let drawnNumbers (inputLines: seq<string>): int[] =
+    let getDrawnNumbers (inputLines: seq<string>): int[] =
         let firstLine = inputLines |> Seq.head
-    
-        firstLine.Split ',' |> Array.map(int)
-    
+
+        let ints = firstLine.Split ','
+        if Array.isEmpty <| ints then
+            Array.empty
+        else
+            ints
+                |> Seq.choose(fun n -> match Int32.TryParse(n) with | true, n -> Some n | false, _ -> None)
+                |> Array.ofSeq
+                
     module Part1 =
         let Execute: unit =
             printfn "\nDay 4 / Part 1 Result:\n"
         
             let lines = Common.getData ".\Data\input4.txt"
                 
-            let picks = drawnNumbers <| lines
+            let picks = getDrawnNumbers <| lines
             
             printfn "DrawnNumbers: %A" <| picks
         
