@@ -14,6 +14,15 @@ module Day4
                 |> Seq.choose(fun n -> match Int32.TryParse(n) with | true, n -> Some n | false, _ -> None)
                 |> Array.ofSeq
                 
+    let parseLine (line: string) =
+        [|
+            { IsSelected = false; Value = 22uy }
+            { IsSelected = false; Value = 13uy }
+            { IsSelected = false; Value = 17uy }
+            { IsSelected = false; Value = 11uy }
+            { IsSelected = false; Value = 0uy }
+        |]    
+                
     let getGameBoards (inputLines: seq<string>): seq<BingoCell[,]> =
         let gameBoards = seq {
             array2D [

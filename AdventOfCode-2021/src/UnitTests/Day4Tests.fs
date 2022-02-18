@@ -35,6 +35,21 @@ module UnitTests.Day4Tests
         Assert.Equal<int[]>([| 1 |], result)
         
     [<Fact>]
+    let ``parseLine: when line contains 5 numbers then result is 5 BingoCells`` () =
+        let inputLine = "22 13 17 11  0"
+        
+        let result = parseLine(inputLine)
+        
+        Assert.Equal<BingoCell[]>(
+            [|
+                { IsSelected = false; Value = 22uy }
+                { IsSelected = false; Value = 13uy }
+                { IsSelected = false; Value = 17uy }
+                { IsSelected = false; Value = 11uy }
+                { IsSelected = false; Value = 0uy }
+            |], result)
+        
+    [<Fact>]
     let ``getGameBoards: when input contains single game board then result is Array2D containing game board values`` () =
         let inputLines = seq {
             "1,2,3,4,5";
