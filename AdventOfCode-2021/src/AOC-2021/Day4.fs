@@ -28,23 +28,17 @@ module Day4
         Array2D.init 5 5 (fun i j -> array[i][j]) 
                 
     let getGameBoards (inputLines: seq<string>): seq<BingoCell[,]> =
-        let filtered =
-            inputLines
-                |> Seq.skip 2
-                |> Seq.filter(fun line -> line <> "")
-            
-        let result =
-            filtered
-                |> Seq.unfold(fun state ->
-                    if (Seq.isEmpty <| state) then
-                        None
-                    else
-                        let gameBoard = state |> Seq.take 5 |> getGameBoard
-                        let newState = state |> Seq.skip 5
-                        Some(gameBoard, newState))
-  
-        result
-                
+        inputLines
+            |> Seq.skip 2
+            |> Seq.filter(fun line -> line <> "")
+            |> Seq.unfold(fun state ->
+                if (Seq.isEmpty <| state) then
+                    None
+                else
+                    let gameBoard = state |> Seq.take 5 |> getGameBoard
+                    let newState = state |> Seq.skip 5
+                    Some(gameBoard, newState))
+                  
     module Part1 =
         let Execute: unit =
             printfn "\nDay 4 / Part 1 Result:\n"
