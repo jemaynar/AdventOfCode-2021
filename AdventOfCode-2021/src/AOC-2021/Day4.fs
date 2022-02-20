@@ -15,16 +15,20 @@ module Day4
                 |> Array.ofSeq
                 
     let parseLine (line: string) =
-        [|
-            { IsSelected = false; Value = 22uy }
-            { IsSelected = false; Value = 13uy }
-            { IsSelected = false; Value = 17uy }
-            { IsSelected = false; Value = 11uy }
-            { IsSelected = false; Value = 0uy }
-        |]    
+        let ints = line.Split ' '
+        if Array.isEmpty <| ints then
+            Array.empty
+        else
+            ints
+                |> Seq.choose(fun n -> match Byte.TryParse(n) with | true, n -> Some { IsSelected = false; Value = n } | false, _ -> None)
+                |> Array.ofSeq
+                
+    let getGameBoard (inputLines: seq<string>) =
+        let array = inputLines |> Seq.map(parseLine) |> Seq.toArray
+        Array2D.init 5 5 (fun i j -> array[i][j]) 
                 
     let getGameBoards (inputLines: seq<string>): seq<BingoCell[,]> =
-        let gameBoards = seq {
+        seq {
             array2D [
                 [{ IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 0uy }];
                 [{ IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 24uy }];
@@ -33,7 +37,6 @@ module Day4
                 [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 20uy }; { IsSelected = false; Value = 15uy }; { IsSelected = false; Value = 19uy }];
             ]
         }
-        gameBoards
                 
     module Part1 =
         let Execute: unit =
