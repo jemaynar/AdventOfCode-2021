@@ -28,9 +28,22 @@ module Day4
         Array2D.init 5 5 (fun i j -> array[i][j]) 
                 
     let getGameBoards (inputLines: seq<string>): seq<BingoCell[,]> =
-        seq {
-            inputLines |> Seq.skip 2 |> Seq.take 5 |> getGameBoard
-        }
+        let filtered =
+            inputLines
+                |> Seq.skip 2
+                |> Seq.filter(fun line -> line <> "")
+            
+        let result =
+            filtered
+                |> Seq.unfold(fun state ->
+                    if (Seq.isEmpty <| state) then
+                        None
+                    else
+                        let gameBoard = state |> Seq.take 5 |> getGameBoard
+                        let newState = state |> Seq.skip 5
+                        Some(gameBoard, newState))
+  
+        result
                 
     module Part1 =
         let Execute: unit =
