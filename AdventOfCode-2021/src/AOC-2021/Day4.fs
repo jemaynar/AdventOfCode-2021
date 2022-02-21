@@ -45,6 +45,11 @@ module Day4
             || gameBoard[2,..5] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
             || gameBoard[3,..5] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
             || gameBoard[4,..5] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
+            || gameBoard[..5,0] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
+            || gameBoard[..5,1] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
+            || gameBoard[..5,2] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
+            || gameBoard[..5,3] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
+            || gameBoard[..5,4] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
                   
     module Part1 =
         let Execute: unit =
