@@ -40,7 +40,7 @@ module Day4
                     Some(gameBoard, newState))
             
     let isWinner(gameBoard: BingoCell[,]): bool =
-        false
+        gameBoard[0,..5] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
                   
     module Part1 =
         let Execute: unit =
