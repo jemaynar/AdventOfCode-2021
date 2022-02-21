@@ -23,7 +23,7 @@ module Day4
                 |> Seq.choose(fun n -> match Byte.TryParse(n) with | true, n -> Some { IsSelected = false; Value = n } | false, _ -> None)
                 |> Array.ofSeq
                 
-    let getGameBoard (inputLines: seq<string>) =
+    let getGameBoard (inputLines: seq<string>): BingoCell[,] =
         let array = inputLines |> Seq.map(parseLine) |> Seq.toArray
         Array2D.init 5 5 (fun i j -> array[i][j]) 
                 
@@ -38,6 +38,9 @@ module Day4
                     let gameBoard = state |> Seq.take 5 |> getGameBoard
                     let newState = state |> Seq.skip 5
                     Some(gameBoard, newState))
+            
+    let isWinner(gameBoard: BingoCell[,]): bool =
+        false
                   
     module Part1 =
         let Execute: unit =
