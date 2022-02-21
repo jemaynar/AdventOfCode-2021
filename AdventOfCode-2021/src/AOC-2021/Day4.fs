@@ -52,7 +52,11 @@ module Day4
             || gameBoard[..5,4] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
     
     let applyPickToGameBoard(gameBoard: BingoCell[,], pick: byte) =
-        gameBoard
+        gameBoard |> Array2D.map(fun cell ->
+            if cell.Value = pick then
+                { IsSelected = true; Value = cell.Value }
+            else
+                cell)
     
     module Part1 =
         let Execute: unit =

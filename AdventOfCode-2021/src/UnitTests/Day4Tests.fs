@@ -322,3 +322,27 @@ module UnitTests.Day4Tests
                 [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = true; Value = 25uy }];
             ],
             result);
+
+    [<Fact>]
+    let ``applyPickToGameBoard: when pick does exists in gameBoard once then returns original gameBoard with IsSelected flipped equal to true`` () =
+        let gameBoard =
+            array2D [
+                [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = true; Value = 5uy }];
+                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = true; Value = 10uy }];
+                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = true; Value = 15uy }]; 
+                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = true; Value = 20uy }]; 
+                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = true; Value = 25uy }];
+            ]
+            
+        let result = applyPickToGameBoard(gameBoard, 1uy)
+        
+        Assert.Equal<BingoCell[,]>(
+            array2D [
+                [{ IsSelected = true; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = true; Value = 5uy }];
+                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = true; Value = 10uy }];
+                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = true; Value = 15uy }]; 
+                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = true; Value = 20uy }]; 
+                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = true; Value = 25uy }];
+            ],
+            result);
+
