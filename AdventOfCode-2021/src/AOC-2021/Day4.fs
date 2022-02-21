@@ -57,6 +57,9 @@ module Day4
                 { IsSelected = true; Value = cell.Value }
             else
                 cell)
+        
+    let applyPickToGameBoards(gameBoards: seq<BingoCell[,]>, pick: byte) =
+        gameBoards
     
     module Part1 =
         let Execute: unit =
