@@ -151,7 +151,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(false, result) 
         
     [<Fact>]
-    let rec ``isWinner: when all 5 numbers in first row selected returns true`` () =
+    let rec ``isWinner: when all 5 numbers in 1st row selected returns true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = true; Value = 1uy }; { IsSelected = true; Value = 2uy }; { IsSelected = true; Value = 2uy }; { IsSelected = true; Value = 4uy }; { IsSelected = true; Value = 5uy }];
@@ -159,6 +159,66 @@ module UnitTests.Day4Tests
                 [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
                 [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
                 [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
+            ]
+            
+        let result = isWinner <| gameBoard
+        
+        Assert.Equal<bool>(true, result) 
+        
+    [<Fact>]
+    let rec ``isWinner: when all 5 numbers in 2nd row selected returns true`` () =
+        let gameBoard =
+            array2D [
+                [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                [{ IsSelected = true; Value = 6uy }; { IsSelected = true; Value = 7uy }; { IsSelected = true; Value = 8uy }; { IsSelected = true; Value = 9uy }; { IsSelected = true; Value = 10uy }];
+                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
+            ]
+            
+        let result = isWinner <| gameBoard
+        
+        Assert.Equal<bool>(true, result)
+        
+    [<Fact>]
+    let rec ``isWinner: when all 5 numbers in 3rd row selected returns true`` () =
+        let gameBoard =
+            array2D [
+                [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                [{ IsSelected = true; Value = 11uy }; { IsSelected = true; Value = 12uy }; { IsSelected = true; Value = 13uy }; { IsSelected = true; Value = 14uy }; { IsSelected = true; Value = 15uy }]; 
+                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
+            ]
+            
+        let result = isWinner <| gameBoard
+        
+        Assert.Equal<bool>(true, result) 
+        
+    [<Fact>]
+    let rec ``isWinner: when all 5 numbers in 4th row selected returns true`` () =
+        let gameBoard =
+            array2D [
+                [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                [{ IsSelected = true; Value = 16uy }; { IsSelected = true; Value = 17uy }; { IsSelected = true; Value = 18uy }; { IsSelected = true; Value = 19uy }; { IsSelected = true; Value = 20uy }]; 
+                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
+            ]
+            
+        let result = isWinner <| gameBoard
+        
+        Assert.Equal<bool>(true, result) 
+        
+    [<Fact>]
+    let rec ``isWinner: when all 5 numbers in 5th row selected returns true`` () =
+        let gameBoard =
+            array2D [
+                [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                [{ IsSelected = true; Value = 21uy }; { IsSelected = true; Value = 22uy }; { IsSelected = true; Value = 23uy }; { IsSelected = true; Value = 24uy }; { IsSelected = true; Value = 25uy }];
             ]
             
         let result = isWinner <| gameBoard

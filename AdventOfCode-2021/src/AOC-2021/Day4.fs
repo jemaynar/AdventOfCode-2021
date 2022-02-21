@@ -41,6 +41,10 @@ module Day4
             
     let isWinner(gameBoard: BingoCell[,]): bool =
         gameBoard[0,..5] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
+            || gameBoard[1,..5] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
+            || gameBoard[2,..5] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
+            || gameBoard[3,..5] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
+            || gameBoard[4,..5] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
                   
     module Part1 =
         let Execute: unit =
