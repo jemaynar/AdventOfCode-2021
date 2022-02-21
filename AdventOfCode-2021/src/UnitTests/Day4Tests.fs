@@ -304,65 +304,65 @@ module UnitTests.Day4Tests
     let ``applyPickToGameBoard: when pick does not exist in game board then returns original game board`` () =
         let gameBoard =
             array2D [
-                [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = true; Value = 5uy }];
-                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = true; Value = 10uy }];
-                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = true; Value = 15uy }]; 
-                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = true; Value = 20uy }]; 
-                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = true; Value = 25uy }];
+                [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
             ]
             
         let result = applyPickToGameBoard(gameBoard, 26uy)
         
         Assert.Equal<BingoCell[,]>(
             array2D [
-                [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = true; Value = 5uy }];
-                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = true; Value = 10uy }];
-                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = true; Value = 15uy }]; 
-                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = true; Value = 20uy }]; 
-                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = true; Value = 25uy }];
+                [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
             ],
             result)
 
     [<Fact>]
-    let ``applyPickToGameBoard: when pick does exists in game board once then returns original gameBoard with IsSelected flipped equal to true`` () =
+    let ``applyPickToGameBoard: when pick does exists in game board once then returns original game board with IsSelected flipped equal to true`` () =
         let gameBoard =
             array2D [
-                [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = true; Value = 5uy }];
-                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = true; Value = 10uy }];
-                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = true; Value = 15uy }]; 
-                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = true; Value = 20uy }]; 
-                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = true; Value = 25uy }];
+                [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
             ]
             
         let result = applyPickToGameBoard(gameBoard, 1uy)
         
         Assert.Equal<BingoCell[,]>(
             array2D [
-                [{ IsSelected = true; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = true; Value = 5uy }];
-                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = true; Value = 10uy }];
-                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = true; Value = 15uy }]; 
-                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = true; Value = 20uy }]; 
-                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = true; Value = 25uy }];
+                [{ IsSelected = true; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
             ],
             result);
 
     [<Fact>]
-    let ``applyPickToGameBoards: When pick does not exist in any game board returns origin gameBoards`` () =
+    let ``applyPickToGameBoards: When pick does not exist in any game board returns origin game boards`` () =
         let gameBoards =
             seq {
                 array2D [
-                    [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = true; Value = 5uy }];
-                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = true; Value = 10uy }];
-                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = true; Value = 15uy }]; 
-                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = true; Value = 20uy }]; 
-                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = true; Value = 25uy }];
+                    [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
                 ]
                 array2D [
-                    [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = true; Value = 5uy }];
-                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = true; Value = 10uy }];
-                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = true; Value = 15uy }]; 
-                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = true; Value = 20uy }]; 
-                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = true; Value = 25uy }];
+                    [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
                 ]
             }
         
@@ -371,20 +371,59 @@ module UnitTests.Day4Tests
         Assert.Equal<BingoCell[,]>(
             seq {
                 array2D [
-                    [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = true; Value = 5uy }];
-                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = true; Value = 10uy }];
-                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = true; Value = 15uy }]; 
-                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = true; Value = 20uy }]; 
-                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = true; Value = 25uy }];
+                    [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
                 ]
                 array2D [
-                    [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = true; Value = 5uy }];
-                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = true; Value = 10uy }];
-                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = true; Value = 15uy }]; 
-                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = true; Value = 20uy }]; 
-                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = true; Value = 25uy }];
+                    [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
                 ]
             },
             result);
 
+    [<Fact>]
+    let ``applyPickToGameBoards: When pick does exists in both game boards then returns origin game board with IsSelected set to true`` () =
+        let gameBoards =
+            seq {
+                array2D [
+                    [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
+                ]
+                array2D [
+                    [{ IsSelected = false; Value = 25uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 21uy }];
+                    [{ IsSelected = false; Value = 20uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 16uy }];
+                    [{ IsSelected = false; Value = 15uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 11uy }]; 
+                    [{ IsSelected = false; Value = 10uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 6uy }]; 
+                    [{ IsSelected = false; Value = 5uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 1uy }];
+                ]
+            }
         
+        let result = applyPickToGameBoards(gameBoards, 1uy)
+        
+        Assert.Equal<BingoCell[,]>(
+            seq {
+                array2D [
+                    [{ IsSelected = true; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
+                ]
+                array2D [
+                    [{ IsSelected = false; Value = 25uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 21uy }];
+                    [{ IsSelected = false; Value = 20uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 16uy }];
+                    [{ IsSelected = false; Value = 15uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 11uy }]; 
+                    [{ IsSelected = false; Value = 10uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 6uy }]; 
+                    [{ IsSelected = false; Value = 5uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 2uy }; { IsSelected = true; Value = 1uy }];
+                ]
+            },
+            result);

@@ -59,7 +59,7 @@ module Day4
                 cell)
         
     let applyPickToGameBoards(gameBoards: seq<BingoCell[,]>, pick: byte) =
-        gameBoards
+        gameBoards |> Seq.map(fun gameBoard -> applyPickToGameBoard(gameBoard, pick))
     
     module Part1 =
         let Execute: unit =
