@@ -366,7 +366,7 @@ module UnitTests.Day4Tests
                 ]
             }
         
-        let result = applyPickToGameBoards(gameBoards, 1uy)
+        let result = applyPickToGameBoards(gameBoards, 26uy)
         
         Assert.Equal<BingoCell[,]>(
             seq {
