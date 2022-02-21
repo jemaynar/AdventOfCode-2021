@@ -62,7 +62,7 @@ module Day4
     let applyPickToGameBoards(gameBoards: seq<BingoCell[,]>, pick: byte) =
         gameBoards |> Seq.map(fun gameBoard -> applyPickToGameBoard(gameBoard, pick))
         
-    let applyUntilWinnerFound(gameBoards: seq<BingoCell[,]>, picks: byte[]): Option<Winner> =
+    let applyPicksUntilWinnerFound(gameBoards: seq<BingoCell[,]>, picks: byte[]): Option<Winner> =
         None
     
     module Part1 =

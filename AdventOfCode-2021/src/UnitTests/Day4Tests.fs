@@ -429,7 +429,7 @@ module UnitTests.Day4Tests
             result)
         
     [<Fact>]
-    let ``applyUntilWinnerFound: When fewer than 5 picks then returns None`` () =
+    let ``applyPicksUntilWinnerFound: When fewer than 5 picks then returns None`` () =
         let gameBoards =
             seq {
                 array2D [
@@ -442,6 +442,6 @@ module UnitTests.Day4Tests
             }
         let picks = [| 1uy; 2uy; 3uy; 4uy; |]
             
-        let result = applyUntilWinnerFound(gameBoards, picks)
+        let result = applyPicksUntilWinnerFound(gameBoards, picks)
         
         Assert.Equal<Option<Winner>>(None, result)        
