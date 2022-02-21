@@ -50,7 +50,10 @@ module Day4
             || gameBoard[..5,2] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
             || gameBoard[..5,3] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
             || gameBoard[..5,4] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
-                  
+    
+    let applyPickToGameBoard(gameBoard: BingoCell[,], pick: byte) =
+        gameBoard
+    
     module Part1 =
         let Execute: unit =
             printfn "\nDay 4 / Part 1 Result:\n"
