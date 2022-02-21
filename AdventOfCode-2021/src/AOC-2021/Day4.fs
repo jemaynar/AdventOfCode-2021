@@ -2,6 +2,7 @@ module Day4
     open System
 
     type BingoCell = { IsSelected: bool; Value: byte }
+    type Winner = { Board: BingoCell[,]; AppliedPicks: int[] }
     
     let getDrawnNumbers (inputLines: seq<string>): int[] =
         let firstLine = inputLines |> Seq.head
@@ -60,6 +61,9 @@ module Day4
         
     let applyPickToGameBoards(gameBoards: seq<BingoCell[,]>, pick: byte) =
         gameBoards |> Seq.map(fun gameBoard -> applyPickToGameBoard(gameBoard, pick))
+        
+    let applyUntilWinnerFound(gameBoards: seq<BingoCell[,]>, picks: byte[]): Option<Winner> =
+        None
     
     module Part1 =
         let Execute: unit =
