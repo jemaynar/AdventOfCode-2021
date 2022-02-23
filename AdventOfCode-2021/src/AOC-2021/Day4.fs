@@ -2,7 +2,7 @@ module Day4
     open System
 
     type BingoCell = { IsSelected: bool; Value: byte }
-    type Winner = { Board: BingoCell[,]; AppliedPicks: int[] }
+    type Winner = { Board: BingoCell[,]; AppliedPicks: byte[] }
     
     let getDrawnNumbers (inputLines: seq<string>): int[] =
         let firstLine = inputLines |> Seq.head
@@ -52,8 +52,9 @@ module Day4
             || gameBoard[..5,3] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
             || gameBoard[..5,4] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
             
-    let findFirstWinner(gameBoards: seq<BingoCell[,]>): Option<Winner> =
-        None 
+    let firstWinner(gameBoards: seq<BingoCell[,]>): Option<BingoCell[,]> =
+        gameBoards
+            |> Seq.tryFind (fun board -> board |> isWinner)
     
     let applyPickToGameBoard(gameBoard: BingoCell[,], pick: byte) =
         gameBoard |> Array2D.map(fun cell ->

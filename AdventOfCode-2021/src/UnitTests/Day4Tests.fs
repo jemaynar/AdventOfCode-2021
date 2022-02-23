@@ -301,7 +301,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(true, result)
         
     [<Fact>]
-    let ``findFirstWinner: when no supplied board is winner returns None`` () =
+    let ``firstWinner: when no supplied board is winner returns None`` () =
         let gameBoards =
             seq {
                 array2D [
@@ -313,9 +313,36 @@ module UnitTests.Day4Tests
                 ];
             }
             
-        let result = findFirstWinner <| gameBoards
+        let result = firstWinner <| gameBoards
         
-        Assert.Equal<Option<Winner>>(None, result)
+        Assert.Equal<Option<BingoCell[,]>>(None, result)
+        
+    [<Fact>]
+    let ``firstWinner: when first board is winner returns Winner`` () =
+        let gameBoards =
+            seq {
+                array2D [
+                    [{ IsSelected = true; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                    [{ IsSelected = true; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                    [{ IsSelected = true; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                    [{ IsSelected = true; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                    [{ IsSelected = true; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
+                ];
+            }
+            
+        let result = firstWinner <| gameBoards
+        
+        let expectedResult =
+            array2D [
+                [{ IsSelected = true; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                [{ IsSelected = true; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                [{ IsSelected = true; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                [{ IsSelected = true; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                [{ IsSelected = true; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
+            ]
+        Assert.Equal<Option<BingoCell[,]>>(
+            Some expectedResult,
+            result)
 
     [<Fact>]
     let ``applyPickToGameBoard: when pick does not exist in game board then returns original game board`` () =
