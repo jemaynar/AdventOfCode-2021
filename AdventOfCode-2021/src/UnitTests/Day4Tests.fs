@@ -318,7 +318,7 @@ module UnitTests.Day4Tests
         Assert.Equal<Option<BingoCell[,]>>(None, result)
         
     [<Fact>]
-    let ``firstWinner: when first board is winner returns Winner`` () =
+    let ``firstWinner: when first board is winner returns the winning game board`` () =
         let gameBoards =
             seq {
                 array2D [
