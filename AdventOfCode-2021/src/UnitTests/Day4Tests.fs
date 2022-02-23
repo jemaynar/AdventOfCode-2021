@@ -8,7 +8,7 @@ module UnitTests.Day4Tests
         
         let result = getDrawnNumbers <| inputLines
         
-        Assert.Equal<int[]>(result, Array.empty)
+        Assert.Equal<byte[]>(result, Array.empty)
         
     [<Fact>]
     let ``getDrawnNumbers: when input line is "1" then result is array containing 1`` () =
@@ -16,7 +16,7 @@ module UnitTests.Day4Tests
         
         let result = getDrawnNumbers <| inputLines
         
-        Assert.Equal<int[]>([| 1 |], result)
+        Assert.Equal<byte[]>([| 1uy |], result)
                 
     [<Fact>]
     let ``getDrawnNumbers: when input line is "1,," then result is array containing 1`` () =
@@ -24,7 +24,7 @@ module UnitTests.Day4Tests
         
         let result = getDrawnNumbers <| inputLines
         
-        Assert.Equal<int[]>([| 1 |], result)
+        Assert.Equal<byte[]>([| 1uy |], result)
         
     [<Fact>]
     let ``getDrawnNumbers: when input line is "1,a," then result is array containing 1`` () =
@@ -32,7 +32,7 @@ module UnitTests.Day4Tests
         
         let result = getDrawnNumbers <| inputLines
         
-        Assert.Equal<int[]>([| 1 |], result)
+        Assert.Equal<byte[]>([| 1uy |], result)
         
     [<Fact>]
     let ``parseLine: when line contains 5 numbers then result is 5 BingoCells`` () =
@@ -488,4 +488,4 @@ module UnitTests.Day4Tests
             
         let result = applyPicksUntilWinnerFound(gameBoards, picks)
         
-        Assert.Equal<Option<Winner>>(None, result)        
+        Assert.Equal<Option<Winner>>(None, result)

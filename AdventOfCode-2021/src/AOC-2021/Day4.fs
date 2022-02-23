@@ -4,15 +4,15 @@ module Day4
     type BingoCell = { IsSelected: bool; Value: byte }
     type Winner = { Board: BingoCell[,]; AppliedPicks: byte[] }
     
-    let getDrawnNumbers (inputLines: seq<string>): int[] =
+    let getDrawnNumbers (inputLines: seq<string>): byte[] =
         let firstLine = inputLines |> Seq.head
 
-        let ints = firstLine.Split ','
-        if Array.isEmpty <| ints then
+        let bytes = firstLine.Split ','
+        if Array.isEmpty <| bytes then
             Array.empty
         else
-            ints
-                |> Seq.choose(fun n -> match Int32.TryParse(n) with | true, n -> Some n | false, _ -> None)
+            bytes
+                |> Seq.choose(fun n -> match Byte.TryParse(n) with | true, n -> Some n | false, _ -> None)
                 |> Array.ofSeq
                 
     let parseLine (line: string) =
