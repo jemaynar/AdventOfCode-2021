@@ -517,3 +517,39 @@ module UnitTests.Day4Tests
                 ];
                 AppliedPicks = [| 1uy; 2uy; 3uy; 4uy; 5uy; |];
             }, result)
+        
+    [<Fact>]
+    let ``applyPicksUntilWinnerFound: When 5 picks that cause a winner on second gameboard then returns Winner`` () =
+        let gameBoards =
+            seq {
+                array2D [
+                    [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
+                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
+                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
+                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
+                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
+                ];
+                array2D [
+                    [{ IsSelected = false; Value = 26uy }; { IsSelected = false; Value = 27uy }; { IsSelected = false; Value = 28uy }; { IsSelected = false; Value = 29uy }; { IsSelected = false; Value = 30uy }];
+                    [{ IsSelected = false; Value = 31uy }; { IsSelected = false; Value = 32uy }; { IsSelected = false; Value = 33uy }; { IsSelected = false; Value = 34uy }; { IsSelected = false; Value = 35uy }];
+                    [{ IsSelected = false; Value = 36uy }; { IsSelected = false; Value = 37uy }; { IsSelected = false; Value = 38uy }; { IsSelected = false; Value = 39uy }; { IsSelected = false; Value = 40uy }]; 
+                    [{ IsSelected = false; Value = 41uy }; { IsSelected = false; Value = 42uy }; { IsSelected = false; Value = 43uy }; { IsSelected = false; Value = 44uy }; { IsSelected = false; Value = 45uy }]; 
+                    [{ IsSelected = false; Value = 46uy }; { IsSelected = false; Value = 47uy }; { IsSelected = false; Value = 48uy }; { IsSelected = false; Value = 49uy }; { IsSelected = false; Value = 50uy }];
+                ]
+            }
+
+        let picks = [| 26uy; 31uy; 36uy; 41uy; 46uy; |]
+            
+        let result = applyPicksUntilWinnerFound(gameBoards, picks)
+        
+        Assert.Equal<Option<Winner>>(
+            Some {
+                Board = array2D [
+                    [{ IsSelected = true; Value = 26uy }; { IsSelected = false; Value = 27uy }; { IsSelected = false; Value = 28uy }; { IsSelected = false; Value = 29uy }; { IsSelected = false; Value = 30uy }];
+                    [{ IsSelected = true; Value = 31uy }; { IsSelected = false; Value = 32uy }; { IsSelected = false; Value = 33uy }; { IsSelected = false; Value = 34uy }; { IsSelected = false; Value = 35uy }];
+                    [{ IsSelected = true; Value = 36uy }; { IsSelected = false; Value = 37uy }; { IsSelected = false; Value = 38uy }; { IsSelected = false; Value = 39uy }; { IsSelected = false; Value = 40uy }]; 
+                    [{ IsSelected = true; Value = 41uy }; { IsSelected = false; Value = 42uy }; { IsSelected = false; Value = 43uy }; { IsSelected = false; Value = 44uy }; { IsSelected = false; Value = 45uy }]; 
+                    [{ IsSelected = true; Value = 46uy }; { IsSelected = false; Value = 47uy }; { IsSelected = false; Value = 48uy }; { IsSelected = false; Value = 49uy }; { IsSelected = false; Value = 50uy }];
+                ];
+                AppliedPicks = [| 26uy; 31uy; 36uy; 41uy; 46uy; |];
+            }, result)

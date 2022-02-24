@@ -70,16 +70,29 @@ module Day4
         if picks |> Array.length < 5 then 
             None
         else
-            Some {
-                Board = array2D [
-                    [{ IsSelected = true; Value = 1uy }; { IsSelected = true; Value = 2uy }; { IsSelected = true; Value = 3uy }; { IsSelected = true; Value = 4uy }; { IsSelected = true; Value = 5uy }];
-                    [{ IsSelected = false; Value = 6uy }; { IsSelected = false; Value = 7uy }; { IsSelected = false; Value = 8uy }; { IsSelected = false; Value = 9uy }; { IsSelected = false; Value = 10uy }];
-                    [{ IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 15uy }]; 
-                    [{ IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 19uy }; { IsSelected = false; Value = 20uy }]; 
-                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value = 25uy }];
-                ];
-                AppliedPicks = picks;
-            }
+            let result =
+                (gameBoards, 0)
+                    // Unfold must return Some Tuple or None
+                    // Some fst: Value yielded from sequence for this iteration.
+                    // Some snd: State to be passed to next iteration of generator function. 
+                    |> Seq.unfold(fun tuple ->
+                        let index = snd tuple
+                        if index = -1 then
+                            None
+                        else
+                            let boardState = fst tuple
+                            let updatedBoards = applyPickToGameBoards(boardState, picks.[index])
+                            let firstWinner = firstWinner <| updatedBoards
+                            
+                            if Option.isNone <| firstWinner then
+                                Some((updatedBoards, picks |> Seq.truncate (index + 1)), (updatedBoards, index + 1))
+                            else
+                                Some((updatedBoards, picks |> Seq.truncate (index + 1)), (updatedBoards, -1)))
+                    |> Seq.last
+                    
+            let winner = fst result |> firstWinner
+
+            winner |> Option.map(fun w -> { Board = w; AppliedPicks = snd result |> Seq.toArray; } )
     
     module Part1 =
         let Execute: unit =
