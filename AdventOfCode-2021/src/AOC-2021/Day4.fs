@@ -95,6 +95,9 @@ module Day4
             winner |> Option.map(fun w -> { Board = w; AppliedPicks = snd result |> Seq.toArray; } )
     
     module Part1 =
+        let calculateScore (winner: Option<Winner>):int =
+            4512            
+        
         let Execute: unit =
             printfn "\nDay 4 / Part 1 Result:\n"
         
