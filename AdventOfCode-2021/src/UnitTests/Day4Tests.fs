@@ -519,7 +519,7 @@ module UnitTests.Day4Tests
             }, result)
         
     [<Fact>]
-    let ``applyPicksUntilWinnerFound: When 5 picks that cause a winner on second gameboard then returns Winner`` () =
+    let ``applyPicksUntilWinnerFound: When 5 picks that cause a winner on second game board then returns Winner`` () =
         let gameBoards =
             seq {
                 array2D [
@@ -552,4 +552,47 @@ module UnitTests.Day4Tests
                     [{ IsSelected = true; Value = 46uy }; { IsSelected = false; Value = 47uy }; { IsSelected = false; Value = 48uy }; { IsSelected = false; Value = 49uy }; { IsSelected = false; Value = 50uy }];
                 ];
                 AppliedPicks = [| 26uy; 31uy; 36uy; 41uy; 46uy; |];
+            }, result)
+
+    [<Fact>]
+    let ``applyPicksUntilWinnerFound: When 27 picks picks from part 1 description when 3 boards from description then returns third board and first 12 picks as winner.`` () =
+        let gameBoards =
+            seq {
+                array2D [
+                    [{ IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 11uy }; { IsSelected = false; Value =  0uy }];
+                    [{ IsSelected = false; Value =  8uy }; { IsSelected = false; Value =  2uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value =  4uy }; { IsSelected = false; Value = 24uy }];
+                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value =  9uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 16uy }; { IsSelected = false; Value =  7uy }]; 
+                    [{ IsSelected = false; Value =  6uy }; { IsSelected = false; Value = 10uy }; { IsSelected = false; Value =  3uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value =  5uy }]; 
+                    [{ IsSelected = false; Value =  1uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 20uy }; { IsSelected = false; Value = 15uy }; { IsSelected = false; Value = 19uy }];
+                ];
+                array2D [
+                    [{ IsSelected = false; Value =  3uy }; { IsSelected = false; Value = 15uy }; { IsSelected = false; Value =  0uy }; { IsSelected = false; Value =  2uy }; { IsSelected = false; Value = 22uy }];
+                    [{ IsSelected = false; Value =  9uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value =  5uy }];
+                    [{ IsSelected = false; Value = 19uy }; { IsSelected = false; Value =  8uy }; { IsSelected = false; Value =  7uy }; { IsSelected = false; Value = 25uy }; { IsSelected = false; Value = 23uy }]; 
+                    [{ IsSelected = false; Value = 20uy }; { IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 10uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value =  4uy }]; 
+                    [{ IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value =  6uy }];
+                ];
+                array2D [
+                    [{ IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value =  4uy }];
+                    [{ IsSelected = false; Value = 10uy }; { IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 15uy }; { IsSelected = false; Value =  9uy }; { IsSelected = false; Value = 19uy }];
+                    [{ IsSelected = false; Value = 18uy }; { IsSelected = false; Value =  8uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 26uy }; { IsSelected = false; Value = 20uy }]; 
+                    [{ IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value =  6uy }; { IsSelected = false; Value =  5uy }]; 
+                    [{ IsSelected = false; Value =  2uy }; { IsSelected = false; Value =  0uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value =  3uy }; { IsSelected = false; Value =  7uy }];
+                ]
+            }
+
+        let picks = [| 7uy; 4uy; 9uy; 5uy; 11uy; 17uy; 23uy; 2uy; 0uy; 14uy; 21uy; 24uy; 10uy; 16uy; 13uy; 6uy; 15uy; 25uy; 12uy; 22uy; 18uy; 20uy; 8uy; 19uy; 3uy; 26uy; 1uy; |]
+            
+        let result = applyPicksUntilWinnerFound(gameBoards, picks)
+        
+        Assert.Equal<Option<Winner>>(
+            Some {
+                Board = array2D [
+                    [{ IsSelected = true; Value = 14uy }; { IsSelected = true; Value = 21uy }; { IsSelected = true; Value = 17uy }; { IsSelected = true; Value = 24uy }; { IsSelected = true; Value =  4uy }];
+                    [{ IsSelected = false; Value = 10uy }; { IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 15uy }; { IsSelected = true; Value =  9uy }; { IsSelected = false; Value = 19uy }];
+                    [{ IsSelected = false; Value = 18uy }; { IsSelected = false; Value =  8uy }; { IsSelected = true; Value = 23uy }; { IsSelected = false; Value = 26uy }; { IsSelected = false; Value = 20uy }]; 
+                    [{ IsSelected = false; Value = 22uy }; { IsSelected = true; Value = 11uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value =  6uy }; { IsSelected = true; Value =  5uy }]; 
+                    [{ IsSelected = true; Value =  2uy }; { IsSelected = true; Value =  0uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value =  3uy }; { IsSelected = true; Value =  7uy }];
+                ]
+                AppliedPicks = [| 7uy; 4uy;9uy; 5uy; 11uy; 17uy; 23uy; 2uy; 0uy; 14uy; 21uy; 24uy; |];
             }, result)
