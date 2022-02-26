@@ -127,7 +127,8 @@ module Day4
                     | Some(value) -> value
                     | None -> 0
 
-        sumOfUnmarkedCells * pick     
+        sumOfUnmarkedCells * pick
+
     module Part1 =
         let Execute: unit =
             printfn "\nDay 4 / Part 1 Result:\n"
