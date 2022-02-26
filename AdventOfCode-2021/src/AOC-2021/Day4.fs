@@ -95,9 +95,41 @@ module Day4
             winner |> Option.map(fun w -> { Board = w; AppliedPicks = snd result |> Seq.toArray; } )
     
     module Part1 =
-        let calculateScore (winner: Option<Winner>):int =
-            4512            
+        let calculateSumOfUnmarkedBingoCells (winner: Option<Winner>): Option<int> =
+            winner
+                |> Option.map(
+                    fun w ->
+                        w.Board
+                            |> Seq.cast<BingoCell> 
+                            |> Seq.filter(fun c -> c.IsSelected = false)
+                            |> Seq.map(fun c -> c.Value |> Convert.ToInt32)
+                            |> Seq.sum)
         
+        let lastPick (winner: Option<Winner>): Option<int> =
+            winner
+                |> Option.map(
+                    fun w ->
+                        w.AppliedPicks
+                            |> Array.map(Convert.ToInt32)
+                            |> Array.last)
+
+        let calculateScore (winner: Option<Winner>): int =
+            let sumOfUnmarkedCells =
+                winner
+                    |> calculateSumOfUnmarkedBingoCells
+                    |> function 
+                        | Some(value) -> value
+                        | None -> 0
+
+            let pick =
+                winner
+                    |> lastPick
+                    |> function
+                        | Some(value) -> value
+                        | None -> 0
+
+            sumOfUnmarkedCells * pick 
+                
         let Execute: unit =
             printfn "\nDay 4 / Part 1 Result:\n"
         
