@@ -598,7 +598,7 @@ module UnitTests.Day4Tests
             }, result)
         
     [<Fact>]
-    let ``calculateSumOfUnmarkedBingoCells: when sum of all unmarked numbers on winning board is 188 then returns 188`` () = //  when last number called was 24 then result is 4512`` () =
+    let ``calculateSumOfUnmarkedBingoCells: when sum of all unmarked numbers on winning board is 188 then returns 188`` () =
         let winner =
             Some {
                 Board = 
