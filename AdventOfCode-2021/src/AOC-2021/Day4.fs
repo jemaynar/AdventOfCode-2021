@@ -93,9 +93,8 @@ module Day4
             let winner = fst result |> firstWinner
 
             winner |> Option.map(fun w -> { Board = w; AppliedPicks = snd result |> Seq.toArray; } )
-    
-    module Part1 =
-        let calculateSumOfUnmarkedBingoCells (winner: Option<Winner>): Option<int> =
+
+    let calculateSumOfUnmarkedBingoCells (winner: Option<Winner>): Option<int> =
             winner
                 |> Option.map(
                     fun w ->
@@ -105,31 +104,31 @@ module Day4
                             |> Seq.map(fun c -> c.Value |> Convert.ToInt32)
                             |> Seq.sum)
         
-        let lastPick (winner: Option<Winner>): Option<int> =
+    let lastPick (winner: Option<Winner>): Option<int> =
+        winner
+            |> Option.map(
+                fun w ->
+                    w.AppliedPicks
+                        |> Array.map(Convert.ToInt32)
+                        |> Array.last)
+
+    let calculateScore (winner: Option<Winner>): int =
+        let sumOfUnmarkedCells =
             winner
-                |> Option.map(
-                    fun w ->
-                        w.AppliedPicks
-                            |> Array.map(Convert.ToInt32)
-                            |> Array.last)
+                |> calculateSumOfUnmarkedBingoCells
+                |> function 
+                    | Some(value) -> value
+                    | None -> 0
 
-        let calculateScore (winner: Option<Winner>): int =
-            let sumOfUnmarkedCells =
-                winner
-                    |> calculateSumOfUnmarkedBingoCells
-                    |> function 
-                        | Some(value) -> value
-                        | None -> 0
+        let pick =
+            winner
+                |> lastPick
+                |> function
+                    | Some(value) -> value
+                    | None -> 0
 
-            let pick =
-                winner
-                    |> lastPick
-                    |> function
-                        | Some(value) -> value
-                        | None -> 0
-
-            sumOfUnmarkedCells * pick 
-                
+        sumOfUnmarkedCells * pick     
+    module Part1 =
         let Execute: unit =
             printfn "\nDay 4 / Part 1 Result:\n"
         

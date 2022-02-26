@@ -612,7 +612,7 @@ module UnitTests.Day4Tests
                 AppliedPicks = [| 7uy; 4uy; 9uy; 5uy; 11uy; 17uy; 23uy; 2uy; 0uy; 14uy; 21uy; 24uy; |]
             }
 
-        let result = winner |> Part1.calculateSumOfUnmarkedBingoCells
+        let result = winner |> calculateSumOfUnmarkedBingoCells
         
         Assert.Equal<Option<int>>(Some 188, result)
         
@@ -630,7 +630,7 @@ module UnitTests.Day4Tests
                 AppliedPicks = [| 1uy; 2uy; 3uy; 4uy; 5uy; |]
             }
             
-        let result = winner |> Part1.calculateSumOfUnmarkedBingoCells
+        let result = winner |> calculateSumOfUnmarkedBingoCells
         
         Assert.Equal<Option<int>>(Some 310, result)
         
@@ -648,7 +648,7 @@ module UnitTests.Day4Tests
                 AppliedPicks = [| 1uy; 2uy; 3uy; 4uy; 5uy; |]
             }
         
-        let result = winner |> Part1.calculateScore
+        let result = winner |> calculateScore
         
         Assert.Equal<int>(1550, result)
         
@@ -667,6 +667,6 @@ module UnitTests.Day4Tests
                 AppliedPicks = [| 7uy; 4uy; 9uy; 5uy; 11uy; 17uy; 23uy; 2uy; 0uy; 14uy; 21uy; 24uy; |]
             }
 
-        let result = winner |> Part1.calculateScore
+        let result = winner |> calculateScore
         
         Assert.Equal<int>(4512, result)
