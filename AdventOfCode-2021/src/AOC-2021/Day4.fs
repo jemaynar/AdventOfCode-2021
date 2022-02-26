@@ -134,14 +134,14 @@ module Day4
             printfn "\nDay 4 / Part 1 Result:\n"
         
             let lines = Common.getData ".\Data\input4.txt"
-                
             let picks = getDrawnNumbers <| lines
-            
-            printfn "DrawnNumbers: %A" <| picks
-            
             let gameBoards = getGameBoards <| lines
             
-            printfn "GameBoards: %A" <| gameBoards
+            let winningScore =
+                applyPicksUntilWinnerFound(gameBoards, picks)
+                    |> calculateScore
+                    
+            printfn "Winning Score: %A" <| winningScore
         
     let Execute: unit =
         Part1.Execute
