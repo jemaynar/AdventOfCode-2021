@@ -93,16 +93,19 @@ module Day4
             let winner = fst result |> firstWinner
 
             winner |> Option.map(fun w -> { Board = w; AppliedPicks = snd result |> Seq.toArray; } )
+            
+    let applyPicksUntilLastWinnerFound(gameBoards: seq<BingoCell[,]>, picks: byte[]): Option<Winner> =
+        None
 
     let calculateSumOfUnmarkedBingoCells (winner: Option<Winner>): Option<int> =
-            winner
-                |> Option.map(
-                    fun w ->
-                        w.Board
-                            |> Seq.cast<BingoCell> 
-                            |> Seq.filter(fun c -> c.IsSelected = false)
-                            |> Seq.map(fun c -> c.Value |> Convert.ToInt32)
-                            |> Seq.sum)
+        winner
+            |> Option.map(
+                fun w ->
+                    w.Board
+                        |> Seq.cast<BingoCell> 
+                        |> Seq.filter(fun c -> c.IsSelected = false)
+                        |> Seq.map(fun c -> c.Value |> Convert.ToInt32)
+                        |> Seq.sum)
         
     let lastPick (winner: Option<Winner>): Option<int> =
         winner
@@ -142,6 +145,21 @@ module Day4
                     |> calculateScore
                     
             printfn "Winning Score: %A" <| winningScore
+            
+    module Part2 =
+        let Execute: unit =
+            printfn "\nDay 4 / Part 2 Result:\n"
+            
+            let lines = Common.getData ".\Data\input4.txt"
+            let picks = getDrawnNumbers <| lines
+            let gameBoards = getGameBoards <| lines
+            
+            let lastWinningScore =
+                applyPicksUntilLastWinnerFound(gameBoards, picks)
+                    |> calculateScore
+            
+            printfn "Last Winner Score: %A" <| lastWinningScore
         
     let Execute: unit =
         Part1.Execute
+        Part2.Execute
