@@ -95,8 +95,42 @@ module Day4
             winner |> Option.map(fun w -> { Board = w; AppliedPicks = snd result |> Seq.toArray; } )
             
     let applyPicksUntilLastWinnerFound(gameBoards: seq<BingoCell[,]>, picks: byte[]): Option<Winner> =
-        None
+        if picks |> Array.length < 5 then 
+            None
+        else
+            let result =
+                (gameBoards, 0)
+                    // Unfold must return Some Tuple or None
+                    // Some fst: Value yielded from sequence for this iteration.
+                    // Some snd: State to be passed to next iteration of generator function. 
+                    |> Seq.unfold(fun tuple ->
+                        let index = snd tuple
+                        if index = -1 then
+                            None
+                        else
+                            let boardState = fst tuple
+                            let updatedBoards = applyPickToGameBoards(boardState, picks.[index])
+                            let winner = firstWinner <| updatedBoards
+                            
+                            if Option.isNone <| winner then
+                                Some((updatedBoards, picks |> Seq.truncate (index + 1)), (updatedBoards, index + 1))
+                            else
+                                let remainingBoards = updatedBoards |> Seq.filter(fun b -> b |> isWinner = false) |> Seq.toArray
+                                if Array.length <| remainingBoards > 1 then
+                                    Some((remainingBoards, picks |> Seq.truncate (index + 1)), (remainingBoards, index + 1))
+                                else
+                                    let updatedRemainingBoards = applyPickToGameBoards(remainingBoards, picks[index + 1])
+                                    let isWinner = firstWinner <| updatedRemainingBoards
+                                    if Option.isNone <| isWinner then
+                                        Some((remainingBoards, picks |> Seq.truncate (index + 1)), (remainingBoards, index + 1))
+                                    else
+                                        Some((updatedRemainingBoards, picks |> Seq.truncate (index + 2)), (updatedRemainingBoards, -1)))
+                    |> Seq.last
+                    
+            let winner = fst result |> firstWinner
 
+            winner |> Option.map(fun w -> { Board = w; AppliedPicks = snd result |> Seq.toArray; } )
+    
     let calculateSumOfUnmarkedBingoCells (winner: Option<Winner>): Option<int> =
         winner
             |> Option.map(

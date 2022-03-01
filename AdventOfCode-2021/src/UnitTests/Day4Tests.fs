@@ -3,7 +3,7 @@ module UnitTests.Day4Tests
     open Day4
 
     [<Fact>]
-    let ``getDrawnNumbers: when input line is empty string then returns empty array`` () =
+    let ``getDrawnNumbers: When input line is empty string then returns empty array`` () =
         let inputLines = seq { "" }
         
         let result = getDrawnNumbers <| inputLines
@@ -11,7 +11,7 @@ module UnitTests.Day4Tests
         Assert.Equal<byte[]>(result, Array.empty)
         
     [<Fact>]
-    let ``getDrawnNumbers: when input line is "1" then result is array containing 1`` () =
+    let ``getDrawnNumbers: When input line is "1" then result is array containing 1`` () =
         let inputLines = seq { "1" }
         
         let result = getDrawnNumbers <| inputLines
@@ -19,7 +19,7 @@ module UnitTests.Day4Tests
         Assert.Equal<byte[]>([| 1uy |], result)
                 
     [<Fact>]
-    let ``getDrawnNumbers: when input line is "1,," then result is array containing 1`` () =
+    let ``getDrawnNumbers: When input line is "1,," then result is array containing 1`` () =
         let inputLines = seq { "1,," }
         
         let result = getDrawnNumbers <| inputLines
@@ -27,7 +27,7 @@ module UnitTests.Day4Tests
         Assert.Equal<byte[]>([| 1uy |], result)
         
     [<Fact>]
-    let ``getDrawnNumbers: when input line is "1,a," then result is array containing 1`` () =
+    let ``getDrawnNumbers: When input line is "1,a," then result is array containing 1`` () =
         let inputLines = seq { "1,a," }
         
         let result = getDrawnNumbers <| inputLines
@@ -35,7 +35,7 @@ module UnitTests.Day4Tests
         Assert.Equal<byte[]>([| 1uy |], result)
         
     [<Fact>]
-    let ``parseLine: when line contains 5 numbers then result is 5 BingoCells`` () =
+    let ``parseLine: When line contains 5 numbers then result is 5 BingoCells`` () =
         let inputLine = "22 13 17 11  0"
         
         let result = parseLine(inputLine)
@@ -50,7 +50,7 @@ module UnitTests.Day4Tests
             |], result)
         
     [<Fact>]
-    let ``getGameBoard: returns expected BingoCell Array2D`` () =
+    let ``getGameBoard: Returns expected BingoCell Array2D`` () =
         let inputLines = seq {
             "22 13 17 11  0";
             " 8  2 23  4 24";
@@ -71,7 +71,7 @@ module UnitTests.Day4Tests
             ], result)
         
     [<Fact>]
-    let ``getGameBoards: when input contains single game board then result is sequence containing single Array2D containing game board values`` () =
+    let ``getGameBoards: When input contains single game board then result is sequence containing single Array2D containing game board values`` () =
         let inputLines = seq {
             "1,2,3,4,5";
             "";
@@ -97,7 +97,7 @@ module UnitTests.Day4Tests
             result)
         
     [<Fact>]
-    let ``getGameBoards: when input contains two game boards then result is sequence containing two Array2Ds containing game board values`` () =
+    let ``getGameBoards: When input contains two game boards then result is sequence containing two Array2Ds containing game board values`` () =
         let inputLines = seq {
             "1,2,3,4,5";
             "";
@@ -136,7 +136,7 @@ module UnitTests.Day4Tests
             result)
         
     [<Fact>]
-    let ``isWinner: when fewer than 5 numbers selected returns false`` () =
+    let ``isWinner: When fewer than 5 numbers selected returns false`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = true; Value = 1uy }; { IsSelected = true; Value = 2uy }; { IsSelected = true; Value = 3uy }; { IsSelected = true; Value = 4uy }; { IsSelected = false; Value = 5uy }];
@@ -151,7 +151,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(false, result) 
 
     [<Fact>]
-    let ``isWinner: when all 5 numbers in 1st row selected returns true`` () =
+    let ``isWinner: When all 5 numbers in 1st row selected returns true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = true; Value = 1uy }; { IsSelected = true; Value = 2uy }; { IsSelected = true; Value = 3uy }; { IsSelected = true; Value = 4uy }; { IsSelected = true; Value = 5uy }];
@@ -166,7 +166,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(true, result) 
 
     [<Fact>]
-    let ``isWinner: when all 5 numbers in 2nd row selected returns true`` () =
+    let ``isWinner: When all 5 numbers in 2nd row selected returns true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
@@ -181,7 +181,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(true, result)
 
     [<Fact>]
-    let ``isWinner: when all 5 numbers in 3rd row selected returns true`` () =
+    let ``isWinner: When all 5 numbers in 3rd row selected returns true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
@@ -196,7 +196,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(true, result) 
 
     [<Fact>]
-    let ``isWinner: when all 5 numbers in 4th row selected returns true`` () =
+    let ``isWinner: When all 5 numbers in 4th row selected returns true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
@@ -211,7 +211,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(true, result) 
 
     [<Fact>]
-    let ``isWinner: when all 5 numbers in 5th row selected returns true`` () =
+    let ``isWinner: When all 5 numbers in 5th row selected returns true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
@@ -226,7 +226,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(true, result) 
 
     [<Fact>]
-    let ``isWinner: when all 5 numbers in 1st column selected returns true`` () =
+    let ``isWinner: When all 5 numbers in 1st column selected returns true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = true; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
@@ -241,7 +241,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(true, result)
 
     [<Fact>]
-    let ``isWinner: when all 5 numbers in 2nd column selected returns true`` () =
+    let ``isWinner: When all 5 numbers in 2nd column selected returns true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = false; Value = 1uy }; { IsSelected = true; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
@@ -256,7 +256,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(true, result)
 
     [<Fact>]
-    let ``isWinner: when all 5 numbers in 3rd column selected returns true`` () =
+    let ``isWinner: When all 5 numbers in 3rd column selected returns true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = true; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
@@ -271,7 +271,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(true, result)
 
     [<Fact>]
-    let ``isWinner: when all 5 numbers in 4th column selected returns true`` () =
+    let ``isWinner: When all 5 numbers in 4th column selected returns true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = true; Value = 4uy }; { IsSelected = false; Value = 5uy }];
@@ -286,7 +286,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(true, result)
  
     [<Fact>]
-    let ``isWinner: when all 5 numbers in 5th column selected returns true`` () =
+    let ``isWinner: When all 5 numbers in 5th column selected returns true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = true; Value = 5uy }];
@@ -301,7 +301,7 @@ module UnitTests.Day4Tests
         Assert.Equal<bool>(true, result)
         
     [<Fact>]
-    let ``firstWinner: when no supplied board is winner returns None`` () =
+    let ``firstWinner: When no supplied board is winner returns None`` () =
         let gameBoards =
             seq {
                 array2D [
@@ -318,7 +318,7 @@ module UnitTests.Day4Tests
         Assert.Equal<Option<BingoCell[,]>>(None, result)
         
     [<Fact>]
-    let ``firstWinner: when first board is winner returns the winning game board`` () =
+    let ``firstWinner: When first board is winner returns the winning game board`` () =
         let gameBoards =
             seq {
                 array2D [
@@ -345,7 +345,7 @@ module UnitTests.Day4Tests
             result)
 
     [<Fact>]
-    let ``applyPickToGameBoard: when pick does not exist in game board then returns original game board`` () =
+    let ``applyPickToGameBoard: When pick does not exist in game board then returns original game board`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
@@ -368,7 +368,7 @@ module UnitTests.Day4Tests
             result)
 
     [<Fact>]
-    let ``applyPickToGameBoard: when pick does exists in game board once then returns original game board with IsSelected flipped equal to true`` () =
+    let ``applyPickToGameBoard: When pick does exists in game board once then returns original game board with IsSelected flipped equal to true`` () =
         let gameBoard =
             array2D [
                 [{ IsSelected = false; Value = 1uy }; { IsSelected = false; Value = 2uy }; { IsSelected = false; Value = 3uy }; { IsSelected = false; Value = 4uy }; { IsSelected = false; Value = 5uy }];
@@ -594,7 +594,7 @@ module UnitTests.Day4Tests
                     [{ IsSelected = false; Value = 22uy }; { IsSelected = true; Value = 11uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value =  6uy }; { IsSelected = true; Value =  5uy }]; 
                     [{ IsSelected = true; Value =  2uy }; { IsSelected = true; Value =  0uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value =  3uy }; { IsSelected = true; Value =  7uy }];
                 ]
-                AppliedPicks = [| 7uy; 4uy;9uy; 5uy; 11uy; 17uy; 23uy; 2uy; 0uy; 14uy; 21uy; 24uy; |];
+                AppliedPicks = [| 7uy; 4uy; 9uy; 5uy; 11uy; 17uy; 23uy; 2uy; 0uy; 14uy; 21uy; 24uy; |];
             }, result)
         
     [<Fact>]
@@ -653,7 +653,7 @@ module UnitTests.Day4Tests
         Assert.Equal<int>(1550, result)
         
     [<Fact>]
-    let ``calculateScore: when sum of all unmarked numbers on winning board is 188 when last number called was 24 then result is 4512`` () =
+    let ``calculateScore: When sum of all unmarked numbers on winning board is 188 when last number called was 24 then result is 4512`` () =
         let winner =
             Some {
                 Board = 
@@ -670,3 +670,47 @@ module UnitTests.Day4Tests
         let result = winner |> calculateScore
         
         Assert.Equal<int>(4512, result)
+
+    [<Fact>]
+    let ``applyPicksUntilLastWinnerFound: When 27 picks picks from part 1 description when 3 boards from description then returns third board and first 15 picks as last winner.`` () =
+        let gameBoards =
+            seq {
+                array2D [
+                    [{ IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 11uy }; { IsSelected = false; Value =  0uy }];
+                    [{ IsSelected = false; Value =  8uy }; { IsSelected = false; Value =  2uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value =  4uy }; { IsSelected = false; Value = 24uy }];
+                    [{ IsSelected = false; Value = 21uy }; { IsSelected = false; Value =  9uy }; { IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 16uy }; { IsSelected = false; Value =  7uy }]; 
+                    [{ IsSelected = false; Value =  6uy }; { IsSelected = false; Value = 10uy }; { IsSelected = false; Value =  3uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value =  5uy }]; 
+                    [{ IsSelected = false; Value =  1uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value = 20uy }; { IsSelected = false; Value = 15uy }; { IsSelected = false; Value = 19uy }];
+                ];
+                array2D [
+                    [{ IsSelected = false; Value =  3uy }; { IsSelected = false; Value = 15uy }; { IsSelected = false; Value =  0uy }; { IsSelected = false; Value =  2uy }; { IsSelected = false; Value = 22uy }];
+                    [{ IsSelected = false; Value =  9uy }; { IsSelected = false; Value = 18uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value =  5uy }];
+                    [{ IsSelected = false; Value = 19uy }; { IsSelected = false; Value =  8uy }; { IsSelected = false; Value =  7uy }; { IsSelected = false; Value = 25uy }; { IsSelected = false; Value = 23uy }]; 
+                    [{ IsSelected = false; Value = 20uy }; { IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 10uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value =  4uy }]; 
+                    [{ IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value =  6uy }];
+                ];
+                array2D [
+                    [{ IsSelected = false; Value = 14uy }; { IsSelected = false; Value = 21uy }; { IsSelected = false; Value = 17uy }; { IsSelected = false; Value = 24uy }; { IsSelected = false; Value =  4uy }];
+                    [{ IsSelected = false; Value = 10uy }; { IsSelected = false; Value = 16uy }; { IsSelected = false; Value = 15uy }; { IsSelected = false; Value =  9uy }; { IsSelected = false; Value = 19uy }];
+                    [{ IsSelected = false; Value = 18uy }; { IsSelected = false; Value =  8uy }; { IsSelected = false; Value = 23uy }; { IsSelected = false; Value = 26uy }; { IsSelected = false; Value = 20uy }]; 
+                    [{ IsSelected = false; Value = 22uy }; { IsSelected = false; Value = 11uy }; { IsSelected = false; Value = 13uy }; { IsSelected = false; Value =  6uy }; { IsSelected = false; Value =  5uy }]; 
+                    [{ IsSelected = false; Value =  2uy }; { IsSelected = false; Value =  0uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value =  3uy }; { IsSelected = false; Value =  7uy }];
+                ]
+            }
+
+        let picks = [| 7uy; 4uy; 9uy; 5uy; 11uy; 17uy; 23uy; 2uy; 0uy; 14uy; 21uy; 24uy; 10uy; 16uy; 13uy; 6uy; 15uy; 25uy; 12uy; 22uy; 18uy; 20uy; 8uy; 19uy; 3uy; 26uy; 1uy; |]
+            
+        let result = applyPicksUntilLastWinnerFound(gameBoards, picks)
+        
+        Assert.Equal<Option<Winner>>(
+            Some {
+                Board = array2D [
+                    [{ IsSelected = false; Value =  3uy }; { IsSelected = false; Value = 15uy }; { IsSelected = true; Value =  0uy }; { IsSelected = true; Value =  2uy }; { IsSelected = false; Value = 22uy }];
+                    [{ IsSelected = true; Value =  9uy }; { IsSelected = false; Value = 18uy }; { IsSelected = true; Value = 13uy }; { IsSelected = true; Value = 17uy }; { IsSelected = true; Value =  5uy }];
+                    [{ IsSelected = false; Value = 19uy }; { IsSelected = false; Value =  8uy }; { IsSelected = true; Value =  7uy }; { IsSelected = false; Value = 25uy }; { IsSelected = true; Value = 23uy }]; 
+                    [{ IsSelected = false; Value = 20uy }; { IsSelected = true; Value = 11uy }; { IsSelected = true; Value = 10uy }; { IsSelected = true; Value = 24uy }; { IsSelected = true; Value =  4uy }]; 
+                    [{ IsSelected = true; Value = 14uy }; { IsSelected = true; Value = 21uy }; { IsSelected = true; Value = 16uy }; { IsSelected = false; Value = 12uy }; { IsSelected = false; Value =  6uy }];
+                ];
+                AppliedPicks = [| 7uy; 4uy; 9uy; 5uy; 11uy; 17uy; 23uy; 2uy; 0uy; 14uy; 21uy; 24uy; 10uy; 16uy; 13uy; |];
+            }, result)
+        
