@@ -115,16 +115,16 @@ module Day4
                             if Option.isNone <| winner then
                                 Some((updatedBoards, picks |> Seq.truncate (index + 1)), (updatedBoards, index + 1))
                             else
-                                let remainingBoards = updatedBoards |> Seq.filter(fun b -> b |> isWinner = false) |> Seq.toArray
-                                if Array.length <| remainingBoards > 1 then
+                                if updatedBoards |> Seq.toArray |> Array.length > 1 then
+                                    let remainingBoards = updatedBoards |> Seq.filter(fun b -> b |> isWinner = false) |> Seq.toArray
                                     Some((remainingBoards, picks |> Seq.truncate (index + 1)), (remainingBoards, index + 1))
                                 else
-                                    let updatedRemainingBoards = applyPickToGameBoards(remainingBoards, picks[index + 1])
+                                    let updatedRemainingBoards = applyPickToGameBoards(updatedBoards, picks[index + 1])
                                     let isWinner = firstWinner <| updatedRemainingBoards
                                     if Option.isNone <| isWinner then
-                                        Some((remainingBoards, picks |> Seq.truncate (index + 1)), (remainingBoards, index + 1))
+                                        Some((updatedBoards, picks |> Seq.truncate (index + 1)), (updatedBoards, index + 1))
                                     else
-                                        Some((updatedRemainingBoards, picks |> Seq.truncate (index + 2)), (updatedRemainingBoards, -1)))
+                                        Some((updatedBoards, picks |> Seq.truncate (index + 1)), (updatedBoards, -1)))
                     |> Seq.last
                     
             let winner = fst result |> firstWinner
