@@ -1,6 +1,7 @@
 module Day5
 
     type Coordinate = { X: uint16; Y: uint16 }
+    type Line = { EndPoint1: Coordinate; EndPoint2: Coordinate }
     
     module Part1 =
         let Execute: unit =
