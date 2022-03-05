@@ -8,10 +8,14 @@ module Day5
         if inputLine |> String.IsNullOrWhiteSpace then
             Option.None
         else
-            Option.Some {
-                 EndPoint1 = { X = 0us; Y = 0us; };
-                 EndPoint2 = { X = 0us; Y = 1us; }
-             }
+            let coordinateArray = inputLine.Split " -> "
+            if coordinateArray.Length <> 2 then
+                Option.None
+            else
+                Option.Some {
+                     EndPoint1 = { X = 0us; Y = 0us; };
+                     EndPoint2 = { X = 0us; Y = 1us; }
+                 }
             
     module Part1 =
         let Execute: unit =

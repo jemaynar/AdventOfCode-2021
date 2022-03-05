@@ -10,10 +10,20 @@ module UnitTests.Day5Tests
 
         Assert.Equal<Option<LineSegment>>(
             Option.None,
-            result)        
+            result)
+        
+    [<Fact>]
+    let ``parseLineSegment: when inputLine is "0,0->0,1" then returns Option.None`` () =
+        let inputLine = "0,0->0,1"
+        
+        let result = inputLine |> parseLineSegment
+
+        Assert.Equal<Option<LineSegment>>(
+            Option.None,
+            result)    
     
     [<Fact>]
-    let ``parseLineSegment: when inputLine is 0,0 -> 0,1 then returns lineSegment with equal value`` () =
+    let ``parseLineSegment: when inputLine is "0,0 -> 0,1" then returns lineSegment with equal value`` () =
         let inputLine = "0,0 -> 0,1"
         
         let result = inputLine |> parseLineSegment
