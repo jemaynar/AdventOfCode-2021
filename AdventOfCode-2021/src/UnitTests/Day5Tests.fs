@@ -3,10 +3,21 @@ module UnitTests.Day5Tests
     open Day5
     
     [<Fact>]
-    let ``getLineSegment: when inputLine is 0,1, -> 1,1 then returns lineSegment with equal value`` () =
-        let inputLine = "0,1 -> 1,1"
+    let ``parseLineSegment: when inputLine is blank then returns Option.None`` () =
+        let inputLine = ""
+        
+        let result = inputLine |> parseLineSegment
+
+        Assert.Equal<Option<LineSegment>>(
+            Option.None,
+            result)        
+    
+    [<Fact>]
+    let ``parseLineSegment: when inputLine is 0,0 -> 0,1 then returns lineSegment with equal value`` () =
+        let inputLine = "0,0 -> 0,1"
         
         let result = inputLine |> parseLineSegment
         
-        Assert.Equal<LineSegment>(
-            result, { EndPoint1 = { X = 0us; Y = 1us; }; EndPoint2 = { X = 1us; Y = 1us }; })
+        Assert.Equal<Option<LineSegment>>(
+            Some { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us }; },
+            result)

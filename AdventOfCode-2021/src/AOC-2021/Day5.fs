@@ -1,15 +1,17 @@
 module Day5
+    open System
 
     type Coordinate = { X: uint16; Y: uint16 }
     type LineSegment = { EndPoint1: Coordinate; EndPoint2: Coordinate }
     
-    let parseLineSegment (inputLine: string): LineSegment =
-        let lineSegment = {
-            EndPoint1 = { X = 0us; Y = 1us; };
-            EndPoint2 = { X = 1us; Y = 1us; }
-        }
-
-        lineSegment
+    let parseLineSegment (inputLine: string): Option<LineSegment> =
+        if inputLine |> String.IsNullOrWhiteSpace then
+            Option.None
+        else
+            Option.Some {
+                 EndPoint1 = { X = 0us; Y = 0us; };
+                 EndPoint2 = { X = 0us; Y = 1us; }
+             }
             
     module Part1 =
         let Execute: unit =
