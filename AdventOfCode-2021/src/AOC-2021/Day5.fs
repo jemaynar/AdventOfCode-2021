@@ -26,6 +26,10 @@ module Day5
                             }
                         })
                     |> Array.head
+                    
+    let getLineSegments (inputLines: seq<string>): seq<LineSegment> =
+        inputLines
+            |> Seq.choose(parseLineSegment)
             
     module Part1 =
         let Execute: unit =
