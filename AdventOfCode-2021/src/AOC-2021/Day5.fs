@@ -12,10 +12,20 @@ module Day5
             if coordinateArray.Length <> 2 then
                 Option.None
             else
-                Option.Some {
-                     EndPoint1 = { X = 0us; Y = 0us; };
-                     EndPoint2 = { X = 0us; Y = 1us; }
-                 }
+                coordinateArray
+                    |> Array.pairwise
+                    |> Array.map(fun tuple ->
+                        Option<LineSegment>.Some {
+                            EndPoint1 = {
+                                X = (fst tuple).Split(',').[0] |> Convert.ToUInt16;
+                                Y = (fst tuple).Split(',').[1] |> Convert.ToUInt16;
+                            }
+                            EndPoint2 = {
+                                X = (snd tuple).Split(',').[0] |> Convert.ToUInt16;
+                                Y = (snd tuple).Split(',').[1] |> Convert.ToUInt16;
+                            }
+                        })
+                    |> Array.head
             
     module Part1 =
         let Execute: unit =
