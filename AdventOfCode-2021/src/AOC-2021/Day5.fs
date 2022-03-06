@@ -35,7 +35,11 @@ module Day5
         let Execute: unit =
             printfn "\nDay 5 / Part 1 Result:\n"
             
-            let fileLines = Common.getData ".\Data\input5.txt"
+            let lineSegments =
+                Common.getData ".\Data\input5.txt"
+                    |> getLineSegments
+                    
+            printfn "%A" <| lineSegments
             
             let lineOverlaps = 0
             
