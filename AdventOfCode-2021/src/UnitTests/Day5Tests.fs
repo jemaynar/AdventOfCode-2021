@@ -97,3 +97,15 @@ module UnitTests.Day5Tests
              },
              result)
         
+    [<Fact>]
+    let ``lineSegmentToCoordinates: when endPoints 0,0 -> 0,0 then returns single coordinate 0,0`` () =
+        let lineSegment =
+            { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 0us; } }
+        
+        let result = lineSegment |> lineSegmentToCoordinates
+            
+        Assert.Equal<seq<Coordinate>>(
+            seq<Coordinate> {
+                { X = 0us; Y = 0us; }
+            },
+            result)

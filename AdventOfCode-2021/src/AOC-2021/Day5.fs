@@ -31,6 +31,11 @@ module Day5
         inputLines
             |> Seq.choose(parseLineSegment)
             
+    let lineSegmentToCoordinates (lineSegment: LineSegment): seq<Coordinate> =
+        seq<Coordinate> {
+            { X = 0us; Y = 0us; }
+        }
+            
     module Part1 =
         let Execute: unit =
             printfn "\nDay 5 / Part 1 Result:\n"
