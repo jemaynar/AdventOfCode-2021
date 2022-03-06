@@ -100,7 +100,7 @@ module UnitTests.Day5Tests
     [<Fact>]
     let ``lineSegmentToCoordinates: when endPoints 0,0 -> 0,0 then returns single coordinate 0,0`` () =
         let lineSegment =
-            { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 0us; } }
+            { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 0us; }; }
         
         let result =
             lineSegment
@@ -111,13 +111,13 @@ module UnitTests.Day5Tests
                 { X = 0us; Y = 0us; };
             },
             match result with
-                | Some(x) -> x
+                | Some(sequence) -> sequence
                 | None -> Seq.empty)
         
     [<Fact>]
     let ``lineSegmentToCoordinates: when endPoints 0,0 -> 0,1 then returns coordinates coordinates 0,0 and 0,1`` () =
         let lineSegment =
-            { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us; } }
+            { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us; }; }
         
         let result =
             lineSegment
@@ -129,13 +129,13 @@ module UnitTests.Day5Tests
                 { X = 0us; Y = 1us; }
             },
             match result with
-                | Some(x) -> x
+                | Some(sequence) -> sequence
                 | None -> Seq.empty)
         
     [<Fact>]
     let ``lineSegmentToCoordinates: when endpoints 0,0 -> 1,0 then returns coordinates 0,0 and 1,0`` () =
         let lineSegment =
-            { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 1us; Y = 0us; } }
+            { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 1us; Y = 0us; }; }
         
         let result =
             lineSegment
@@ -147,5 +147,49 @@ module UnitTests.Day5Tests
                 { X = 1us; Y = 0us; }
             },
             match result with
-                | Some(x) -> x
+                | Some(sequence) -> sequence
                 | None -> Seq.empty)
+
+    [<Fact>]
+    let ``lineSegmentToCoordinateOccurrences: when single line segment 0,0 -> 0,0 then returns single coordinate 0,0 with 1 occurrence`` () =
+        let lineSegments =
+            seq<LineSegment> {
+                { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 0us; }; }            
+            }
+            
+        let result =
+            lineSegments
+            |> lineSegmentsToCoordinateOccurrences
+            
+        Assert.Equal<seq<CoordinateOccurrences>>(
+            seq<CoordinateOccurrences> {
+                {
+                    Coordinate = { X = 0us; Y = 0us; }
+                    Occurrences = 1us;
+                }
+            },
+            result)
+
+    [<Fact>]
+    let ``lineSegmentToCoordinateOccurrences: when single line segment 0,0 -> 0,1 then returns two coordinates 0,0 and 0,1 each with 1 occurrence`` () =
+        let lineSegments =
+            seq<LineSegment> {
+                { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us; }; }            
+            }
+            
+        let result =
+            lineSegments
+            |> lineSegmentsToCoordinateOccurrences
+            
+        Assert.Equal<seq<CoordinateOccurrences>>(
+            seq<CoordinateOccurrences> {
+                {
+                    Coordinate = { X = 0us; Y = 0us; }
+                    Occurrences = 1us;
+                };
+                {
+                    Coordinate = { X = 0us; Y = 1us; }
+                    Occurrences = 1us;
+                }
+            },
+            result)

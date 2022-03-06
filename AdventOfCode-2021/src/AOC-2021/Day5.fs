@@ -3,6 +3,7 @@ module Day5
 
     type Coordinate = { X: uint16; Y: uint16 }
     type LineSegment = { EndPoint1: Coordinate; EndPoint2: Coordinate }
+    type CoordinateOccurrences = { Coordinate: Coordinate; Occurrences: uint16 }
 
     let parseLineSegment (inputLine: string): Option<LineSegment> =
         if inputLine |> String.IsNullOrWhiteSpace then
@@ -49,7 +50,14 @@ module Day5
             Some coordinates
         else
             None
-            
+
+    let lineSegmentsToCoordinateOccurrences (lineSegments: seq<LineSegment>): seq<CoordinateOccurrences> =
+        lineSegments
+            |> Seq.choose(fun lineSegment -> lineSegment |> lineSegmentToCoordinates)
+            |> Seq.concat
+            |> Seq.countBy(id)
+            |> Seq.map(fun tuple -> { Coordinate = fst tuple; Occurrences = snd tuple |> uint16 })
+
     module Part1 =
         let Execute: unit =
             printfn "\nDay 5 / Part 1 Result:\n"
