@@ -3,7 +3,7 @@ module Day5
 
     type Coordinate = { X: uint16; Y: uint16 }
     type LineSegment = { EndPoint1: Coordinate; EndPoint2: Coordinate }
-    
+
     let parseLineSegment (inputLine: string): Option<LineSegment> =
         if inputLine |> String.IsNullOrWhiteSpace then
             Option.None
@@ -26,34 +26,48 @@ module Day5
                             }
                         })
                     |> Array.head
-                    
+
     let getLineSegments (inputLines: seq<string>): seq<LineSegment> =
         inputLines
             |> Seq.choose(parseLineSegment)
-            
-    let lineSegmentToCoordinates (lineSegment: LineSegment): seq<Coordinate> =
-        seq<Coordinate> {
-            { X = 0us; Y = 0us; }
-        }
+
+    let lineSegmentToCoordinates (lineSegment: LineSegment): Option<seq<Coordinate>> =
+        if lineSegment.EndPoint1.X = lineSegment.EndPoint2.X && lineSegment.EndPoint1.Y = lineSegment.EndPoint2.Y then
+            let coordinates = seq<Coordinate> {
+                { X = lineSegment.EndPoint1.X; Y = lineSegment.EndPoint1.Y; }
+            }
+            Some coordinates
+        else if lineSegment.EndPoint1.X = lineSegment.EndPoint2.X then
+            let coordinates =
+                seq { lineSegment.EndPoint1.Y .. lineSegment.EndPoint2.Y }
+                    |> Seq.map(fun yCoordinate -> { X = lineSegment.EndPoint1.X; Y = yCoordinate })
+            Some coordinates
+        else if lineSegment.EndPoint1.Y = lineSegment.EndPoint2.Y then
+            let coordinates =
+                seq { lineSegment.EndPoint1.X .. lineSegment.EndPoint2.X }
+                    |> Seq.map(fun xCoordinate -> { X = xCoordinate; Y = lineSegment.EndPoint1.Y })
+            Some coordinates
+        else
+            None
             
     module Part1 =
         let Execute: unit =
             printfn "\nDay 5 / Part 1 Result:\n"
-            
+
             let lineSegments =
                 Common.getData ".\Data\input5.txt"
                     |> getLineSegments
-                    
+
             printfn "%A" <| lineSegments
-            
+
             let lineOverlaps = 0
-            
+
             printfn "\nOverlap Count: %i" <| lineOverlaps
-            
+
     module Part2 =
         let Execute: unit =
             printfn "\nDay 5 / Part 2 Result:\n"
-    
+
     let Execute: unit =
         Part1.Execute
         Part2.Execute
