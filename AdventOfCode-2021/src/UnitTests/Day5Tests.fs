@@ -43,6 +43,14 @@ module UnitTests.Day5Tests
             result)
 
     [<Fact>]
+    let ``getLineSegments: when inputLines is empty then returns empty sequence.`` () =
+        let inputLines = Seq.empty
+        
+        let result = inputLines |> getLineSegments
+            
+        Assert.Equal<seq<LineSegment>>(Seq.empty, result)
+    
+    [<Fact>]
     let ``getLineSegments: when 10 valid sample lines from problem then returns seq of lineSegments with equal values`` () =
         let inputLines = seq<string> {
             "0,9 -> 5,9";
@@ -73,4 +81,19 @@ module UnitTests.Day5Tests
                 { EndPoint1 = { X = 5us; Y = 5us; }; EndPoint2 = { X = 8us; Y = 2us; }; };
             },
             result)
+                
+    [<Fact>]
+    let ``getLineSegments: when inputLines contains one valid line and one invalid line then empty line is filtered.`` () =
+        let inputLines = seq<string> {
+            "0,9 -> 5,9";
+            "invalid line"
+        }
+        
+        let result = inputLines |> getLineSegments
+            
+        Assert.Equal<seq<LineSegment>>(
+             seq<LineSegment> {
+                { EndPoint1 = { X = 0us; Y = 9us; }; EndPoint2 = { X = 5us; Y = 9us; }; }
+             },
+             result)
         
