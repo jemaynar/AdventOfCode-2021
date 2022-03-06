@@ -193,3 +193,33 @@ module UnitTests.Day5Tests
                 }
             },
             result)
+        
+    [<Fact>]
+    let ``letSegmentToCoordinateOccurrences: when two line segments 0,0 -> 0,1 and 0,1 -> 1,1 then returns 2 expected coordinates with one occurence and 1 coordinate with 2 occurrences`` () =
+        let lineSegments =
+            seq<LineSegment> {
+                { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us; }; }
+                { EndPoint1 = { X = 0us; Y = 1us; }; EndPoint2 = { X = 1us; Y = 1us; }; }
+            }
+            
+        let result =
+            lineSegments
+            |> lineSegmentsToCoordinateOccurrences
+            
+        Assert.Equal<seq<CoordinateOccurrences>>(
+            seq<CoordinateOccurrences> {
+                {
+                    Coordinate = { X = 0us; Y = 0us; }
+                    Occurrences = 1us;
+                };
+                {
+                    Coordinate = { X = 0us; Y = 1us; }
+                    Occurrences = 2us;
+                };
+                {
+                    Coordinate = { X = 1us; Y = 1us; }
+                    Occurrences = 1us;
+                };
+            },
+            result)
+        
