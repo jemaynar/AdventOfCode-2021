@@ -40,13 +40,19 @@ module Day5
             Some coordinates
         else if lineSegment.EndPoint1.X = lineSegment.EndPoint2.X then
             let coordinates =
-                seq { lineSegment.EndPoint1.Y .. lineSegment.EndPoint2.Y }
-                    |> Seq.map(fun yCoordinate -> { X = lineSegment.EndPoint1.X; Y = yCoordinate })
+                if lineSegment.EndPoint1.Y >= lineSegment.EndPoint2.Y then
+                    seq { lineSegment.EndPoint2.Y .. lineSegment.EndPoint1.Y }
+                else
+                    seq { lineSegment.EndPoint1.Y .. lineSegment.EndPoint2.Y }
+                |> Seq.map(fun yCoordinate -> { X = lineSegment.EndPoint1.X; Y = yCoordinate })
             Some coordinates
         else if lineSegment.EndPoint1.Y = lineSegment.EndPoint2.Y then
             let coordinates =
-                seq { lineSegment.EndPoint1.X .. lineSegment.EndPoint2.X }
-                    |> Seq.map(fun xCoordinate -> { X = xCoordinate; Y = lineSegment.EndPoint1.Y })
+                if lineSegment.EndPoint1.X >= lineSegment.EndPoint2.X then
+                    seq { lineSegment.EndPoint2.X .. lineSegment.EndPoint1.X }
+                else
+                    seq { lineSegment.EndPoint1.X .. lineSegment.EndPoint2.X }
+                |> Seq.map(fun xCoordinate -> { X = xCoordinate; Y = lineSegment.EndPoint1.Y })
             Some coordinates
         else
             None
@@ -58,6 +64,11 @@ module Day5
             |> Seq.countBy(id)
             |> Seq.map(fun tuple -> { Coordinate = fst tuple; Occurrences = snd tuple |> uint16 })
 
+    let lineSegmentsToCoordinateOccurrenceIntersections (lineSegments: seq<LineSegment>): seq<CoordinateOccurrences> =
+        lineSegments
+            |> lineSegmentsToCoordinateOccurrences
+            |> Seq.filter(fun o -> o.Occurrences > 1us)
+    
     module Part1 =
         let Execute: unit =
             printfn "\nDay 5 / Part 1 Result:\n"
