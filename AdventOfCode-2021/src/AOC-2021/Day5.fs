@@ -73,15 +73,13 @@ module Day5
         let Execute: unit =
             printfn "\nDay 5 / Part 1 Result:\n"
 
-            let lineSegments =
+            let lineOverlaps =
                 Common.getData ".\Data\input5.txt"
                     |> getLineSegments
+                    |> lineSegmentsToCoordinateOccurrenceIntersections
+                    |> Seq.length
 
-            printfn "%A" <| lineSegments
-
-            let lineOverlaps = 0
-
-            printfn "\nOverlap Count: %i" <| lineOverlaps
+            printfn "Overlap Count: %i" <| lineOverlaps
 
     module Part2 =
         let Execute: unit =
