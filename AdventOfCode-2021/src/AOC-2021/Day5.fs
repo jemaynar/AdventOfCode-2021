@@ -32,51 +32,51 @@ module Day5
         inputLines
             |> Seq.choose(parseLineSegment)
 
-    let lineSegmentToCoordinates (lineSegment: LineSegment): Option<seq<Coordinate>> =
-        if lineSegment.EndPoint1.X = lineSegment.EndPoint2.X && lineSegment.EndPoint1.Y = lineSegment.EndPoint2.Y then
-            let coordinates = seq<Coordinate> {
-                { X = lineSegment.EndPoint1.X; Y = lineSegment.EndPoint1.Y; }
-            }
-            Some coordinates
-        else if lineSegment.EndPoint1.X = lineSegment.EndPoint2.X then
-            let coordinates =
-                if lineSegment.EndPoint1.Y >= lineSegment.EndPoint2.Y then
-                    seq { lineSegment.EndPoint2.Y .. lineSegment.EndPoint1.Y }
-                else
-                    seq { lineSegment.EndPoint1.Y .. lineSegment.EndPoint2.Y }
-                |> Seq.map(fun yCoordinate -> { X = lineSegment.EndPoint1.X; Y = yCoordinate })
-            Some coordinates
-        else if lineSegment.EndPoint1.Y = lineSegment.EndPoint2.Y then
-            let coordinates =
-                if lineSegment.EndPoint1.X >= lineSegment.EndPoint2.X then
-                    seq { lineSegment.EndPoint2.X .. lineSegment.EndPoint1.X }
-                else
-                    seq { lineSegment.EndPoint1.X .. lineSegment.EndPoint2.X }
-                |> Seq.map(fun xCoordinate -> { X = xCoordinate; Y = lineSegment.EndPoint1.Y })
-            Some coordinates
-        else
-            None
-
-    let lineSegmentsToCoordinateOccurrences (lineSegments: seq<LineSegment>): seq<CoordinateOccurrences> =
+    let lineSegmentsToCoordinateOccurrences lineSegments lineSegmentsToCoordinatesFunc =
         lineSegments
-            |> Seq.choose(fun lineSegment -> lineSegment |> lineSegmentToCoordinates)
+            |> Seq.choose(fun lineSegment -> lineSegment |> lineSegmentsToCoordinatesFunc)
             |> Seq.concat
             |> Seq.countBy(id)
             |> Seq.map(fun tuple -> { Coordinate = fst tuple; Occurrences = snd tuple |> uint16 })
 
-    let lineSegmentsToCoordinateOccurrenceIntersections (lineSegments: seq<LineSegment>): seq<CoordinateOccurrences> =
+    let lineSegmentsToCoordinateOccurrenceIntersections lineSegments lineSegmentsToCoordinatesFunc =
         lineSegments
-            |> lineSegmentsToCoordinateOccurrences
+            |> lineSegmentsToCoordinateOccurrences <| lineSegmentsToCoordinatesFunc
             |> Seq.filter(fun o -> o.Occurrences > 1us)
     
     module Part1 =
+        let lineSegmentToCoordinates (lineSegment: LineSegment): Option<seq<Coordinate>> =
+            if lineSegment.EndPoint1.X = lineSegment.EndPoint2.X && lineSegment.EndPoint1.Y = lineSegment.EndPoint2.Y then
+                let coordinates = seq<Coordinate> {
+                    { X = lineSegment.EndPoint1.X; Y = lineSegment.EndPoint1.Y; }
+                }
+                Some coordinates
+            else if lineSegment.EndPoint1.X = lineSegment.EndPoint2.X then
+                let coordinates =
+                    if lineSegment.EndPoint1.Y >= lineSegment.EndPoint2.Y then
+                        seq { lineSegment.EndPoint2.Y .. lineSegment.EndPoint1.Y }
+                    else
+                        seq { lineSegment.EndPoint1.Y .. lineSegment.EndPoint2.Y }
+                    |> Seq.map(fun yCoordinate -> { X = lineSegment.EndPoint1.X; Y = yCoordinate })
+                Some coordinates
+            else if lineSegment.EndPoint1.Y = lineSegment.EndPoint2.Y then
+                let coordinates =
+                    if lineSegment.EndPoint1.X >= lineSegment.EndPoint2.X then
+                        seq { lineSegment.EndPoint2.X .. lineSegment.EndPoint1.X }
+                    else
+                        seq { lineSegment.EndPoint1.X .. lineSegment.EndPoint2.X }
+                    |> Seq.map(fun xCoordinate -> { X = xCoordinate; Y = lineSegment.EndPoint1.Y })
+                Some coordinates
+            else
+                None
+        
         let Execute: unit =
             printfn "\nDay 5 / Part 1 Result:\n"
 
             let lineOverlaps =
                 Common.getData ".\Data\input5.txt"
                     |> getLineSegments
-                    |> lineSegmentsToCoordinateOccurrenceIntersections
+                    |> lineSegmentsToCoordinateOccurrenceIntersections <| lineSegmentToCoordinates
                     |> Seq.length
 
             printfn "Overlap Count: %i" <| lineOverlaps
