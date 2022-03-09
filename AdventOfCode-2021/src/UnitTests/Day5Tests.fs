@@ -5,7 +5,7 @@ module UnitTests.Day5Tests
     [<Fact>]
     let ``parseLineSegment: when inputLine is blank then returns Option.None`` () =
         let inputLine = ""
-        
+
         let result = inputLine |> parseLineSegment
 
         Assert.Equal<Option<LineSegment>>(
@@ -15,19 +15,19 @@ module UnitTests.Day5Tests
     [<Fact>]
     let ``parseLineSegment: when inputLine is "0,0->0,1" then returns Option.None`` () =
         let inputLine = "0,0->0,1"
-        
+
         let result = inputLine |> parseLineSegment
 
         Assert.Equal<Option<LineSegment>>(
             Option.None,
             result)    
-    
+
     [<Fact>]
     let ``parseLineSegment: when inputLine is "0,0 -> 0,1" then returns lineSegment with equal value`` () =
         let inputLine = "0,0 -> 0,1"
-        
+
         let result = inputLine |> parseLineSegment
-        
+
         Assert.Equal<Option<LineSegment>>(
             Some { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us }; },
             result)
@@ -35,9 +35,9 @@ module UnitTests.Day5Tests
     [<Fact>]
     let ``parseLineSegment: when inputLine is "0,0 -> 1,0" then returns lineSegment with equal value`` () =
         let inputLine = "0,0 -> 1,0"
-        
+
         let result = inputLine |> parseLineSegment
-        
+
         Assert.Equal<Option<LineSegment>>(
             Some { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 1us; Y = 0us }; },
             result)
@@ -45,9 +45,9 @@ module UnitTests.Day5Tests
     [<Fact>]
     let ``getLineSegments: when inputLines is empty then returns empty sequence.`` () =
         let inputLines = Seq.empty
-        
+
         let result = inputLines |> getLineSegments
-            
+
         Assert.Equal<seq<LineSegment>>(Seq.empty, result)
 
     [<Fact>]
@@ -64,9 +64,9 @@ module UnitTests.Day5Tests
             "0,0 -> 8,8";
             "5,5 -> 8,2";
         }
-        
+
         let result = inputLines |> getLineSegments
-            
+
         Assert.Equal<seq<LineSegment>>(
             seq<LineSegment> {
                 { EndPoint1 = { X = 0us; Y = 9us; }; EndPoint2 = { X = 5us; Y = 9us; }; };
@@ -88,9 +88,9 @@ module UnitTests.Day5Tests
             "0,9 -> 5,9";
             "invalid line"
         }
-        
+
         let result = inputLines |> getLineSegments
-            
+
         Assert.Equal<seq<LineSegment>>(
              seq<LineSegment> {
                 { EndPoint1 = { X = 0us; Y = 9us; }; EndPoint2 = { X = 5us; Y = 9us; }; }
@@ -101,11 +101,11 @@ module UnitTests.Day5Tests
     let ``Part1.lineSegmentToCoordinates: when endPoints 0,0 -> 0,0 then returns single coordinate 0,0`` () =
         let lineSegment =
             { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 0us; }; }
-        
+
         let result =
             lineSegment
                 |> Part1.lineSegmentToCoordinates 
-            
+
         Assert.Equal<seq<Coordinate>>(
             seq<Coordinate> {
                 { X = 0us; Y = 0us; };
@@ -118,11 +118,11 @@ module UnitTests.Day5Tests
     let ``Part1.lineSegmentToCoordinates: when endPoints 0,0 -> 0,1 then returns coordinates coordinates 0,0 and 0,1`` () =
         let lineSegment =
             { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us; }; }
-        
+
         let result =
             lineSegment
             |> Part1.lineSegmentToCoordinates
-        
+
         Assert.Equal<seq<Coordinate>>(
             seq<Coordinate> {
                 { X = 0us; Y = 0us; }
@@ -136,11 +136,11 @@ module UnitTests.Day5Tests
     let ``Part1.lineSegmentToCoordinates: when endPoints 1,1 -> 0,1 then returns coordinates coordinates 1,1 and 0,1`` () =
         let lineSegment =
             { EndPoint1 = { X = 1us; Y = 1us; }; EndPoint2 = { X = 0us; Y = 1us; }; }
-        
+
         let result =
             lineSegment
             |> Part1.lineSegmentToCoordinates
-        
+
         Assert.Equal<seq<Coordinate>>(
             seq<Coordinate> {
                 { X = 0us; Y = 1us; }
@@ -151,14 +151,14 @@ module UnitTests.Day5Tests
                 | None -> Seq.empty)
 
     [<Fact>]
-    let ``Part1.ineSegmentToCoordinates: when endpoints 0,0 -> 1,0 then returns coordinates 0,0 and 1,0`` () =
+    let ``Part1.lineSegmentToCoordinates: when endpoints 0,0 -> 1,0 then returns coordinates 0,0 and 1,0`` () =
         let lineSegment =
             { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 1us; Y = 0us; }; }
-        
+
         let result =
             lineSegment
             |> Part1.lineSegmentToCoordinates
-        
+
         Assert.Equal<seq<Coordinate>>(
             seq<Coordinate> {
                 { X = 0us; Y = 0us; }
@@ -174,9 +174,9 @@ module UnitTests.Day5Tests
             seq<LineSegment> {
                 { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 0us; }; }            
             }
-            
+
         let result = lineSegments |> lineSegmentsToCoordinateOccurrences <| Part1.lineSegmentToCoordinates
-            
+
         Assert.Equal<seq<CoordinateOccurrences>>(
             seq<CoordinateOccurrences> {
                 { Coordinate = { X = 0us; Y = 0us; }; Occurrences = 1us; }
@@ -189,9 +189,9 @@ module UnitTests.Day5Tests
             seq<LineSegment> {
                 { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us; }; }            
             }
-            
+
         let result = lineSegments |> lineSegmentsToCoordinateOccurrences <| Part1.lineSegmentToCoordinates
-            
+
         Assert.Equal<seq<CoordinateOccurrences>>(
             seq<CoordinateOccurrences> {
                 { Coordinate = { X = 0us; Y = 0us; }; Occurrences = 1us; }
@@ -206,9 +206,9 @@ module UnitTests.Day5Tests
                 { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us; }; }
                 { EndPoint1 = { X = 0us; Y = 1us; }; EndPoint2 = { X = 1us; Y = 1us; }; }
             }
-            
+
         let result = lineSegments |> lineSegmentsToCoordinateOccurrences <| Part1.lineSegmentToCoordinates
-            
+
         Assert.Equal<seq<CoordinateOccurrences>>(
             seq<CoordinateOccurrences> {
                 { Coordinate = { X = 0us; Y = 0us; }; Occurrences = 1us; }
@@ -244,3 +244,75 @@ module UnitTests.Day5Tests
                 { Coordinate = { X = 7us; Y = 4us; }; Occurrences = 2us; }
             |],
             result)
+
+    [<Fact>]
+    let ``Part2.lineSegmentToCoordinates: when endpoints 0,0 -> 1,1 then returns coordinates 0,0 and 1,1`` () =
+        let lineSegment =
+            { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 1us; Y = 1us; }; }
+
+        let result =
+            lineSegment
+            |> Part2.lineSegmentToCoordinates
+
+        Assert.Equal<seq<Coordinate>>(
+            seq<Coordinate> {
+                { X = 0us; Y = 0us; }
+                { X = 1us; Y = 1us; }
+            },
+            match result with
+                | Some(sequence) -> sequence
+                | None -> Seq.empty)
+
+    [<Fact>]
+    let ``Part2.lineSegmentToCoordinates: when endpoints 1,1 -> 0,0 then returns coordinates 0,0 and 1,1`` () =
+        let lineSegment =
+            { EndPoint1 = { X = 1us; Y = 1us; }; EndPoint2 = { X = 0us; Y = 0us; }; }
+
+        let result =
+            lineSegment
+            |> Part2.lineSegmentToCoordinates
+
+        Assert.Equal<seq<Coordinate>>(
+            seq<Coordinate> {
+                { X = 1us; Y = 1us; }
+                { X = 0us; Y = 0us; }
+            },
+            match result with
+                | Some(sequence) -> sequence
+                | None -> Seq.empty)
+
+    [<Fact>]
+    let ``Part2.lineSegmentToCoordinates: when endpoints 1,0 -> 0,1 then returns coordinates 1,0 and 0,1`` () =
+        let lineSegment =
+            { EndPoint1 = { X = 1us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us; }; }
+
+        let result =
+            lineSegment
+            |> Part2.lineSegmentToCoordinates
+
+        Assert.Equal<seq<Coordinate>>(
+            seq<Coordinate> {
+                { X = 1us; Y = 0us; }
+                { X = 0us; Y = 1us; }
+            },
+            match result with
+                | Some(sequence) -> sequence
+                | None -> Seq.empty)
+
+    [<Fact>]
+    let ``Part2.lineSegmentToCoordinates: when endpoints 0,1 -> 1,0 then returns coordinates 0,1 and 1,0`` () =
+        let lineSegment =
+            { EndPoint1 = { X = 0us; Y = 1us; }; EndPoint2 = { X = 1us; Y = 0us; }; }
+
+        let result =
+            lineSegment
+            |> Part2.lineSegmentToCoordinates
+
+        Assert.Equal<seq<Coordinate>>(
+            seq<Coordinate> {
+                { X = 0us; Y = 1us; }
+                { X = 1us; Y = 0us; }
+            },
+            match result with
+                | Some(sequence) -> sequence
+                | None -> Seq.empty)

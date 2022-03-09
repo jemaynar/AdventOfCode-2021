@@ -43,7 +43,7 @@ module Day5
         lineSegments
             |> lineSegmentsToCoordinateOccurrences <| lineSegmentsToCoordinatesFunc
             |> Seq.filter(fun o -> o.Occurrences > 1us)
-    
+
     module Part1 =
         let lineSegmentToCoordinates (lineSegment: LineSegment): Option<seq<Coordinate>> =
             if lineSegment.EndPoint1.X = lineSegment.EndPoint2.X && lineSegment.EndPoint1.Y = lineSegment.EndPoint2.Y then
@@ -69,7 +69,7 @@ module Day5
                 Some coordinates
             else
                 None
-        
+
         let Execute: unit =
             printfn "\nDay 5 / Part 1 Result:\n"
 
@@ -84,6 +84,28 @@ module Day5
     module Part2 =
         let Execute: unit =
             printfn "\nDay 5 / Part 2 Result:\n"
+
+        let rec lineSegmentToCoordinates (lineSegment: LineSegment): Option<seq<Coordinate>> =
+            let part1Result = Part1.lineSegmentToCoordinates lineSegment
+
+            if part1Result.IsSome then
+                part1Result
+            else
+                let diagonalResult = 
+                    if lineSegment.EndPoint1.X > lineSegment.EndPoint2.X && lineSegment.EndPoint1.Y > lineSegment.EndPoint2.Y then
+                        seq { 0 .. int lineSegment.EndPoint1.X - int lineSegment.EndPoint2.X }
+                            |> Seq.map(fun i -> { X = uint16 (int lineSegment.EndPoint1.X - i); Y = uint16 (int lineSegment.EndPoint1.Y - i) })
+                    else if lineSegment.EndPoint1.X > lineSegment.EndPoint2.X && lineSegment.EndPoint1.Y < lineSegment.EndPoint2.Y then
+                        seq { 0 .. int lineSegment.EndPoint1.X - int lineSegment.EndPoint2.X }
+                            |> Seq.map(fun i -> { X = uint16 (int lineSegment.EndPoint1.X - i); Y = uint16 (int lineSegment.EndPoint1.Y + i) })
+                    else if lineSegment.EndPoint1.X < lineSegment.EndPoint2.X && lineSegment.EndPoint1.Y < lineSegment.EndPoint2.Y then
+                        seq { 0 .. int lineSegment.EndPoint2.X - int lineSegment.EndPoint1.X }
+                            |> Seq.map(fun i -> { X = uint16 (int lineSegment.EndPoint1.X + i); Y = uint16 (int lineSegment.EndPoint1.Y + i) })
+                    else
+                        seq { 0 .. int lineSegment.EndPoint2.X - int lineSegment.EndPoint1.X }
+                            |> Seq.map(fun i -> { X = uint16 (int lineSegment.EndPoint1.X + i); Y = uint16 (int lineSegment.EndPoint1.Y - i) })
+
+                Some diagonalResult
 
     let Execute: unit =
         Part1.Execute
