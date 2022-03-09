@@ -316,3 +316,38 @@ module UnitTests.Day5Tests
             match result with
                 | Some(sequence) -> sequence
                 | None -> Seq.empty)
+
+    [<Fact>]
+    let ``lineSegmentsToCoordinateOccurrenceIntersections: when using Part2.lineSegmentToCoordinates when 10 valid sample lines from problem then returns 5 expected coordinates with 2 occurrences`` () =
+        let lineSegments =
+            seq<LineSegment> {
+                { EndPoint1 = { X = 0us; Y = 9us; }; EndPoint2 = { X = 5us; Y = 9us; } }
+                { EndPoint1 = { X = 8us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 8us; } }
+                { EndPoint1 = { X = 9us; Y = 4us; }; EndPoint2 = { X = 3us; Y = 4us; } }
+                { EndPoint1 = { X = 2us; Y = 2us; }; EndPoint2 = { X = 2us; Y = 1us; } }
+                { EndPoint1 = { X = 7us; Y = 0us; }; EndPoint2 = { X = 7us; Y = 4us; } }
+                { EndPoint1 = { X = 6us; Y = 4us; }; EndPoint2 = { X = 2us; Y = 0us; } }
+                { EndPoint1 = { X = 0us; Y = 9us; }; EndPoint2 = { X = 2us; Y = 9us; } }
+                { EndPoint1 = { X = 3us; Y = 4us; }; EndPoint2 = { X = 1us; Y = 4us; } }
+                { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 8us; Y = 8us; } }
+                { EndPoint1 = { X = 5us; Y = 5us; }; EndPoint2 = { X = 8us; Y = 2us; } }
+            }
+
+        let result = lineSegments |> lineSegmentsToCoordinateOccurrenceIntersections <| Part2.lineSegmentToCoordinates |> Seq.toArray
+
+        Assert.Equal<array<CoordinateOccurrences>>(
+            [|
+                { Coordinate = { X = 0us; Y = 9us; }; Occurrences = 2us; }
+                { Coordinate = { X = 1us; Y = 9us; }; Occurrences = 2us; }
+                { Coordinate = { X = 2us; Y = 9us; }; Occurrences = 2us; }
+                { Coordinate = { X = 7us; Y = 1us; }; Occurrences = 2us; }
+                { Coordinate = { X = 5us; Y = 3us; }; Occurrences = 2us; }
+                { Coordinate = { X = 4us; Y = 4us; }; Occurrences = 3us; }
+                { Coordinate = { X = 3us; Y = 4us; }; Occurrences = 2us; }
+                { Coordinate = { X = 6us; Y = 4us; }; Occurrences = 3us; }
+                { Coordinate = { X = 7us; Y = 4us; }; Occurrences = 2us; }
+                { Coordinate = { X = 2us; Y = 2us; }; Occurrences = 2us; }
+                { Coordinate = { X = 7us; Y = 3us; }; Occurrences = 2us; }
+                { Coordinate = { X = 5us; Y = 5us; }; Occurrences = 2us; }
+            |],
+            result)
