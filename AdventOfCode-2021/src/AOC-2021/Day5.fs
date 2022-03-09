@@ -82,9 +82,6 @@ module Day5
             printfn "Overlap Count: %i" <| lineOverlaps
 
     module Part2 =
-        let Execute: unit =
-            printfn "\nDay 5 / Part 2 Result:\n"
-
         let rec lineSegmentToCoordinates (lineSegment: LineSegment): Option<seq<Coordinate>> =
             let part1Result = Part1.lineSegmentToCoordinates lineSegment
 
@@ -106,6 +103,17 @@ module Day5
                             |> Seq.map(fun i -> { X = uint16 (int lineSegment.EndPoint1.X + i); Y = uint16 (int lineSegment.EndPoint1.Y - i) })
 
                 Some diagonalResult
+
+        let Execute: unit =
+            printfn "\nDay 5 / Part 2 Result:\n"
+
+            let lineOverlaps =
+                Common.getData ".\Data\input5.txt"
+                    |> getLineSegments
+                    |> lineSegmentsToCoordinateOccurrenceIntersections <| lineSegmentToCoordinates
+                    |> Seq.length
+
+            printfn "Overlap Count: %i" <| lineOverlaps
 
     let Execute: unit =
         Part1.Execute
