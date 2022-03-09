@@ -169,7 +169,7 @@ module UnitTests.Day5Tests
                 | None -> Seq.empty)
 
     [<Fact>]
-    let ``lineSegmentToCoordinateOccurrences: when single line segment 0,0 -> 0,0 then returns single coordinate 0,0 with 1 occurrence`` () =
+    let ``lineSegmentToCoordinateOccurrences: when using Part1.lineSegmentToCoordinates when single line segment 0,0 -> 0,0 then returns single coordinate 0,0 with 1 occurrence`` () =
         let lineSegments =
             seq<LineSegment> {
                 { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 0us; }; }            
@@ -184,7 +184,7 @@ module UnitTests.Day5Tests
             result)
 
     [<Fact>]
-    let ``lineSegmentToCoordinateOccurrences: when single line segment 0,0 -> 0,1 then returns two coordinates 0,0 and 0,1 each with 1 occurrence`` () =
+    let ``lineSegmentToCoordinateOccurrences: when using Part1.lineSegmentToCoordinates when single line segment 0,0 -> 0,1 then returns two coordinates 0,0 and 0,1 each with 1 occurrence`` () =
         let lineSegments =
             seq<LineSegment> {
                 { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us; }; }            
@@ -200,7 +200,7 @@ module UnitTests.Day5Tests
             result)
 
     [<Fact>]
-    let ``lineSegmentToCoordinateOccurrences: when two line segments 0,0 -> 0,1 and 0,1 -> 1,1 then returns 2 expected coordinates with one occurence and 1 coordinate with 2 occurrences`` () =
+    let ``lineSegmentToCoordinateOccurrences: when using Part1.lineSegmentToCoordinates when two line segments 0,0 -> 0,1 and 0,1 -> 1,1 then returns 2 expected coordinates with one occurence and 1 coordinate with 2 occurrences`` () =
         let lineSegments =
             seq<LineSegment> {
                 { EndPoint1 = { X = 0us; Y = 0us; }; EndPoint2 = { X = 0us; Y = 1us; }; }
@@ -218,7 +218,7 @@ module UnitTests.Day5Tests
             result)
 
     [<Fact>]
-    let ``lineSegmentsToCoordinateOccurrenceIntersections: when 10 valid sample lines from problem then returns 5 expected coordinates with 2 occurrences`` () =
+    let ``lineSegmentsToCoordinateOccurrenceIntersections: when using Part1.lineSegmentToCoordinates when 10 valid sample lines from problem then returns 5 expected coordinates with 2 occurrences`` () =
         let lineSegments =
             seq<LineSegment> {
                 { EndPoint1 = { X = 0us; Y = 9us; }; EndPoint2 = { X = 5us; Y = 9us; } }
