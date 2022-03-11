@@ -1,8 +1,20 @@
 module Day6
+    open System
+    
     type LanternFish = { DaysUntilSpawn: byte; }
 
     let parseLanternFish(inputLine: string): Option<seq<LanternFish>> =
-        None
+        if inputLine |> String.IsNullOrWhiteSpace then
+            Option.None
+        else
+            let numberArray = inputLine.Split ","
+            if numberArray.Length = 0 then
+                Option.None
+            else
+                let lanternFish =
+                    numberArray
+                        |> Seq.map(fun i -> { DaysUntilSpawn = i |> Convert.ToByte })
+                Some lanternFish
 
     module Part1 =
         let Execute: unit =
