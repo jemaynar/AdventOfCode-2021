@@ -1,4 +1,6 @@
 module Day6
+    type LanternFish = { DaysUntilSpawn: byte; }
+
     module Part1 =
         let Execute: unit =
            printfn "\nDay 5 / Part 1 Result:\n"
