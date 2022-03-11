@@ -1,6 +1,9 @@
 module Day6
     type LanternFish = { DaysUntilSpawn: byte; }
 
+    let parseLanternFish(inputLine: string): Option<seq<LanternFish>> =
+        None
+
     module Part1 =
         let Execute: unit =
            printfn "\nDay 5 / Part 1 Result:\n"
