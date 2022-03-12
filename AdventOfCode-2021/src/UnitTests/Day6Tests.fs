@@ -3,7 +3,7 @@ module UnitTests.Day6Tests
     open Day6
 
     [<Fact>]
-    let rec ``parseLanternFish: when line is empty then returns Option None`` () =
+    let ``parseLanternFish: when line is empty then returns Option None`` () =
         let inputLine = System.String.Empty
 
         let result = inputLine |> parseLanternFish
@@ -11,7 +11,7 @@ module UnitTests.Day6Tests
         Assert.Equal<Option<seq<LanternFish>>>(None, result)
 
     [<Fact>]
-    let rec ``parseLanternFish: when line is null then returns Option None`` () =
+    let ``parseLanternFish: when line is null then returns Option None`` () =
         let inputLine = null
 
         let result = inputLine |> parseLanternFish
@@ -19,7 +19,7 @@ module UnitTests.Day6Tests
         Assert.Equal<Option<seq<LanternFish>>>(None, result)
 
     [<Fact>]
-    let rec ``parseLanternFish: when line is whitespace then returns Option None`` () =
+    let ``parseLanternFish: when line is whitespace then returns Option None`` () =
         let inputLine = " "
 
         let result = inputLine |> parseLanternFish
@@ -27,7 +27,7 @@ module UnitTests.Day6Tests
         Assert.Equal<Option<seq<LanternFish>>>(None, result)
 
     [<Fact>]
-    let rec ``parseLanternFish: when contains 1 then returns Option Some with sequence of 1 lanternFish with DaysUntilSpawn = 1`` () =
+    let ``parseLanternFish: when contains 1 then returns Option Some with sequence of 1 lanternFish with DaysUntilSpawn = 1`` () =
         let inputLine = "1"
 
         let result = inputLine |> parseLanternFish
@@ -41,7 +41,7 @@ module UnitTests.Day6Tests
                 | None -> Seq.empty)
         
     [<Fact>]
-    let rec ``parseLanternFish: when contains 1,2 then returns Option Some with sequence of 1 lanternFish with DaysUntilSpawn = 1 and 1 lanternFish with DaysUntilSpan = 2`` () =
+    let ``parseLanternFish: when contains 1,2 then returns Option Some with sequence of 1 lanternFish with DaysUntilSpawn = 1 and 1 lanternFish with DaysUntilSpan = 2`` () =
         let inputLine = "1,2"
 
         let result = inputLine |> parseLanternFish
@@ -54,3 +54,25 @@ module UnitTests.Day6Tests
             match result with
                 | Some(sequence) -> sequence
                 | None -> Seq.empty)
+
+    [<Fact>]
+    let ``spawnLanternFish: when Seq.empty then returns seq.Empty`` () =
+        let lanternFish = Seq.empty
+
+        let result = lanternFish |> spawnLanternFish
+
+        Assert.Equal<seq<LanternFish>>(Seq.empty, result)
+
+    [<Fact>]
+    let ``spawnLanternFish: when single lanternFish with DaysUntilSpawn = 6 then returns a single lanternFish with DaysUntilSpan = 5`` () =
+        let lanternFish =
+            seq {
+                { DaysUntilSpawn = 6uy; }
+            }
+
+        let result = lanternFish |> spawnLanternFish
+        
+        Assert.Equal<seq<LanternFish>>(
+            seq {
+                { DaysUntilSpawn = 5uy; }
+            }, result)

@@ -3,7 +3,7 @@ module Day6
     
     type LanternFish = { DaysUntilSpawn: byte; }
 
-    let parseLanternFish(inputLine: string): Option<seq<LanternFish>> =
+    let parseLanternFish inputLine =
         if inputLine |> String.IsNullOrWhiteSpace then
             Option.None
         else
@@ -15,6 +15,14 @@ module Day6
                     numberArray
                         |> Seq.map(fun i -> { DaysUntilSpawn = i |> Convert.ToByte })
                 Some lanternFish
+
+    let spawnLanternFish (lanternFish): seq<LanternFish> =
+        if lanternFish = Seq.empty then
+            Seq.empty
+        else
+            seq {
+                { DaysUntilSpawn = 5uy; }
+            }
 
     module Part1 =
         let Execute: unit =
