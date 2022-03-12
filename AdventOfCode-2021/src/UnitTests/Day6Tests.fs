@@ -27,14 +27,29 @@ module UnitTests.Day6Tests
         Assert.Equal<Option<seq<LanternFish>>>(None, result)
 
     [<Fact>]
-    let rec ``parseLanternFish: when contains 1 then returns Option Some with sequence of 1 lanternFish with DaysUntilSpawn = 5`` () =
-        let inputLine = "5"
+    let rec ``parseLanternFish: when contains 1 then returns Option Some with sequence of 1 lanternFish with DaysUntilSpawn = 1`` () =
+        let inputLine = "1"
 
         let result = inputLine |> parseLanternFish
 
         Assert.Equal<seq<LanternFish>>(
             seq {
-                { DaysUntilSpawn = 5uy; }
+                { DaysUntilSpawn = 1uy; }
+            },
+            match result with
+                | Some(sequence) -> sequence
+                | None -> Seq.empty)
+        
+    [<Fact>]
+    let rec ``parseLanternFish: when contains 1,2 then returns Option Some with sequence of 1 lanternFish with DaysUntilSpawn = 1 and 1 lanternFish with DaysUntilSpan = 2`` () =
+        let inputLine = "1,2"
+
+        let result = inputLine |> parseLanternFish
+
+        Assert.Equal<seq<LanternFish>>(
+            seq {
+                { DaysUntilSpawn = 1uy; }
+                { DaysUntilSpawn = 2uy; }
             },
             match result with
                 | Some(sequence) -> sequence
