@@ -71,7 +71,7 @@ module UnitTests.Day6Tests
             }
 
         let result = lanternFish |> spawnLanternFish
-        
+
         Assert.Equal<seq<LanternFish>>(
             seq {
                 { DaysUntilSpawn = 7uy; }
@@ -86,7 +86,7 @@ module UnitTests.Day6Tests
             }
 
         let result = lanternFish |> spawnLanternFish
-        
+
         Assert.Equal<seq<LanternFish>>(
             seq {
                 { DaysUntilSpawn = 6uy; }
@@ -101,7 +101,7 @@ module UnitTests.Day6Tests
             }
 
         let result = lanternFish |> spawnLanternFish
-        
+
         Assert.Equal<seq<LanternFish>>(
             seq {
                 { DaysUntilSpawn = 5uy; }
@@ -131,7 +131,7 @@ module UnitTests.Day6Tests
             }
 
         let result = lanternFish |> spawnLanternFish
-        
+
         Assert.Equal<seq<LanternFish>>(
             seq {
                 { DaysUntilSpawn = 3uy; }
@@ -146,7 +146,7 @@ module UnitTests.Day6Tests
             }
 
         let result = lanternFish |> spawnLanternFish
-        
+
         Assert.Equal<seq<LanternFish>>(
             seq {
                 { DaysUntilSpawn = 2uy; }
@@ -161,7 +161,7 @@ module UnitTests.Day6Tests
             }
 
         let result = lanternFish |> spawnLanternFish
-        
+
         Assert.Equal<seq<LanternFish>>(
             seq {
                 { DaysUntilSpawn = 1uy; }
@@ -176,13 +176,12 @@ module UnitTests.Day6Tests
             }
 
         let result = lanternFish |> spawnLanternFish
-        
+
         Assert.Equal<seq<LanternFish>>(
             seq {
                 { DaysUntilSpawn = 0uy; }
             },
             result)
-
 
     [<Fact>]
     let ``spawnLanternFish: when single lanternFish with DaysUntilSpawn = 0 then returns two lanternFish one with DaysUntilSpan = 6 and one with DaysUntilSpawn = 6`` () =
@@ -192,7 +191,7 @@ module UnitTests.Day6Tests
             }
 
         let result = lanternFish |> spawnLanternFish
-        
+
         Assert.Equal<seq<LanternFish>>(
             seq {
                 { DaysUntilSpawn = 6uy; }
