@@ -26,7 +26,8 @@ module Day6
                         | 6uy -> { DaysUntilSpawn = 5uy }
                         | 5uy -> { DaysUntilSpawn = 4uy }
                         | 4uy -> { DaysUntilSpawn = 3uy }
-                        | _ -> { DaysUntilSpawn = 2uy })
+                        | 3uy -> { DaysUntilSpawn = 2uy }
+                        | _ -> { DaysUntilSpawn = 1uy })
 
     module Part1 =
         let Execute: unit =

@@ -122,3 +122,18 @@ module UnitTests.Day6Tests
                 { DaysUntilSpawn = 2uy; }
             },
             result)
+
+    [<Fact>]
+    let ``spawnLanternFish: when single lanternFish with DaysUntilSpawn = 2 then returns a single lanternFish with DaysUntilSpan = 1`` () =
+        let lanternFish =
+            seq {
+                { DaysUntilSpawn = 2uy; }
+            }
+
+        let result = lanternFish |> spawnLanternFish
+        
+        Assert.Equal<seq<LanternFish>>(
+            seq {
+                { DaysUntilSpawn = 1uy; }
+            },
+            result)
