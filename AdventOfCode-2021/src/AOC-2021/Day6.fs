@@ -24,6 +24,7 @@ module Day6
                 |> Seq.map(fun f ->
                     match f.DaysUntilSpawn with
                         | 8uy -> seq { { DaysUntilSpawn = 7uy } }
+                        | 7uy -> seq { { DaysUntilSpawn = 6uy } }
                         | 6uy -> seq { { DaysUntilSpawn = 5uy } }
                         | 5uy -> seq { { DaysUntilSpawn = 4uy } }
                         | 4uy -> seq { { DaysUntilSpawn = 3uy } }
