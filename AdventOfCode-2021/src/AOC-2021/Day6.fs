@@ -34,6 +34,22 @@ module Day6
                         | _ -> seq { { DaysUntilSpawn = 6uy }; { DaysUntilSpawn = 8uy } })
                 |> Seq.concat
 
+    let spawnLanternFishTimes lanternFish times =
+        if lanternFish = Seq.empty then
+            Seq.empty
+        else
+            (lanternFish, 0uy)
+                |> Seq.unfold (fun state ->
+                    if snd state > times then
+                        None
+                    else
+                        let lanternFishResult = fst state |> spawnLanternFish
+                        let iteration = snd state + 1uy
+                        Some ((lanternFishResult, iteration), (lanternFish, iteration)))
+                |> Seq.tail
+                |> Seq.map(fst)
+                |> Seq.concat
+
     module Part1 =
         let Execute: unit =
            printfn "\nDay 5 / Part 1 Result:\n"
