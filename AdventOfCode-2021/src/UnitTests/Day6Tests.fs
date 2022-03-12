@@ -39,7 +39,7 @@ module UnitTests.Day6Tests
             match result with
                 | Some(sequence) -> sequence
                 | None -> Seq.empty)
-        
+
     [<Fact>]
     let ``parseLanternFish: when contains 1,2 then returns Option Some with sequence of 1 lanternFish with DaysUntilSpawn = 1 and 1 lanternFish with DaysUntilSpan = 2`` () =
         let inputLine = "1,2"
@@ -75,7 +75,8 @@ module UnitTests.Day6Tests
         Assert.Equal<seq<LanternFish>>(
             seq {
                 { DaysUntilSpawn = 5uy; }
-            }, result)
+            },
+            result)
 
     [<Fact>]
     let ``spawnLanternFish: when single lanternFish with DaysUntilSpawn = 5 then returns a single lanternFish with DaysUntilSpan = 4`` () =
@@ -89,7 +90,8 @@ module UnitTests.Day6Tests
         Assert.Equal<seq<LanternFish>>(
             seq {
                 { DaysUntilSpawn = 4uy; }
-            }, result)
+            },
+            result)
 
     [<Fact>]
     let ``spawnLanternFish: when single lanternFish with DaysUntilSpawn = 4 then returns a single lanternFish with DaysUntilSpan = 3`` () =
@@ -103,4 +105,20 @@ module UnitTests.Day6Tests
         Assert.Equal<seq<LanternFish>>(
             seq {
                 { DaysUntilSpawn = 3uy; }
-            }, result)
+            },
+            result)
+
+    [<Fact>]
+    let ``spawnLanternFish: when single lanternFish with DaysUntilSpawn = 3 then returns a single lanternFish with DaysUntilSpan = 2`` () =
+        let lanternFish =
+            seq {
+                { DaysUntilSpawn = 3uy; }
+            }
+
+        let result = lanternFish |> spawnLanternFish
+        
+        Assert.Equal<seq<LanternFish>>(
+            seq {
+                { DaysUntilSpawn = 2uy; }
+            },
+            result)

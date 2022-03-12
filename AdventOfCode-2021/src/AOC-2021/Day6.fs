@@ -25,7 +25,8 @@ module Day6
                     match f.DaysUntilSpawn with
                         | 6uy -> { DaysUntilSpawn = 5uy }
                         | 5uy -> { DaysUntilSpawn = 4uy }
-                        | _ -> { DaysUntilSpawn = 3uy })
+                        | 4uy -> { DaysUntilSpawn = 3uy }
+                        | _ -> { DaysUntilSpawn = 2uy })
 
     module Part1 =
         let Execute: unit =
