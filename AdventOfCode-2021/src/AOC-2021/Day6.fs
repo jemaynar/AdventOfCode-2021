@@ -16,13 +16,15 @@ module Day6
                         |> Seq.map(fun i -> { DaysUntilSpawn = i |> Convert.ToByte })
                 Some lanternFish
 
-    let spawnLanternFish (lanternFish): seq<LanternFish> =
+    let spawnLanternFish (lanternFish: seq<LanternFish>): seq<LanternFish> =
         if lanternFish = Seq.empty then
             Seq.empty
         else
-            seq {
-                { DaysUntilSpawn = 5uy; }
-            }
+            lanternFish
+                |> Seq.map(fun f ->
+                    match f.DaysUntilSpawn with
+                        | 6uy -> { DaysUntilSpawn = 5uy }
+                        | _ -> { DaysUntilSpawn = 4uy })
 
     module Part1 =
         let Execute: unit =
