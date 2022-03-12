@@ -24,7 +24,8 @@ module Day6
                 |> Seq.map(fun f ->
                     match f.DaysUntilSpawn with
                         | 6uy -> { DaysUntilSpawn = 5uy }
-                        | _ -> { DaysUntilSpawn = 4uy })
+                        | 5uy -> { DaysUntilSpawn = 4uy }
+                        | _ -> { DaysUntilSpawn = 3uy })
 
     module Part1 =
         let Execute: unit =
