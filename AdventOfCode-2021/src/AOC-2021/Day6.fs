@@ -23,12 +23,14 @@ module Day6
             lanternFish
                 |> Seq.map(fun f ->
                     match f.DaysUntilSpawn with
-                        | 6uy -> { DaysUntilSpawn = 5uy }
-                        | 5uy -> { DaysUntilSpawn = 4uy }
-                        | 4uy -> { DaysUntilSpawn = 3uy }
-                        | 3uy -> { DaysUntilSpawn = 2uy }
-                        | 2uy -> { DaysUntilSpawn = 1uy }
-                        | _ -> { DaysUntilSpawn = 0uy })
+                        | 6uy -> seq { { DaysUntilSpawn = 5uy } }
+                        | 5uy -> seq { { DaysUntilSpawn = 4uy } }
+                        | 4uy -> seq { { DaysUntilSpawn = 3uy } }
+                        | 3uy -> seq { { DaysUntilSpawn = 2uy } }
+                        | 2uy -> seq { { DaysUntilSpawn = 1uy } }
+                        | 1uy -> seq { { DaysUntilSpawn = 0uy } }
+                        | _ -> seq { { DaysUntilSpawn = 6uy }; { DaysUntilSpawn = 8uy } })
+                |> Seq.concat
 
     module Part1 =
         let Execute: unit =
