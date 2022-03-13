@@ -324,3 +324,47 @@ module UnitTests.Day6Tests
                 { DaysUntilSpawn = 0uy; }
             },
             result)
+
+    [<Fact>]
+    let ``spawnLanternFishTimes: when initial state is initial state from problem 3,4,3,1,2 when times equals 18 then result is 6,8,1,1,3,0,2,2,4,6,8,1,1,3,4,6,6,8,6,8,1,5,7,0,0,2`` () =
+        let lanternFish =
+            seq {
+                { DaysUntilSpawn = 3uy; }
+                { DaysUntilSpawn = 4uy; }
+                { DaysUntilSpawn = 3uy; }
+                { DaysUntilSpawn = 1uy; }
+                { DaysUntilSpawn = 2uy; }
+            }
+
+        let result = lanternFish |> spawnLanternFishTimes <| 18uy
+
+        Assert.Equal<seq<LanternFish>>(
+            seq {
+                { DaysUntilSpawn = 6uy }
+                { DaysUntilSpawn = 8uy }
+                { DaysUntilSpawn = 1uy }
+                { DaysUntilSpawn = 1uy }
+                { DaysUntilSpawn = 3uy }
+                { DaysUntilSpawn = 0uy }
+                { DaysUntilSpawn = 2uy }
+                { DaysUntilSpawn = 2uy }
+                { DaysUntilSpawn = 4uy }
+                { DaysUntilSpawn = 6uy }
+                { DaysUntilSpawn = 8uy }
+                { DaysUntilSpawn = 1uy }
+                { DaysUntilSpawn = 1uy }
+                { DaysUntilSpawn = 3uy }
+                { DaysUntilSpawn = 4uy }
+                { DaysUntilSpawn = 6uy }
+                { DaysUntilSpawn = 6uy }
+                { DaysUntilSpawn = 8uy }
+                { DaysUntilSpawn = 6uy }
+                { DaysUntilSpawn = 8uy }
+                { DaysUntilSpawn = 1uy }
+                { DaysUntilSpawn = 5uy }
+                { DaysUntilSpawn = 7uy }
+                { DaysUntilSpawn = 0uy }
+                { DaysUntilSpawn = 0uy }
+                { DaysUntilSpawn = 2uy }
+            },
+            result)
