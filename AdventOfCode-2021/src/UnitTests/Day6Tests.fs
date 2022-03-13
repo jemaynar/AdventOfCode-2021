@@ -247,6 +247,38 @@ module UnitTests.Day6Tests
             result)
 
     [<Fact>]
+    let ``spawnLanternFishTimes: when initial state is initial state lanternFish 0 and times is 2 then result is 7,5`` () =
+        let lanternFish =
+            seq {
+                { DaysUntilSpawn = 0uy; }
+            }
+
+        let result = lanternFish |> spawnLanternFishTimes <| 2uy 
+
+        Assert.Equal<seq<LanternFish>>(
+            seq {
+                { DaysUntilSpawn = 5uy; }
+                { DaysUntilSpawn = 7uy; }
+            },
+            result)
+
+    [<Fact>]
+    let ``spawnLanternFishTimes: when initial state is initial state lanternFish 0 and times is 3 then result is 6,4`` () =
+        let lanternFish =
+            seq {
+                { DaysUntilSpawn = 0uy; }
+            }
+
+        let result = lanternFish |> spawnLanternFishTimes <| 3uy 
+
+        Assert.Equal<seq<LanternFish>>(
+            seq {
+                { DaysUntilSpawn = 4uy; }
+                { DaysUntilSpawn = 6uy; }
+            },
+            result)
+
+    [<Fact>]
     let ``spawnLanternFishTimes: when initial state is initial state from problem 3,4,3,1,2 when times equals 1 then result is 2,3,2,0,1`` () =
         let lanternFish =
             seq {

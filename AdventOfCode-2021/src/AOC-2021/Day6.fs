@@ -48,8 +48,7 @@ module Day6
                         let lanternFishResult = fst state |> spawnLanternFish
                         let iteration = snd state + 1uy
                         Some (lanternFishResult, (lanternFishResult, iteration)))
-                |> Seq.tail
-                |> Seq.concat
+                |> Seq.last
 
     module Part1 =
         let Execute: unit =
