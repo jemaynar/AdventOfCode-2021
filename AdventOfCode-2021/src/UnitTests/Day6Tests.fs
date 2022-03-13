@@ -226,7 +226,7 @@ module UnitTests.Day6Tests
     let ``spawnLanternFishTimes: when initial state is initial state lanternFish is Seq.empty then result is Seq.empty`` () =
         let lanternFish = Seq.empty
 
-        let result = lanternFish |> spawnLanternFishTimes <| 0uy 
+        let result = lanternFish |> spawnLanternFishTimes <| 1uy 
 
         Assert.Equal<seq<LanternFish>>(Seq.empty, result)
 
@@ -243,5 +243,52 @@ module UnitTests.Day6Tests
             seq {
                 { DaysUntilSpawn = 6uy; }
                 { DaysUntilSpawn = 8uy; }
+            },
+            result)
+
+    [<Fact>]
+    let ``spawnLanternFishTimes: when initial state is initial state from problem 3,4,3,1,2 when times equals 1 then result is 2,3,2,0,1`` () =
+        let lanternFish =
+            seq {
+                { DaysUntilSpawn = 3uy; }
+                { DaysUntilSpawn = 4uy; }
+                { DaysUntilSpawn = 3uy; }
+                { DaysUntilSpawn = 1uy; }
+                { DaysUntilSpawn = 2uy; }
+            }
+
+        let result = lanternFish |> spawnLanternFishTimes <| 1uy
+
+        Assert.Equal<seq<LanternFish>>(
+            seq {
+                { DaysUntilSpawn = 2uy; }
+                { DaysUntilSpawn = 3uy; }
+                { DaysUntilSpawn = 2uy; }
+                { DaysUntilSpawn = 0uy; }
+                { DaysUntilSpawn = 1uy; }
+            },
+            result)
+
+    [<Fact>]
+    let ``spawnLanternFishTimes: when initial state is initial state from problem 3,4,3,1,2 when times equals 2 then result is 1,2,1,6,8,0`` () =
+        let lanternFish =
+            seq {
+                { DaysUntilSpawn = 3uy; }
+                { DaysUntilSpawn = 4uy; }
+                { DaysUntilSpawn = 3uy; }
+                { DaysUntilSpawn = 1uy; }
+                { DaysUntilSpawn = 2uy; }
+            }
+
+        let result = lanternFish |> spawnLanternFishTimes <| 2uy
+
+        Assert.Equal<seq<LanternFish>>(
+            seq {
+                { DaysUntilSpawn = 1uy; }
+                { DaysUntilSpawn = 2uy; }
+                { DaysUntilSpawn = 1uy; }
+                { DaysUntilSpawn = 6uy; }
+                { DaysUntilSpawn = 8uy; }
+                { DaysUntilSpawn = 0uy; }
             },
             result)

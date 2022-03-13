@@ -35,19 +35,20 @@ module Day6
                 |> Seq.concat
 
     let spawnLanternFishTimes lanternFish times =
-        if lanternFish = Seq.empty then
+        if lanternFish = Seq.empty || times = 0uy then
             Seq.empty
+        elif times = 1uy then
+            lanternFish |> spawnLanternFish
         else
             (lanternFish, 0uy)
                 |> Seq.unfold (fun state ->
-                    if snd state > times then
+                    if snd state >= times then
                         None
                     else
                         let lanternFishResult = fst state |> spawnLanternFish
                         let iteration = snd state + 1uy
-                        Some ((lanternFishResult, iteration), (lanternFish, iteration)))
+                        Some (lanternFishResult, (lanternFishResult, iteration)))
                 |> Seq.tail
-                |> Seq.map(fst)
                 |> Seq.concat
 
     module Part1 =
