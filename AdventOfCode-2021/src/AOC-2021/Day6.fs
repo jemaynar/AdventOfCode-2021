@@ -35,18 +35,18 @@ module Day6
                 |> Seq.concat
 
     let spawnLanternFishTimes lanternFish times =
-        if lanternFish = Seq.empty || times = 0uy then
+        if lanternFish = Seq.empty || times = 0 then
             Seq.empty
-        elif times = 1uy then
+        elif times = 1 then
             lanternFish |> spawnLanternFish
         else
-            (lanternFish, 0uy)
+            (lanternFish, 0)
                 |> Seq.unfold (fun state ->
                     if snd state >= times then
                         None
                     else
                         let lanternFishResult = fst state |> spawnLanternFish
-                        let iteration = snd state + 1uy
+                        let iteration = snd state + 1
                         Some (lanternFishResult, (lanternFishResult, iteration)))
                 |> Seq.last
 
@@ -59,14 +59,24 @@ module Day6
                     |> Seq.head
                     |> parseLanternFish
                     |> Option.defaultValue(Seq.empty)
-                    |> spawnLanternFishTimes <| 80uy
+                    |> spawnLanternFishTimes <| 80
                     |> Seq.length
 
             printfn "Total # of lanternfish after 80 spans: %A" <| totalNumberOfFish
 
     module Part2 =
         let Execute: unit =
-           printfn "\nDay 5 / Part 2 Result:\n"
+            printfn "\nDay 5 / Part 2 Result:\n"
+
+            let totalNumberOfFish =
+                Common.getData ".\Data\input6.txt"
+                    |> Seq.head
+                    |> parseLanternFish
+                    |> Option.defaultValue(Seq.empty)
+                    |> spawnLanternFishTimes <| 256
+                    |> Seq.length
+
+            printfn "Total # of lanternfish after 256 spans: %A" <| totalNumberOfFish
 
     let Execute: unit =
         Part1.Execute

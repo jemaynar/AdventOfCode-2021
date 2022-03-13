@@ -226,7 +226,7 @@ module UnitTests.Day6Tests
     let ``spawnLanternFishTimes: when initial state is initial state lanternFish is Seq.empty then result is Seq.empty`` () =
         let lanternFish = Seq.empty
 
-        let result = lanternFish |> spawnLanternFishTimes <| 1uy 
+        let result = lanternFish |> spawnLanternFishTimes <| 1
 
         Assert.Equal<seq<LanternFish>>(Seq.empty, result)
 
@@ -237,7 +237,7 @@ module UnitTests.Day6Tests
                 { DaysUntilSpawn = 0uy; }
             }
 
-        let result = lanternFish |> spawnLanternFishTimes <| 1uy 
+        let result = lanternFish |> spawnLanternFishTimes <| 1
 
         Assert.Equal<seq<LanternFish>>(
             seq {
@@ -253,7 +253,7 @@ module UnitTests.Day6Tests
                 { DaysUntilSpawn = 0uy; }
             }
 
-        let result = lanternFish |> spawnLanternFishTimes <| 2uy 
+        let result = lanternFish |> spawnLanternFishTimes <| 2
 
         Assert.Equal<seq<LanternFish>>(
             seq {
@@ -269,7 +269,7 @@ module UnitTests.Day6Tests
                 { DaysUntilSpawn = 0uy; }
             }
 
-        let result = lanternFish |> spawnLanternFishTimes <| 3uy 
+        let result = lanternFish |> spawnLanternFishTimes <| 3
 
         Assert.Equal<seq<LanternFish>>(
             seq {
@@ -289,7 +289,7 @@ module UnitTests.Day6Tests
                 { DaysUntilSpawn = 2uy; }
             }
 
-        let result = lanternFish |> spawnLanternFishTimes <| 1uy
+        let result = lanternFish |> spawnLanternFishTimes <| 1
 
         Assert.Equal<seq<LanternFish>>(
             seq {
@@ -312,7 +312,7 @@ module UnitTests.Day6Tests
                 { DaysUntilSpawn = 2uy; }
             }
 
-        let result = lanternFish |> spawnLanternFishTimes <| 2uy
+        let result = lanternFish |> spawnLanternFishTimes <| 2
 
         Assert.Equal<seq<LanternFish>>(
             seq {
@@ -336,7 +336,7 @@ module UnitTests.Day6Tests
                 { DaysUntilSpawn = 2uy; }
             }
 
-        let result = lanternFish |> spawnLanternFishTimes <| 18uy
+        let result = lanternFish |> spawnLanternFishTimes <| 18
 
         Assert.Equal<seq<LanternFish>>(
             seq {
