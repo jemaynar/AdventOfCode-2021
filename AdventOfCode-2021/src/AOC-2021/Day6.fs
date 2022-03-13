@@ -52,7 +52,17 @@ module Day6
 
     module Part1 =
         let Execute: unit =
-           printfn "\nDay 5 / Part 1 Result:\n"
+            printfn "\nDay 5 / Part 1 Result:\n"
+
+            let totalNumberOfFish =
+                Common.getData ".\Data\input6.txt"
+                    |> Seq.head
+                    |> parseLanternFish
+                    |> Option.defaultValue(Seq.empty)
+                    |> spawnLanternFishTimes <| 80uy
+                    |> Seq.length
+
+            printfn "Total # of lanternfish after 80 spans: %A" <| totalNumberOfFish
 
     module Part2 =
         let Execute: unit =
