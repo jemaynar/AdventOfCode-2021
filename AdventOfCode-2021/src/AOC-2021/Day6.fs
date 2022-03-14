@@ -1,5 +1,6 @@
 module Day6
     open System
+    open System.Collections.Generic
     
     type LanternFish = { DaysUntilSpawn: byte; }
 
@@ -65,16 +66,21 @@ module Day6
             printfn "Total # of lanternfish after 80 spans: %A" <| totalNumberOfFish
 
     module Part2 =
+        let toLanternFishDictionary (lanternfishOption: Option<seq<LanternFish>>): Dictionary<byte, int> =
+            let lanternFishSeq = lanternfishOption |> Option.defaultValue(Seq.empty)
+            if lanternFishSeq = Seq.empty then
+                Dictionary<byte, int>()
+            else
+                let lanternFishDictionary = Dictionary<byte, int>()
+                lanternFishSeq
+                    |> Seq.groupBy(fun x -> x.DaysUntilSpawn)
+                    |> Seq.iter(fun x -> lanternFishDictionary.[fst x] <- (snd x |> Seq.length))
+                lanternFishDictionary
+
         let Execute: unit =
             printfn "\nDay 5 / Part 2 Result:\n"
 
-            let totalNumberOfFish =
-                Common.getData ".\Data\input6.txt"
-                    |> Seq.head
-                    |> parseLanternFish
-                    |> Option.defaultValue(Seq.empty)
-                    |> spawnLanternFishTimes <| 256
-                    |> Seq.length
+            let totalNumberOfFish = 0
 
             printfn "Total # of lanternfish after 256 spans: %A" <| totalNumberOfFish
 

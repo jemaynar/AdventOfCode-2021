@@ -368,3 +368,11 @@ module UnitTests.Day6Tests
                 { DaysUntilSpawn = 2uy }
             },
             result)
+
+    [<Fact>]
+    let ``Part2.toLanternFishDictionary: when lanternFishSeq is empty then dictionary with 0 keys`` () =
+        let lanternFishSeq = Some Seq.empty
+
+        let result = lanternFishSeq |> Part2.toLanternFishDictionary
+
+        Assert.Equal<int32>(0, result.Count)
