@@ -1,4 +1,5 @@
 module UnitTests.Day6Tests
+    open System.Collections.Generic
     open Xunit
     open Day6
 
@@ -384,3 +385,19 @@ module UnitTests.Day6Tests
         let result = lanternFishSeq |> Part2.toLanternFishDictionary
 
         Assert.Equal<int32>(0, result.Count)
+
+    [<Fact>]
+    let ``Part2.toLanternFishDictionary: when lanternFishSeq is Some 1 then dictionary with 0 keys`` () =
+        let lanternFishSeq =
+            seq {
+                { DaysUntilSpawn = 1uy; }
+            }
+
+        let result = Some lanternFishSeq |> Part2.toLanternFishDictionary
+
+        let expected = Dictionary<byte, int>()
+        expected.Add(1uy, 1)
+            
+        Assert.Equal<Dictionary<byte, int>>(
+            expected,
+            result)
