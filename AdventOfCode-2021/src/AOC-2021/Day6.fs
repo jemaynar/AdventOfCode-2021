@@ -77,6 +77,29 @@ module Day6
                     |> Seq.iter(fun x -> lanternFishDictionary.[fst x] <- (snd x |> Seq.length))
                 lanternFishDictionary
 
+        let spawnLanternFish (lanternFishDictionary: Dictionary<byte, int>): Dictionary<byte, int> =
+            if lanternFishDictionary.Count = 0 then
+                Dictionary<byte, int>()
+            else
+                if lanternFishDictionary.ContainsKey(0uy) && lanternFishDictionary.ContainsKey(7uy) then
+                    lanternFishDictionary.[7uy] <- lanternFishDictionary[7uy] + lanternFishDictionary[0uy]
+                elif lanternFishDictionary.ContainsKey(0uy) then
+                    lanternFishDictionary.[7uy] <- lanternFishDictionary[0uy]
+                lanternFishDictionary.Keys
+                    |> Seq.map(fun k ->
+                        match k with
+                        | 8uy -> (7uy, lanternFishDictionary[8uy])
+                        | 7uy -> (6uy, lanternFishDictionary[7uy])
+                        | 6uy -> (5uy, lanternFishDictionary[6uy])
+                        | 5uy -> (4uy, lanternFishDictionary[5uy])
+                        | 4uy -> (3uy, lanternFishDictionary[4uy])
+                        | 3uy -> (2uy, lanternFishDictionary[3uy])
+                        | 2uy -> (1uy, lanternFishDictionary[2uy])
+                        | 1uy -> (0uy, lanternFishDictionary[1uy])
+                        | _ -> (8uy, lanternFishDictionary[0uy]))
+                    |> dict
+                    |> Dictionary
+
         let Execute: unit =
             printfn "\nDay 5 / Part 2 Result:\n"
 
