@@ -6,4 +6,4 @@ module Common
         System.IO.File.ReadLines(filename)
 
     let printReadableNumber (number) (tw:TextWriter) =
-        tw.Write($"{number:n0}")        
+        tw.Write($"{number:n0}")
