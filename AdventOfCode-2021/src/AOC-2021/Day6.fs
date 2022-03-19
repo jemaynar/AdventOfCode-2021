@@ -68,9 +68,6 @@ module Day6
                         Some (lanternFishResult, (lanternFishResult, iteration)))
                 |> Seq.last
 
-    let printTotalNumberOfFish (totalFish) (tw:TextWriter) =
-        tw.Write($"{totalFish:n0}")
-
     module Part1 =
         let Execute: unit =
             printfn "\nDay 6 / Part 1 Result:\n"
@@ -83,7 +80,7 @@ module Day6
                     |> spawnLanternFishTimes <| 80
                     |> Seq.sumBy(fun x -> x.Value)
 
-            printfn "Total # of lanternfish after 80 spans: %t" <| printTotalNumberOfFish totalNumberOfFish
+            printfn "Total # of lanternfish after 80 spans: %t" <| Common.printReadableNumber totalNumberOfFish
 
     module Part2 =
         let Execute: unit =
@@ -97,7 +94,7 @@ module Day6
                     |> spawnLanternFishTimes <| 256
                     |> Seq.sumBy(fun x -> x.Value)
 
-            printfn "Total # of lanternfish after 256 spans: %t" <| printTotalNumberOfFish totalNumberOfFish
+            printfn "Total # of lanternfish after 256 spans: %t" <| Common.printReadableNumber totalNumberOfFish
 
     let Execute: unit =
         Part1.Execute
