@@ -83,7 +83,7 @@ module Day4
                             let boardState = fst tuple
                             let updatedBoards = applyPickToGameBoards(boardState, picks.[index])
                             let firstWinner = firstWinner <| updatedBoards
-                            
+
                             if Option.isNone <| firstWinner then
                                 Some((updatedBoards, picks |> Seq.truncate (index + 1)), (updatedBoards, index + 1))
                             else
