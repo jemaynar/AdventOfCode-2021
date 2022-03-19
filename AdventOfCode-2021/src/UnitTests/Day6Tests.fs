@@ -439,7 +439,7 @@ module UnitTests.Day6Tests
             result)
 
     [<Fact>]
-    let ``Part2.spawnLanternFish: when Seq.empty then returns empty dictionary`` () =
+    let ``Part2.spawnLanternFish: when empty dictionary then returns empty dictionary`` () =
         let lanternFish = Dictionary<byte, int>()
 
         let result = lanternFish |> Part2.spawnLanternFish
@@ -562,3 +562,11 @@ module UnitTests.Day6Tests
         expected.Add(0uy, 1)
         expected.Add(1uy, 1)
         Assert.Equal<Dictionary<byte, int>>(expected, result)
+
+    [<Fact>]
+    let ``Part2.spawnLanternFishTimes: when initial state is initial state lanternFish is empty dictionary then result is empty dictionary`` () =
+        let lanternFish = Dictionary<byte, int>()
+
+        let result = lanternFish |> Part2.spawnLanternFishTimes <| 1
+
+        Assert.Equal<Dictionary<byte, int>>(Dictionary<byte, int>(), result)

@@ -100,6 +100,9 @@ module Day6
                     |> dict
                     |> Dictionary
 
+        let spawnLanternFishTimes lanternFish times =
+            Dictionary<byte, int>()
+
         let Execute: unit =
             printfn "\nDay 5 / Part 2 Result:\n"
 
