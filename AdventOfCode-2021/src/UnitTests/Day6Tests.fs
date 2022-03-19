@@ -570,3 +570,15 @@ module UnitTests.Day6Tests
         let result = lanternFish |> Part2.spawnLanternFishTimes <| 1
 
         Assert.Equal<Dictionary<byte, int>>(Dictionary<byte, int>(), result)
+
+    [<Fact>]
+    let ``Part2.spawnLanternFishTimes: when initial state is initial state lanternFish 0 and times is 1 then result is 8,6`` () =
+        let lanternFish = Dictionary<byte, int>()
+        lanternFish.Add(0uy, 1)
+
+        let result = lanternFish |> Part2.spawnLanternFishTimes <| 1
+
+        let expected = Dictionary<byte, int>()
+        expected.Add(6uy, 1)
+        expected.Add(8uy, 1)
+        Assert.Equal<Dictionary<byte, int>>(expected, result)

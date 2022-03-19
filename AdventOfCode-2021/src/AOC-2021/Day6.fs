@@ -100,8 +100,11 @@ module Day6
                     |> dict
                     |> Dictionary
 
-        let spawnLanternFishTimes lanternFish times =
-            Dictionary<byte, int>()
+        let spawnLanternFishTimes (lanternFish: Dictionary<byte,int>) times =
+            if lanternFish.Count = 0 || times = 0 then
+                Dictionary<byte, int>()
+            else
+                lanternFish |> spawnLanternFish
 
         let Execute: unit =
             printfn "\nDay 5 / Part 2 Result:\n"
