@@ -1,6 +1,7 @@
 module Day6
     open System
     open System.Collections.Generic
+    open System.IO
     
     type LanternFish = { DaysUntilSpawn: byte; }
 
@@ -51,6 +52,9 @@ module Day6
                         Some (lanternFishResult, (lanternFishResult, iteration)))
                 |> Seq.last
 
+    let printTotalNumberOfFish (totalFish) (tw:TextWriter) =
+        tw.Write($"{totalFish:n0}")
+
     module Part1 =
         let Execute: unit =
             printfn "\nDay 5 / Part 1 Result:\n"
@@ -63,7 +67,7 @@ module Day6
                     |> spawnLanternFishTimes <| 80
                     |> Seq.length
 
-            printfn "Total # of lanternfish after 80 spans: %A" <| totalNumberOfFish
+            printfn "Total # of lanternfish after 80 spans: %t" <| printTotalNumberOfFish totalNumberOfFish
 
     module Part2 =
         let toLanternFishDictionary (lanternfishOption: Option<seq<LanternFish>>): Dictionary<byte, uint64> =
@@ -127,7 +131,7 @@ module Day6
                     |> spawnLanternFishTimes <| 256
                     |> Seq.sumBy(fun x -> x.Value)
 
-            printfn "Total # of lanternfish after 256 spans: %A" <| totalNumberOfFish
+            printfn "Total # of lanternfish after 256 spans: %t" <| printTotalNumberOfFish totalNumberOfFish
 
     let Execute: unit =
         Part1.Execute
