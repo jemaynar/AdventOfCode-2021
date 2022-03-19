@@ -66,20 +66,20 @@ module Day6
             printfn "Total # of lanternfish after 80 spans: %A" <| totalNumberOfFish
 
     module Part2 =
-        let toLanternFishDictionary (lanternfishOption: Option<seq<LanternFish>>): Dictionary<byte, int> =
+        let toLanternFishDictionary (lanternfishOption: Option<seq<LanternFish>>): Dictionary<byte, uint64> =
             let lanternFishSeq = lanternfishOption |> Option.defaultValue(Seq.empty)
             if lanternFishSeq = Seq.empty then
-                Dictionary<byte, int>()
+                Dictionary<byte, uint64>()
             else
-                let lanternFishDictionary = Dictionary<byte, int>()
+                let lanternFishDictionary = Dictionary<byte, uint64>()
                 lanternFishSeq
                     |> Seq.groupBy(fun x -> x.DaysUntilSpawn)
-                    |> Seq.iter(fun x -> lanternFishDictionary.[fst x] <- (snd x |> Seq.length))
+                    |> Seq.iter(fun x -> lanternFishDictionary.[fst x] <- uint64((snd x |> Seq.length)))
                 lanternFishDictionary
 
-        let spawnLanternFish (lanternFishDictionary: Dictionary<byte, int>): Dictionary<byte, int> =
+        let spawnLanternFish (lanternFishDictionary: Dictionary<byte, uint64>): Dictionary<byte, uint64> =
             if lanternFishDictionary.Count = 0 then
-                Dictionary<byte, int>()
+                Dictionary<byte, uint64>()
             else
                 if lanternFishDictionary.ContainsKey(0uy) && lanternFishDictionary.ContainsKey(7uy) then
                     lanternFishDictionary.[7uy] <- lanternFishDictionary[7uy] + lanternFishDictionary[0uy]
@@ -100,9 +100,9 @@ module Day6
                     |> dict
                     |> Dictionary
 
-        let spawnLanternFishTimes (lanternFish: Dictionary<byte,int>) times =
+        let spawnLanternFishTimes (lanternFish: Dictionary<byte, uint64>) times =
             if lanternFish.Count = 0 || times = 0 then
-                Dictionary<byte, int>()
+                Dictionary<byte, uint64>()
             elif times = 1 then
                 lanternFish |> spawnLanternFish
             else
@@ -119,7 +119,13 @@ module Day6
         let Execute: unit =
             printfn "\nDay 5 / Part 2 Result:\n"
 
-            let totalNumberOfFish = 0
+            let totalNumberOfFish =
+                Common.getData ".\Data\input6.txt"
+                    |> Seq.head
+                    |> parseLanternFish
+                    |> toLanternFishDictionary
+                    |> spawnLanternFishTimes <| 256
+                    |> Seq.sumBy(fun x -> x.Value)
 
             printfn "Total # of lanternfish after 256 spans: %A" <| totalNumberOfFish
 
