@@ -103,8 +103,18 @@ module Day6
         let spawnLanternFishTimes (lanternFish: Dictionary<byte,int>) times =
             if lanternFish.Count = 0 || times = 0 then
                 Dictionary<byte, int>()
-            else
+            elif times = 1 then
                 lanternFish |> spawnLanternFish
+            else
+                (lanternFish, 0)
+                    |> Seq.unfold (fun state ->
+                        if snd state >= times then
+                            None
+                        else
+                            let lanternFishResult = fst state |> spawnLanternFish
+                            let iteration = snd state + 1
+                            Some (lanternFishResult, (lanternFishResult, iteration)))
+                    |> Seq.last
 
         let Execute: unit =
             printfn "\nDay 5 / Part 2 Result:\n"
