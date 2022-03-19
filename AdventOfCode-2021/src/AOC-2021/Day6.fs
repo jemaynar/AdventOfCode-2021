@@ -73,7 +73,7 @@ module Day6
 
     module Part1 =
         let Execute: unit =
-            printfn "\nDay 5 / Part 1 Result:\n"
+            printfn "\nDay 6 / Part 1 Result:\n"
 
             let totalNumberOfFish =
                 Common.getData ".\Data\input6.txt"
@@ -87,7 +87,7 @@ module Day6
 
     module Part2 =
         let Execute: unit =
-            printfn "\nDay 5 / Part 2 Result:\n"
+            printfn "\nDay 6 / Part 2 Result:\n"
 
             let totalNumberOfFish =
                 Common.getData ".\Data\input6.txt"
