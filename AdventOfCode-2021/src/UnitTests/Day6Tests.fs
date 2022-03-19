@@ -371,29 +371,29 @@ module UnitTests.Day6Tests
             result)
 
     [<Fact>]
-    let ``Part2.toLanternFishDictionary: when lanternFishSeq is Some empty then dictionary with 0 keys`` () =
+    let ``toLanternFishDictionary: when lanternFishSeq is Some empty then dictionary with 0 keys`` () =
         let lanternFishSeq = Some Seq.empty
 
-        let result = lanternFishSeq |> Part2.toLanternFishDictionary
+        let result = lanternFishSeq |> toLanternFishDictionary
 
         Assert.Equal<int32>(0, result.Count)
 
     [<Fact>]
-    let ``Part2.toLanternFishDictionary: when lanternFishSeq is None then dictionary with 0 keys`` () =
+    let ``toLanternFishDictionary: when lanternFishSeq is None then dictionary with 0 keys`` () =
         let lanternFishSeq = None
 
-        let result = lanternFishSeq |> Part2.toLanternFishDictionary
+        let result = lanternFishSeq |> toLanternFishDictionary
 
         Assert.Equal<int32>(0, result.Count)
 
     [<Fact>]
-    let ``Part2.toLanternFishDictionary: when lanternFishSeq is Some with 1 item with DaysUntilSpawn = 1 then dictionary with Key 1 and Value = 1`` () =
+    let ``toLanternFishDictionary: when lanternFishSeq is Some with 1 item with DaysUntilSpawn = 1 then dictionary with Key 1 and Value = 1`` () =
         let lanternFishSeq =
             seq {
                 { DaysUntilSpawn = 1uy; }
             }
 
-        let result = Some lanternFishSeq |> Part2.toLanternFishDictionary
+        let result = Some lanternFishSeq |> toLanternFishDictionary
 
         let expected = Dictionary<byte, uint64>()
         expected.Add(1uy, 1UL)
@@ -403,14 +403,14 @@ module UnitTests.Day6Tests
             result)
 
     [<Fact>]
-    let ``Part2.toLanternFishDictionary: when lanternFishSeq is Some with 2 items with DaysUntilSpawn = 1 then dictionary with Key 1 and Value 2`` () =
+    let ``toLanternFishDictionary: when lanternFishSeq is Some with 2 items with DaysUntilSpawn = 1 then dictionary with Key 1 and Value 2`` () =
         let lanternFishSeq =
             seq {
                 { DaysUntilSpawn = 1uy; }
                 { DaysUntilSpawn = 1uy; }
             }
 
-        let result = Some lanternFishSeq |> Part2.toLanternFishDictionary
+        let result = Some lanternFishSeq |> toLanternFishDictionary
 
         let expected = Dictionary<byte, uint64>()
         expected.Add(1uy, 2UL)
@@ -420,7 +420,7 @@ module UnitTests.Day6Tests
             result)
 
     [<Fact>]
-    let ``Part2.toLanternFishDictionary: when lanternFishSeq is Some with 2 items with DaysUntilSpawn = 1 and 1 item with DaysUntilSpawn 2 then dictionary with Key 1 and Value 2 and Key 2 and Value 1`` () =
+    let ``toLanternFishDictionary: when lanternFishSeq is Some with 2 items with DaysUntilSpawn = 1 and 1 item with DaysUntilSpawn 2 then dictionary with Key 1 and Value 2 and Key 2 and Value 1`` () =
         let lanternFishSeq =
             seq {
                 { DaysUntilSpawn = 1uy; }
@@ -428,7 +428,7 @@ module UnitTests.Day6Tests
                 { DaysUntilSpawn = 2uy; }
             }
 
-        let result = Some lanternFishSeq |> Part2.toLanternFishDictionary
+        let result = Some lanternFishSeq |> toLanternFishDictionary
 
         let expected = Dictionary<byte, uint64>()
         expected.Add(1uy, 2UL)

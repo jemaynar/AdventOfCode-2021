@@ -18,6 +18,17 @@ module Day6
                         |> Seq.map(fun i -> { DaysUntilSpawn = i |> Convert.ToByte })
                 Some lanternFish
 
+    let toLanternFishDictionary (lanternfishOption: Option<seq<LanternFish>>): Dictionary<byte, uint64> =
+        let lanternFishSeq = lanternfishOption |> Option.defaultValue(Seq.empty)
+        if lanternFishSeq = Seq.empty then
+            Dictionary<byte, uint64>()
+        else
+            let lanternFishDictionary = Dictionary<byte, uint64>()
+            lanternFishSeq
+                |> Seq.groupBy(fun x -> x.DaysUntilSpawn)
+                |> Seq.iter(fun x -> lanternFishDictionary.[fst x] <- uint64((snd x |> Seq.length)))
+            lanternFishDictionary
+
     let spawnLanternFish (lanternFish: seq<LanternFish>): seq<LanternFish> =
         if lanternFish = Seq.empty then
             Seq.empty
@@ -70,17 +81,6 @@ module Day6
             printfn "Total # of lanternfish after 80 spans: %t" <| printTotalNumberOfFish totalNumberOfFish
 
     module Part2 =
-        let toLanternFishDictionary (lanternfishOption: Option<seq<LanternFish>>): Dictionary<byte, uint64> =
-            let lanternFishSeq = lanternfishOption |> Option.defaultValue(Seq.empty)
-            if lanternFishSeq = Seq.empty then
-                Dictionary<byte, uint64>()
-            else
-                let lanternFishDictionary = Dictionary<byte, uint64>()
-                lanternFishSeq
-                    |> Seq.groupBy(fun x -> x.DaysUntilSpawn)
-                    |> Seq.iter(fun x -> lanternFishDictionary.[fst x] <- uint64((snd x |> Seq.length)))
-                lanternFishDictionary
-
         let spawnLanternFish (lanternFishDictionary: Dictionary<byte, uint64>): Dictionary<byte, uint64> =
             if lanternFishDictionary.Count = 0 then
                 Dictionary<byte, uint64>()
