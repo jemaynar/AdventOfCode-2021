@@ -79,7 +79,7 @@ module Day5
                     |> lineSegmentsToCoordinateOccurrenceIntersections <| lineSegmentToCoordinates
                     |> Seq.length
 
-            printfn "Overlap Count: %i" <| lineOverlaps
+            printfn "Overlap Count: %t" <| Common.printReadableNumber lineOverlaps
 
     module Part2 =
         let rec lineSegmentToCoordinates (lineSegment: LineSegment): Option<seq<Coordinate>> =
@@ -113,7 +113,7 @@ module Day5
                     |> lineSegmentsToCoordinateOccurrenceIntersections <| lineSegmentToCoordinates
                     |> Seq.length
 
-            printfn "Overlap Count: %i" <| lineOverlaps
+            printfn "Overlap Count: %t" <| Common.printReadableNumber lineOverlaps
 
     let Execute: unit =
         Part1.Execute

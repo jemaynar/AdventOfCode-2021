@@ -3,7 +3,7 @@ module Day4
 
     type BingoCell = { IsSelected: bool; Value: byte }
     type Winner = { Board: BingoCell[,]; AppliedPicks: byte[] }
-    
+
     let getDrawnNumbers (inputLines: seq<string>): byte[] =
         let firstLine = inputLines |> Seq.head
 
@@ -14,7 +14,7 @@ module Day4
             bytes
                 |> Seq.choose(fun n -> match Byte.TryParse(n) with | true, n -> Some n | false, _ -> None)
                 |> Array.ofSeq
-                
+
     let parseLine (line: string) =
         let ints = line.Split ' '
         if Array.isEmpty <| ints then
@@ -23,11 +23,11 @@ module Day4
             ints
                 |> Seq.choose(fun n -> match Byte.TryParse(n) with | true, n -> Some { IsSelected = false; Value = n } | false, _ -> None)
                 |> Array.ofSeq
-                
+
     let getGameBoard (inputLines: seq<string>): BingoCell[,] =
         let array = inputLines |> Seq.map(parseLine) |> Seq.toArray
         Array2D.init 5 5 (fun i j -> array[i][j]) 
-                
+
     let getGameBoards (inputLines: seq<string>): seq<BingoCell[,]> =
         inputLines
             |> Seq.skip 2
@@ -39,7 +39,7 @@ module Day4
                     let gameBoard = state |> Seq.take 5 |> getGameBoard
                     let newState = state |> Seq.skip 5
                     Some(gameBoard, newState))
-            
+
     let isWinner(gameBoard: BingoCell[,]): bool =
         gameBoard[0,..5] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
             || gameBoard[1,..5] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
@@ -51,21 +51,21 @@ module Day4
             || gameBoard[..5,2] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
             || gameBoard[..5,3] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
             || gameBoard[..5,4] |> Array.filter(fun f -> f.IsSelected) |> Array.length = 5
-            
+
     let firstWinner(gameBoards: seq<BingoCell[,]>): Option<BingoCell[,]> =
         gameBoards
             |> Seq.tryFind (fun board -> board |> isWinner)
-    
+
     let applyPickToGameBoard(gameBoard: BingoCell[,], pick: byte) =
         gameBoard |> Array2D.map(fun cell ->
             if cell.Value = pick then
                 { IsSelected = true; Value = cell.Value }
             else
                 cell)
-        
+
     let applyPickToGameBoards(gameBoards: seq<BingoCell[,]>, pick: byte) =
         gameBoards |> Seq.map(fun gameBoard -> applyPickToGameBoard(gameBoard, pick))
-        
+
     let applyPicksUntilWinnerFound(gameBoards: seq<BingoCell[,]>, picks: byte[]): Option<Winner> =
         if picks |> Array.length < 5 then 
             None
@@ -89,11 +89,11 @@ module Day4
                             else
                                 Some((updatedBoards, picks |> Seq.truncate (index + 1)), (updatedBoards, -1)))
                     |> Seq.last
-                    
+
             let winner = fst result |> firstWinner
 
             winner |> Option.map(fun w -> { Board = w; AppliedPicks = snd result |> Seq.toArray; } )
-            
+
     let applyPicksUntilLastWinnerFound(gameBoards: seq<BingoCell[,]>, picks: byte[]): Option<Winner> =
         if picks |> Array.length < 5 then 
             None
@@ -111,7 +111,7 @@ module Day4
                             let boardState = fst tuple
                             let updatedBoards = applyPickToGameBoards(boardState, picks.[index])
                             let winner = firstWinner <| updatedBoards
-                            
+
                             if Option.isNone <| winner then
                                 Some((updatedBoards, picks |> Seq.truncate (index + 1)), (updatedBoards, index + 1))
                             else
@@ -126,11 +126,11 @@ module Day4
                                     else
                                         Some((updatedBoards, picks |> Seq.truncate (index + 1)), (updatedBoards, -1)))
                     |> Seq.last
-                    
+
             let winner = fst result |> firstWinner
 
             winner |> Option.map(fun w -> { Board = w; AppliedPicks = snd result |> Seq.toArray; } )
-    
+
     let calculateSumOfUnmarkedBingoCells (winner: Option<Winner>): Option<int> =
         winner
             |> Option.map(
@@ -140,7 +140,7 @@ module Day4
                         |> Seq.filter(fun c -> c.IsSelected = false)
                         |> Seq.map(fun c -> c.Value |> Convert.ToInt32)
                         |> Seq.sum)
-        
+
     let lastPick (winner: Option<Winner>): Option<int> =
         winner
             |> Option.map(
@@ -169,31 +169,31 @@ module Day4
     module Part1 =
         let Execute: unit =
             printfn "\nDay 4 / Part 1 Result:\n"
-        
+
             let lines = Common.getData ".\Data\input4.txt"
             let picks = getDrawnNumbers <| lines
             let gameBoards = getGameBoards <| lines
-            
+
             let winningScore =
                 applyPicksUntilWinnerFound(gameBoards, picks)
                     |> calculateScore
-                    
-            printfn "Winning Score: %A" <| winningScore
-            
+
+            printfn "Winning Score: %t" <| Common.printReadableNumber winningScore
+
     module Part2 =
         let Execute: unit =
             printfn "\nDay 4 / Part 2 Result:\n"
-            
+
             let lines = Common.getData ".\Data\input4.txt"
             let picks = getDrawnNumbers <| lines
             let gameBoards = getGameBoards <| lines
-            
+
             let lastWinningScore =
                 applyPicksUntilLastWinnerFound(gameBoards, picks)
                     |> calculateScore
-            
-            printfn "Last Winner Score: %A" <| lastWinningScore
-        
+
+            printfn "Last Winner Score: %t" <| Common.printReadableNumber lastWinningScore
+
     let Execute: unit =
         Part1.Execute
         Part2.Execute

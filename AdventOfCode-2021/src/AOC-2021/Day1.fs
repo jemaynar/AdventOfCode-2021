@@ -24,9 +24,9 @@ module Day1
 
         let depths = Part1.sumData <| lines
 
-        printfn "Day 1 / Part 1 Result: \n\n%A\n" <| depths
+        printfn "Day 1 / Part 1 Result: \n\n%t\n" <| Common.printReadableNumber depths
 
         let depths = Part2.sumData <| lines
 
-        printfn "Day 1 / Part 2 Result: \n\n%A" <| depths
+        printfn "Day 1 / Part 2 Result: \n\n%t" <| Common.printReadableNumber depths
         

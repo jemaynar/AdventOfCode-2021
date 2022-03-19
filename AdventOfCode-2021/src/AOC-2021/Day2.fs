@@ -36,4 +36,4 @@ module Day2
         // Display result
         printfn "\nDay 2 Result:"
         printfn "\nFinal Position:\n %A" <| finalPosition
-        printfn "Position Product: %s" <| positionProduct.ToString("N0")
+        printfn "Position Product: %t" <| Common.printReadableNumber positionProduct

@@ -1,7 +1,6 @@
 module Day6
     open System
     open System.Collections.Generic
-    open System.IO
 
     type LanternFish = { DaysUntilSpawn: byte; }
 

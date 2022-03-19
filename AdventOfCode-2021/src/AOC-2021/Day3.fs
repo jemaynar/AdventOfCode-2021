@@ -1,7 +1,7 @@
 module Day3
     let getData =
         Common.getData ".\Data\input3.txt"
-        
+
     let toArrayOfBinaryStrings (sequenceOfBitArrays: seq<int[]>) =
         sequenceOfBitArrays
             |> Seq.map(fun x -> x |> Seq.map(string) |> Seq.fold (+) "")
@@ -15,7 +15,7 @@ module Day3
                         match x with 
                             | '1' -> 1 
                             | _ -> 0 ))
-            
+
     // Thank you stack overflow!
     let pivotSequenceOfBitArrays (sequenceOfBitArrays: seq<int[]>) =
         sequenceOfBitArrays 
@@ -23,7 +23,7 @@ module Day3
             |> Seq.groupBy fst
             |> Seq.map (snd >> Seq.map snd)
             |> Seq.map(Seq.toArray)
-            
+
     let private mostCommon accum elem =
         if accum = (0, 0) then elem
         else
@@ -56,7 +56,7 @@ module Day3
             |> Seq.indexed
             |> Seq.reduce(fun accum elem -> (fst elem, snd accum + (if snd elem = 1 then int(2.0 ** float(fst elem)) else 0)))
             |> snd
-    
+
     module Part1 =
         let Execute: unit =
             let Day3Data = getData
@@ -83,28 +83,28 @@ module Day3
 
             // Show Data
             printfn "\nDay 3 / Part 1 Result:\n"
-            gammaRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Gamma Rate -> Binary: %A Numeric: %A" <| numericGammaRate
-            epsilonRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Epsilon Rate -> Binary: %A Numeric: %A" <| numericEpsilonRate
-            powerConsumption |> printfn "Power Consumption: %A"
+            gammaRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Gamma Rate -> Binary: %A Numeric: %t" <| Common.printReadableNumber numericGammaRate
+            epsilonRateBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Epsilon Rate -> Binary: %A Numeric: %t" <| Common.printReadableNumber numericEpsilonRate
+            printfn "Power Consumption: %t" <| Common.printReadableNumber powerConsumption
 
     module Part2 =
         let filterByArrayIndex arrayOfCharArrays filterIndex filterBitValue = 
             arrayOfCharArrays
                 |> Seq.map(Array.ofSeq)
                 |> Seq.filter(fun x -> x.[filterIndex] = filterBitValue)
-            
+
         let mostCommonBits (sequenceOfBitArrays: seq<int[]>) =
             sequenceOfBitArrays
                 |> pivotSequenceOfBitArrays
                 |> mostCommonBit
                 |> Seq.toArray
-                
+
         let leastCommonBits (sequenceOfBitArrays: seq<int[]>) =
             sequenceOfBitArrays
                 |> pivotSequenceOfBitArrays
                 |> leastCommonBit
                 |> Seq.toArray
-                
+
         let calculateOxygenGeneratorRating (data: seq<int[]>) =
             (data, 0)
             |> Seq.unfold (fun tuple ->
@@ -117,7 +117,7 @@ module Day3
                     Some(rows, (rows, index + 1)))
             |> Seq.last
             |> Seq.last
-            
+
         let calculateCo2ScrubberRating (data: seq<int[]>) =
             (data, 0)
             |> Seq.unfold (fun tuple ->
@@ -130,10 +130,10 @@ module Day3
                     Some(rows, (rows, index + 1)))
             |> Seq.last
             |> Seq.last
-                        
+
         let calculateLifeSupportRating oxygenGeneratorRating co2ScrubberRating =
             oxygenGeneratorRating * co2ScrubberRating
-                
+
         let Execute: unit =
             printfn "\nDay 3 / Part 2 Result:\n"
 
@@ -143,16 +143,16 @@ module Day3
 
             let oxygenGeneratorRatingBinary = lines |> calculateOxygenGeneratorRating
             let oxygenGeneratorRatingNumeric = oxygenGeneratorRatingBinary |> bitsToNumber            
-            oxygenGeneratorRatingBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Oxygen Generator Rating -> Binary: %A Numeric: %A" <| oxygenGeneratorRatingNumeric
-            
+            oxygenGeneratorRatingBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "Oxygen Generator Rating -> Binary: %A Numeric: %t" <| Common.printReadableNumber oxygenGeneratorRatingNumeric
+
             let co2ScrubberRatingBinary = lines |> calculateCo2ScrubberRating
             let co2ScrubberRatingNumeric = co2ScrubberRatingBinary |> bitsToNumber            
-            co2ScrubberRatingBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "CO2 Scrubber Rating -> Binary: %A Numeric: %A" <| co2ScrubberRatingNumeric
+            co2ScrubberRatingBinary |> Seq.map(string) |> Seq.fold (+) "" |> printfn "CO2 Scrubber Rating -> Binary: %A Numeric: %t" <| Common.printReadableNumber co2ScrubberRatingNumeric
 
             let lifeSupportRating:int =
                 calculateLifeSupportRating oxygenGeneratorRatingNumeric co2ScrubberRatingNumeric
 
-            lifeSupportRating |> printfn "Life Support Rating: %A"
+            printfn "Life Support Rating: %t" <| Common.printReadableNumber lifeSupportRating
 
     let Execute: unit =
         Part1.Execute
