@@ -1,8 +1,20 @@
 module Day7
-    type Crab = { HorizontalPosition: uint }
+    open System
+
+    type Crab = { HorizontalPosition: uint16 }
 
     let parseCrabs inputLine =
-        None
+        if inputLine |> String.IsNullOrWhiteSpace then
+            Option.None
+        else
+            let numberArray = inputLine.Split ","
+            if numberArray.Length = 0 then
+                Option.None
+            else
+                let crabs =
+                    numberArray
+                        |> Seq.map(fun i -> { HorizontalPosition = i |> Convert.ToUInt16 })
+                Some crabs
 
     module Part1 =
         let Execute: unit =
