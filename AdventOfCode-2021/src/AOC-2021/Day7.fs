@@ -37,6 +37,15 @@ module Day7
         let Execute: unit =
             printfn "\nDay 7 / Part 1 Result:\n"
 
+            let fuelConsumption =
+                Common.getData(".\Data\input7.txt")
+                    |> Seq.head
+                    |> parseCrabs
+                    |> fuelConsumption
+                    |> Option.defaultValue 0
+
+            printfn "\nFuel Consumption: %t" <| Common.printReadableNumber fuelConsumption
+
     module Part2 =
         let Execute: unit =
             printfn "\nDay 7 / Part 1 Result:\n"
