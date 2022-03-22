@@ -54,3 +54,29 @@ module UnitTests.Day7Tests
             match result with
                 | Some(sequence) -> sequence
                 | None -> Seq.empty)
+
+    [<Fact>]
+    let ``fuelConsumption: when horizontal positions are 16,1,2,0,4,2,7,1,2,14 then result is 37`` () =
+        let crabs =
+            seq {
+                { HorizontalPosition = 16us }
+                { HorizontalPosition = 1us }
+                { HorizontalPosition = 2us }
+                { HorizontalPosition = 0us }
+                { HorizontalPosition = 4us }
+                { HorizontalPosition = 2us }
+                { HorizontalPosition = 7us }
+                { HorizontalPosition = 1us }
+                { HorizontalPosition = 2us }
+                { HorizontalPosition = 14us }
+            }
+
+        let result =
+            Some crabs
+                |> fuelConsumption
+
+        Assert.Equal<int>(
+            37,
+            match result with
+                | Some(i) -> i
+                | None -> 0)
