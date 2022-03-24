@@ -16,7 +16,7 @@ module Day7
                         |> Seq.map(fun i -> { HorizontalPosition = i |> Convert.ToUInt16 })
                 Some crabs
     
-    let fuelConsumption optionCrabs =
+    let fuelConsumption optionCrabs crabConsumption =
         if optionCrabs |> Option.defaultValue Seq.empty = Seq.empty then
             None
         else
@@ -28,12 +28,15 @@ module Day7
             let optimalPosition = sortedCrabs.[sortedCrabs.Length / 2].HorizontalPosition
             let fuelConsumption =
                 sortedCrabs
-                    |> Seq.map(fun c -> abs(int(c.HorizontalPosition) - int(optimalPosition)))
+                    |> Seq.map(fun c -> crabConsumption c optimalPosition)
                     |> Seq.sum
             
             Some fuelConsumption
 
     module Part1 =
+        let getCrabConsumption crab optimalPosition =
+            abs(int(crab.HorizontalPosition) - int(optimalPosition))
+
         let Execute: unit =
             printfn "\nDay 7 / Part 1 Result:\n"
 
@@ -41,7 +44,7 @@ module Day7
                 Common.getData(".\Data\input7.txt")
                     |> Seq.head
                     |> parseCrabs
-                    |> fuelConsumption
+                    |> fuelConsumption <| getCrabConsumption
                     |> Option.defaultValue 0
 
             printfn "\nFuel Consumption: %t" <| Common.printReadableNumber fuelConsumption
