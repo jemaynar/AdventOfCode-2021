@@ -56,6 +56,42 @@ module UnitTests.Day7Tests
                 | None -> Seq.empty)
 
     [<Fact>]
+    let ``Part1.getCrabConsumption: when Crab.HorizontalPosition is 1 and optimalPosition position is 1 then result is 0`` () =
+        let crab = { HorizontalPosition = 1us }
+        let optimalPosition = 1us
+
+        let result = Part1.getCrabConsumption crab optimalPosition
+
+        Assert.Equal<int>(result, 0)
+
+    [<Fact>]
+    let ``Part1.getCrabConsumption: when Crab.HorizontalPosition is 1 and optimalPosition position is 0 then result is 1`` () =
+        let crab = { HorizontalPosition = 1us }
+        let optimalPosition = 0us
+
+        let result = Part1.getCrabConsumption crab optimalPosition
+
+        Assert.Equal<int>(result, 1)
+
+    [<Fact>]
+    let ``Part1.getCrabConsumption: when Crab.HorizontalPosition is 0 and optimalPosition position is 1 then result is 1`` () =
+        let crab = { HorizontalPosition = 0us }
+        let optimalPosition = 1us
+
+        let result = Part1.getCrabConsumption crab optimalPosition
+
+        Assert.Equal<int>(result, 1)
+
+    [<Fact>]
+    let ``Part1.getCrabConsumption: when Crab.HorizontalPosition is 2 and optimalPosition position is 0 then result is 2`` () =
+        let crab = { HorizontalPosition = 2us }
+        let optimalPosition = 0us
+
+        let result = Part1.getCrabConsumption crab optimalPosition
+
+        Assert.Equal<int>(result, 2)
+
+    [<Fact>]
     let ``fuelConsumption: when horizontal positions are 16,1,2,0,4,2,7,1,2,14 when crabConsumption is one fuel per position then result is 37`` () =
         let crabs =
             seq {
