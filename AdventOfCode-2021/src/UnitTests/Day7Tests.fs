@@ -56,7 +56,7 @@ module UnitTests.Day7Tests
                 | None -> Seq.empty)
 
     [<Fact>]
-    let ``fuelConsumption: when horizontal positions are 16,1,2,0,4,2,7,1,2,14 then result is 37`` () =
+    let ``fuelConsumption: when horizontal positions are 16,1,2,0,4,2,7,1,2,14 when crabConsumption is one fuel per position then result is 37`` () =
         let crabs =
             seq {
                 { HorizontalPosition = 16us }
@@ -73,7 +73,7 @@ module UnitTests.Day7Tests
 
         let result =
             Some crabs
-                |> fuelConsumption
+                |> fuelConsumption <| Part1.getCrabConsumption
 
         Assert.Equal<int>(
             37,
