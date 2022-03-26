@@ -34,7 +34,7 @@ module Day7
             Some fuelConsumption
 
     let getTriangleNumber nth =
-        nth
+        nth * (nth + 1) / 2
 
     module Part1 =
         let getCrabConsumption crab optimalPosition =
@@ -57,7 +57,7 @@ module Day7
             printfn "\nDay 7 / Part 2 Result:\n"
 
         let getCrabConsumption crab optimalPosition =
-            abs(int(crab.HorizontalPosition) - int(optimalPosition))
+            getTriangleNumber <| abs(int(crab.HorizontalPosition) - int(optimalPosition))
 
         let fuelConsumption =
             Common.getData(".\Data\input7.txt")

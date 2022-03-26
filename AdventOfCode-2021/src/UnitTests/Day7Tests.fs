@@ -108,6 +108,22 @@ module UnitTests.Day7Tests
         Assert.Equal<int>(1, result)
 
     [<Fact>]
+    let ``getTriangleNumber: when 2 then result is 3`` () =
+        let nth = 2
+
+        let result = getTriangleNumber nth
+
+        Assert.Equal<int>(3, result)
+        
+    [<Fact>]
+    let ``getTriangleNumber: when 3 then result is 6`` () =
+        let nth = 3
+
+        let result = getTriangleNumber nth
+
+        Assert.Equal<int>(6, result)
+
+    [<Fact>]
     let ``fuelConsumption: when horizontal positions are 16,1,2,0,4,2,7,1,2,14 when crabConsumption is one fuel per position then result is 37`` () =
         let crabs =
             seq {
