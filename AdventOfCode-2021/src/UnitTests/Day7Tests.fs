@@ -62,7 +62,7 @@ module UnitTests.Day7Tests
 
         let result = Part1.getCrabConsumption crab optimalPosition
 
-        Assert.Equal<int>(result, 0)
+        Assert.Equal<int>(0, result)
 
     [<Fact>]
     let ``Part1.getCrabConsumption: when Crab.HorizontalPosition is 1 and optimalPosition position is 0 then result is 1`` () =
@@ -71,7 +71,7 @@ module UnitTests.Day7Tests
 
         let result = Part1.getCrabConsumption crab optimalPosition
 
-        Assert.Equal<int>(result, 1)
+        Assert.Equal<int>(1, result)
 
     [<Fact>]
     let ``Part1.getCrabConsumption: when Crab.HorizontalPosition is 0 and optimalPosition position is 1 then result is 1`` () =
@@ -80,7 +80,7 @@ module UnitTests.Day7Tests
 
         let result = Part1.getCrabConsumption crab optimalPosition
 
-        Assert.Equal<int>(result, 1)
+        Assert.Equal<int>(1, result)
 
     [<Fact>]
     let ``Part1.getCrabConsumption: when Crab.HorizontalPosition is 2 and optimalPosition position is 0 then result is 2`` () =
@@ -89,7 +89,23 @@ module UnitTests.Day7Tests
 
         let result = Part1.getCrabConsumption crab optimalPosition
 
-        Assert.Equal<int>(result, 2)
+        Assert.Equal<int>(2, result)
+
+    [<Fact>]
+    let ``getTriangleNumber: when 0 then result is 0`` () =
+        let nth = 0
+
+        let result = getTriangleNumber nth
+
+        Assert.Equal<int>(0, result)
+
+    [<Fact>]
+    let ``getTriangleNumber: when 1 then result is 1`` () =
+        let nth = 1
+
+        let result = getTriangleNumber nth
+
+        Assert.Equal<int>(1, result)
 
     [<Fact>]
     let ``fuelConsumption: when horizontal positions are 16,1,2,0,4,2,7,1,2,14 when crabConsumption is one fuel per position then result is 37`` () =

@@ -33,6 +33,9 @@ module Day7
             
             Some fuelConsumption
 
+    let getTriangleNumber nth =
+        nth
+
     module Part1 =
         let getCrabConsumption crab optimalPosition =
             abs(int(crab.HorizontalPosition) - int(optimalPosition))
