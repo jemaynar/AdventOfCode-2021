@@ -51,7 +51,17 @@ module Day7
 
     module Part2 =
         let Execute: unit =
-            printfn "\nDay 7 / Part 1 Result:\n"
+            printfn "\nDay 7 / Part 2 Result:\n"
+            
+        let getCrabConsumption crab optimalPosition =
+            abs(int(crab.HorizontalPosition) - int(optimalPosition))
+            
+        let fuelConsumption =
+            Common.getData(".\Data\input7.txt")
+                |> Seq.head
+                |> parseCrabs
+                |> fuelConsumption <| getCrabConsumption
+                |> Option.defaultValue 0
 
     let Execute: unit =
         Part1.Execute
