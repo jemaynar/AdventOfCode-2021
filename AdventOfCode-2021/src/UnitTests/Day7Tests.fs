@@ -58,7 +58,7 @@ module UnitTests.Day7Tests
     [<Fact>]
     let ``Part1.getCrabConsumption: when Crab.HorizontalPosition is 1 and optimalPosition position is 1 then result is 0`` () =
         let crab = { HorizontalPosition = 1us }
-        let optimalPosition = 1us
+        let optimalPosition = 1
 
         let result = Part1.getCrabConsumption crab optimalPosition
 
@@ -67,7 +67,7 @@ module UnitTests.Day7Tests
     [<Fact>]
     let ``Part1.getCrabConsumption: when Crab.HorizontalPosition is 1 and optimalPosition position is 0 then result is 1`` () =
         let crab = { HorizontalPosition = 1us }
-        let optimalPosition = 0us
+        let optimalPosition = 0
 
         let result = Part1.getCrabConsumption crab optimalPosition
 
@@ -76,7 +76,7 @@ module UnitTests.Day7Tests
     [<Fact>]
     let ``Part1.getCrabConsumption: when Crab.HorizontalPosition is 0 and optimalPosition position is 1 then result is 1`` () =
         let crab = { HorizontalPosition = 0us }
-        let optimalPosition = 1us
+        let optimalPosition = 1
 
         let result = Part1.getCrabConsumption crab optimalPosition
 
@@ -85,7 +85,7 @@ module UnitTests.Day7Tests
     [<Fact>]
     let ``Part1.getCrabConsumption: when Crab.HorizontalPosition is 2 and optimalPosition position is 0 then result is 2`` () =
         let crab = { HorizontalPosition = 2us }
-        let optimalPosition = 0us
+        let optimalPosition = 0
 
         let result = Part1.getCrabConsumption crab optimalPosition
 
@@ -124,7 +124,47 @@ module UnitTests.Day7Tests
         Assert.Equal<int>(6, result)
 
     [<Fact>]
-    let ``fuelConsumption: when horizontal positions are 16,1,2,0,4,2,7,1,2,14 when crabConsumption is one fuel per position then result is 37`` () =
+    let ``getAverage: when 16,1,2,0,4,2,7,1,2,14 then result is seq { 4; 5 }`` () =
+        let sortedCrabs =
+            [|
+                { HorizontalPosition = 0us }
+                { HorizontalPosition = 1us }
+                { HorizontalPosition = 1us }
+                { HorizontalPosition = 2us }
+                { HorizontalPosition = 2us }
+                { HorizontalPosition = 2us }
+                { HorizontalPosition = 4us }
+                { HorizontalPosition = 7us }
+                { HorizontalPosition = 14us }
+                { HorizontalPosition = 16us }
+            |]
+
+        let result = sortedCrabs |> getAverage
+
+        Assert.Equal<seq<int>>(seq { 4; 5 }, result)
+
+    [<Fact>]
+    let ``getAverage: when 10,1,2,0,4,2,7,1,2,14 then result is seq { 4; 5 }`` () =
+        let sortedCrabs =
+            [|
+                { HorizontalPosition = 0us }
+                { HorizontalPosition = 1us }
+                { HorizontalPosition = 1us }
+                { HorizontalPosition = 2us }
+                { HorizontalPosition = 2us }
+                { HorizontalPosition = 2us }
+                { HorizontalPosition = 4us }
+                { HorizontalPosition = 8us }
+                { HorizontalPosition = 10us }
+                { HorizontalPosition = 16us }
+            |]
+
+        let result = sortedCrabs |> getAverage
+
+        Assert.Equal<seq<int>>(seq { 4; 5 }, result)
+
+    [<Fact>]
+    let ``Part1.fuelConsumption: when horizontal positions are 16,1,2,0,4,2,7,1,2,14 when crabConsumption is one fuel per position then result is 37`` () =
         let crabs =
             seq {
                 { HorizontalPosition = 16us }
@@ -141,7 +181,7 @@ module UnitTests.Day7Tests
 
         let result =
             Some crabs
-                |> fuelConsumption <| Part1.getCrabConsumption
+                |> fuelConsumption <| Part1.getCrabConsumption <| getMedian
 
         Assert.Equal<int>(
             37,
@@ -150,7 +190,7 @@ module UnitTests.Day7Tests
                 | None -> 0)
 
     [<Fact>]
-    let ``fuelConsumption: : when horizontal positions are 16,1,2,0,4,2,7,1,2,14 when crabConsumption increases by one per position then result is 206`` () =
+    let ``Part2.fuelConsumption: when horizontal positions are 16,1,2,0,4,2,7,1,2,14 when crabConsumption increases by one per position then result is 168`` () =
         let crabs =
             seq {
                 { HorizontalPosition = 16us }
@@ -167,10 +207,10 @@ module UnitTests.Day7Tests
 
         let result =
             Some crabs
-                |> fuelConsumption <| Part2.getCrabConsumption
+                |> fuelConsumption <| Part2.getCrabConsumption <| getAverage
 
         Assert.Equal<int>(
-            206,
+            168,
             match result with
                 | Some(i) -> i
                 | None -> 0)
