@@ -1,4 +1,21 @@
 module Day8
+    open System
+
+    type SignalEntry = { UniqueSignalPattern: string[]; FourDigitOutput: string[] }
+
+    let parseLine (inputLine: string) =
+        if inputLine |> String.IsNullOrWhiteSpace then
+            Option.None
+        else
+            let signalSections =
+                "|" |> inputLine.Split
+                |> Array.map(fun x -> x.Trim())
+
+            let signalPattern = signalSections |> Array.head
+            let signalOutput = signalSections |> Array.last
+            let signal = { UniqueSignalPattern = signalPattern.Split(" ") |> Array.map(fun x -> x.Trim()); FourDigitOutput = signalOutput.Split(" ") |> Array.map(fun x -> x.Trim()) }
+
+            Some signal
 
     module Part1 =
         let lengthToNumberMap =
