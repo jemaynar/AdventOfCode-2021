@@ -31,12 +31,12 @@ module UnitTests.Day8Tests
         let inputLine = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"
 
         let result = inputLine |> parseLine
-        
+
         let matched = 
             match result with 
                 | Some(signalEntry) -> signalEntry
                 | None -> { UniqueSignalPattern = Array.empty; FourDigitOutput = Array.empty }
-        
+
         Assert.Equal<SignalEntry>(
             {
                 UniqueSignalPattern =
@@ -61,3 +61,20 @@ module UnitTests.Day8Tests
                     |]
             },
             matched)
+
+    [<Fact>]
+    let ``Part1.getKnownDigitCount: when line contains series 4 known digits then returns 4`` () =
+        let inputLine = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | gx cbe eafb abcdefg"
+
+        let parsed = inputLine |> parseLine
+
+        let seqResult =
+            match parsed with
+                | Some(x) -> seq { x }
+                | None  -> Seq.empty
+
+        let result =
+            seqResult
+                |> Part1.getKnownDigitCount
+
+        Assert.Equal<int>(4, result)

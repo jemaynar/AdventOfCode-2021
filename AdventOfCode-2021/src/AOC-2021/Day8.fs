@@ -18,13 +18,20 @@ module Day8
             Some signal
 
     module Part1 =
-        let lengthToNumberMap =
+        let knownDigitsLengthToNumberMap =
             Map[
                 (2, 1)
                 (3, 7)
                 (4, 4)
                 (7, 8)
             ]
+
+        let getKnownDigitCount signalEntries =
+            signalEntries
+                |> Seq.map(fun s -> s.FourDigitOutput)
+                |> Seq.concat
+                |> Seq.filter(fun x -> knownDigitsLengthToNumberMap.ContainsKey x.Length)
+                |> Seq.length
 
         let Execute: unit =
             printfn "\nDay 8 / Part 1 Result:"
