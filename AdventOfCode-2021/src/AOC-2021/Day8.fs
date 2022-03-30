@@ -36,6 +36,14 @@ module Day8
         let Execute: unit =
             printfn "\nDay 8 / Part 1 Result:"
 
+            let knownDigitCount =
+                Common.getData ".\Data\input8.txt"
+                    |> Seq.map(parseLine)
+                    |> Seq.choose id
+                    |> getKnownDigitCount
+
+            printfn "\nKnown digit count: %t" <| Common.printReadableNumber knownDigitCount
+
     module Part2 =
         let Execute: unit =
             printfn "\nDay 8 / Part 2 Result:"
