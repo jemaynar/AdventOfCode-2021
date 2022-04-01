@@ -2,6 +2,7 @@ module Day8
     open System
 
     type SignalEntry = { UniqueSignalPattern: string[]; FourDigitOutput: string[] }
+    type Digit = { Top: char; TopRight: char; TopLeft: char; Middle: char; BottomLeft: char; BottomRight: char; BottomChar: char; }
 
     let parseLine (inputLine: string) =
         if inputLine |> String.IsNullOrWhiteSpace then
