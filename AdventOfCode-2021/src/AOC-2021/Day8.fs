@@ -4,6 +4,14 @@ module Day8
     type SignalEntry = { UniqueSignalPattern: string[]; FourDigitOutput: string[] }
     type DigitalLedPosition = { Top: char; TopRight: char; TopLeft: char; Middle: char; BottomLeft: char; BottomRight: char; BottomChar: char; }
 
+    let knownDigitsLengthToNumberMap =
+        Map[
+            (2, 1)
+            (3, 7)
+            (4, 4)
+            (7, 8)
+        ]
+
     let parseLine (inputLine: string) =
         if inputLine |> String.IsNullOrWhiteSpace then
             Option.None
@@ -18,22 +26,14 @@ module Day8
 
             Some signal
 
+    let getKnownDigitCount signalEntries =
+        signalEntries
+            |> Seq.map(fun s -> s.FourDigitOutput)
+            |> Seq.concat
+            |> Seq.filter(fun x -> knownDigitsLengthToNumberMap.ContainsKey x.Length)
+            |> Seq.length
+
     module Part1 =
-        let knownDigitsLengthToNumberMap =
-            Map[
-                (2, 1)
-                (3, 7)
-                (4, 4)
-                (7, 8)
-            ]
-
-        let getKnownDigitCount signalEntries =
-            signalEntries
-                |> Seq.map(fun s -> s.FourDigitOutput)
-                |> Seq.concat
-                |> Seq.filter(fun x -> knownDigitsLengthToNumberMap.ContainsKey x.Length)
-                |> Seq.length
-
         let Execute: unit =
             printfn "\nDay 8 / Part 1 Result:"
 

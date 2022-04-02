@@ -63,7 +63,7 @@ module UnitTests.Day8Tests
             matched)
 
     [<Fact>]
-    let ``Part1.getKnownDigitCount: when line contains series 4 known digits then returns 4`` () =
+    let ``getKnownDigitCount: when line contains series 4 known digits then returns 4`` () =
         let inputLine = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | gx cbe eafb abcdefg"
 
         let parsed = inputLine |> parseLine
@@ -75,7 +75,7 @@ module UnitTests.Day8Tests
 
         let result =
             seqResult
-                |> Part1.getKnownDigitCount
+                |> getKnownDigitCount
 
         Assert.Equal<int>(4, result)
 
@@ -99,6 +99,6 @@ module UnitTests.Day8Tests
             inputLines
                 |> Seq.map(parseLine)
                 |> Seq.choose id
-                |> Part1.getKnownDigitCount
+                |> getKnownDigitCount
 
         Assert.Equal<int>(26, result)
