@@ -80,7 +80,7 @@ module UnitTests.Day8Tests
         Assert.Equal<int>(4, result)
 
     [<Fact>]
-    let ``Part1.getKnownDigitCount: when lines from sample problem then returns 26`` () =
+    let ``getKnownDigitCount: when lines from sample problem then returns 26`` () =
         let inputLines =
             seq {
                 "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe"
@@ -102,3 +102,169 @@ module UnitTests.Day8Tests
                 |> getKnownDigitCount
 
         Assert.Equal<int>(26, result)
+
+    [<Fact>]
+    let ``getDigit: when digit is 2 then returns then returns Option.None`` () =
+        let signalEntry =
+            {
+                UniqueSignalPattern =
+                    [|
+                        "acedgfb"
+                        "cdfbe"
+                        "gcdfa"
+                        "fbcad"
+                        "dab"
+                        "cefabd"
+                        "cdfgeb"
+                        "eafb"
+                        "cagedb"
+                        "ab"
+                    |]
+                FourDigitOutput =
+                      [|
+                          "cdfeb"
+                          "fcadb"
+                          "cdfeb"
+                          "cdbaf"
+                      |]
+            }
+
+        let result = getDigit signalEntry 2
+
+        Assert.Equal<Option<string>>(None, result)
+
+    [<Fact>]
+    let ``getDigit: when digit is 1 then returns unique signal pattern with length 2 (ab)`` () =
+        let signalEntry =
+            {
+                UniqueSignalPattern =
+                    [|
+                        "acedgfb"
+                        "cdfbe"
+                        "gcdfa"
+                        "fbcad"
+                        "dab"
+                        "cefabd"
+                        "cdfgeb"
+                        "eafb"
+                        "cagedb"
+                        "ab"
+                    |]
+                FourDigitOutput =
+                      [|
+                          "cdfeb"
+                          "fcadb"
+                          "cdfeb"
+                          "cdbaf"
+                      |]
+            }
+
+        let result = getDigit signalEntry 1
+
+        Assert.Equal<string>(
+            "ab",
+            match result with
+                | Some(result) -> result
+                | None -> System.String.Empty)
+
+    [<Fact>]
+    let ``getDigit: when digit is 4 then returns unique signal pattern with length 4 (eafb)`` () =
+        let signalEntry =
+            {
+                UniqueSignalPattern =
+                    [|
+                        "acedgfb"
+                        "cdfbe"
+                        "gcdfa"
+                        "fbcad"
+                        "dab"
+                        "cefabd"
+                        "cdfgeb"
+                        "eafb"
+                        "cagedb"
+                        "ab"
+                    |]
+                FourDigitOutput =
+                      [|
+                          "cdfeb"
+                          "fcadb"
+                          "cdfeb"
+                          "cdbaf"
+                      |]
+            }
+
+        let result = getDigit signalEntry 4
+
+        Assert.Equal<string>(
+            "eafb",
+            match result with
+                | Some(result) -> result
+                | None -> System.String.Empty)
+
+    [<Fact>]
+    let ``getDigit: when digit is 7 then returns unique signal pattern with length 3 (dab)`` () =
+        let signalEntry =
+            {
+                UniqueSignalPattern =
+                    [|
+                        "acedgfb"
+                        "cdfbe"
+                        "gcdfa"
+                        "fbcad"
+                        "dab"
+                        "cefabd"
+                        "cdfgeb"
+                        "eafb"
+                        "cagedb"
+                        "ab"
+                    |]
+                FourDigitOutput =
+                      [|
+                          "cdfeb"
+                          "fcadb"
+                          "cdfeb"
+                          "cdbaf"
+                      |]
+            }
+
+        let result = getDigit signalEntry 7
+
+        Assert.Equal<string>(
+            "dab",
+            match result with
+                | Some(result) -> result
+                | None -> System.String.Empty)
+
+    [<Fact>]
+    let ``getDigit: when digit is 8 then returns unique signal pattern with length 7 (acedgfb)`` () =
+        let signalEntry =
+            {
+                UniqueSignalPattern =
+                    [|
+                        "acedgfb"
+                        "cdfbe"
+                        "gcdfa"
+                        "fbcad"
+                        "dab"
+                        "cefabd"
+                        "cdfgeb"
+                        "eafb"
+                        "cagedb"
+                        "ab"
+                    |]
+                FourDigitOutput =
+                      [|
+                          "cdfeb"
+                          "fcadb"
+                          "cdfeb"
+                          "cdbaf"
+                      |]
+            }
+
+        let result = getDigit signalEntry 8
+
+        Assert.Equal<string>(
+            "acedgfb",
+            match result with
+                | Some(result) -> result
+                | None -> System.String.Empty)

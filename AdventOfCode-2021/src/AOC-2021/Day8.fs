@@ -4,12 +4,20 @@ module Day8
     type SignalEntry = { UniqueSignalPattern: string[]; FourDigitOutput: string[] }
     type DigitalLedPosition = { Top: char; TopRight: char; TopLeft: char; Middle: char; BottomLeft: char; BottomRight: char; BottomChar: char; }
 
-    let knownDigitsLengthToNumberMap =
+    let lengthToKnownDigitsMap =
         Map[
             (2, 1)
             (3, 7)
             (4, 4)
             (7, 8)
+        ]
+
+    let digitsToLengthMap =
+        Map[
+            (1, 2)
+            (4, 4)
+            (7, 3)
+            (8, 7)
         ]
 
     let parseLine (inputLine: string) =
@@ -26,11 +34,19 @@ module Day8
 
             Some signal
 
+    let getDigit signalEntry digit =
+         if digitsToLengthMap.ContainsKey digit = false then
+             Option.None
+         else
+             signalEntry.UniqueSignalPattern
+                |> Seq.filter(fun x -> x.Length = digitsToLengthMap.[digit])
+                |> Seq.tryItem 0
+
     let getKnownDigitCount signalEntries =
         signalEntries
             |> Seq.map(fun s -> s.FourDigitOutput)
             |> Seq.concat
-            |> Seq.filter(fun x -> knownDigitsLengthToNumberMap.ContainsKey x.Length)
+            |> Seq.filter(fun x -> lengthToKnownDigitsMap.ContainsKey x.Length)
             |> Seq.length
 
     module Part1 =
