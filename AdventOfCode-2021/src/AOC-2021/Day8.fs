@@ -2,7 +2,16 @@ module Day8
     open System
 
     type SignalEntry = { UniqueSignalPattern: string[]; FourDigitOutput: string[] }
-    type DigitalLedPosition = { Top: char; TopRight: char; TopLeft: char; Middle: char; BottomLeft: char; BottomRight: char; BottomChar: char; }
+    type DigitalLedPosition =
+        {
+            Top: Option<char>
+            TopRight: Option<char>
+            TopLeft: Option<char>
+            Middle: Option<char>
+            BottomLeft: Option<char>
+            BottomRight: Option<char>
+            BottomChar: Option<char>
+        }
 
     let lengthToKnownDigitsMap =
         Map[
@@ -48,6 +57,26 @@ module Day8
             |> Seq.concat
             |> Seq.filter(fun x -> lengthToKnownDigitsMap.ContainsKey x.Length)
             |> Seq.length
+
+    let getDigitalLedPositions signalEntry =
+        let mapDigit = getDigit signalEntry
+
+        let oneChars = match mapDigit 1 with | Some(x) -> Seq.toArray x | None -> Array.empty
+        let sevenChars = match mapDigit 7 with | Some(x) -> Seq.toArray x | None -> Array.empty
+
+        let ledTop = sevenChars |> Array.except oneChars |> Array.tryItem 0
+        let result =
+            {
+                Top = ledTop
+                TopRight = None
+                TopLeft = None
+                Middle = None
+                BottomLeft = None
+                BottomRight = None
+                BottomChar = None
+            }
+            
+        result
 
     module Part1 =
         let Execute: unit =

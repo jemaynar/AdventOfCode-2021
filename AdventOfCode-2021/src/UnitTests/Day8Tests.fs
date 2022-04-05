@@ -268,3 +268,34 @@ module UnitTests.Day8Tests
             match result with
                 | Some(result) -> result
                 | None -> System.String.Empty)
+
+    [<Fact>]
+    let ``getDigitalLedPositions: when 7 is dab and 1 is ab then Top is d`` () =
+        let signalEntry =
+            {
+                UniqueSignalPattern =
+                    [|
+                        "acedgfb"
+                        "cdfbe"
+                        "gcdfa"
+                        "fbcad"
+                        "dab"
+                        "cefabd"
+                        "cdfgeb"
+                        "eafb"
+                        "cagedb"
+                        "ab"
+                    |]
+                FourDigitOutput =
+                      [|
+                          "cdfeb"
+                          "fcadb"
+                          "cdfeb"
+                          "cdbaf"
+                      |]
+            }
+
+        let result = getDigitalLedPositions signalEntry
+
+        let matchedResult = match result.Top with | Some(x) -> x | None -> '_'
+        Assert.Equal<char>('d', matchedResult)
