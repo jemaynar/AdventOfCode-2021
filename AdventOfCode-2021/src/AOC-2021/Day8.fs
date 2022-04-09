@@ -71,16 +71,16 @@ module Day8
 
         let signalEntriesForZeroSixAndNine = getDigitsWithLength signalEntry 6
 
-        let charsThatOccurTwiceInZeroSixAndNine =
+        let charsOccurrencesInInZeroSixAndNine times =
              signalEntriesForZeroSixAndNine
                 |> Seq.map(Seq.toList)
                 |> Seq.concat
                 |> Seq.countBy id
-                |> Seq.filter(fun o -> snd o = 2)
+                |> Seq.filter(fun o -> snd o = times)
                 |> Seq.map(fst)           
 
         let ledTopRight =
-            charsThatOccurTwiceInZeroSixAndNine
+            charsOccurrencesInInZeroSixAndNine 2
                 |> Seq.filter(fun f -> oneChars |> Array.contains(f))
                 |> Seq.tryItem 0
         let ledTop =
@@ -92,7 +92,7 @@ module Day8
                  |> Seq.except(seq { Option.get ledTopRight })
                  |> Seq.tryItem 0
         let ledMiddle =
-            charsThatOccurTwiceInZeroSixAndNine
+            charsOccurrencesInInZeroSixAndNine 2
                 |> Seq.except(seq { Option.get ledTopRight; Option.get ledBottomRight })
                 |> Seq.tryItem 0
         let ledTopLeft =
@@ -100,7 +100,7 @@ module Day8
                 |> Seq.except(seq { Option.get ledTopRight; Option.get ledBottomRight; Option.get ledMiddle })
                 |> Seq.tryItem 0
         let ledBottomLeft =
-            charsThatOccurTwiceInZeroSixAndNine
+            charsOccurrencesInInZeroSixAndNine 2
                 |> Seq.except(seq { Option.get ledMiddle; Option.get ledTopRight })
                 |> Seq.tryItem 0
 
