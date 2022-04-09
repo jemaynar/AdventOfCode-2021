@@ -83,13 +83,22 @@ module Day8
                 |> Seq.tryItem 0
         let ledTop = sevenChars |> Array.except oneChars |> Array.tryItem 0
         let ledBottomRight = oneChars |> Seq.filter(fun f -> f <> Option.get ledTopRight) |> Seq.tryItem 0
+        let ledMiddle =
+            signalEntriesForZeroSixAndNine
+                |> Seq.map(Seq.toList)
+                |> Seq.concat
+                |> Seq.countBy id
+                |> Seq.filter(fun o -> snd o = 2)
+                |> Seq.map(fst)
+                |> Seq.filter(fun o -> Some o <> ledTopRight && Some o <> ledBottomRight)
+                |> Seq.tryItem 0
 
         let result =
             {
                 Top = ledTop
                 TopRight = ledTopRight
                 TopLeft = None
-                Middle = None
+                Middle = ledMiddle
                 BottomLeft = None
                 BottomRight = ledBottomRight
                 BottomChar = None
