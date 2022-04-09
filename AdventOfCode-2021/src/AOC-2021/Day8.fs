@@ -10,7 +10,7 @@ module Day8
             Middle: Option<char>
             BottomLeft: Option<char>
             BottomRight: Option<char>
-            BottomChar: Option<char>
+            Bottom: Option<char>
         }
 
     let lengthToKnownDigitsMap =
@@ -112,7 +112,7 @@ module Day8
                 Middle = ledMiddle
                 BottomLeft = ledBottomLeft
                 BottomRight = ledBottomRight
-                BottomChar = None
+                Bottom = None
             }
             
         result
