@@ -99,6 +99,10 @@ module Day8
             fourChars
                 |> Seq.except(seq { Option.get ledTopRight; Option.get ledBottomRight; Option.get ledMiddle })
                 |> Seq.tryItem 0
+        let ledBottomLeft =
+            charsThatOccurTwiceInZeroSixAndNine
+                |> Seq.except(seq { Option.get ledMiddle; Option.get ledTopRight })
+                |> Seq.tryItem 0
 
         let result =
             {
@@ -106,7 +110,7 @@ module Day8
                 TopRight = ledTopRight
                 TopLeft = ledTopLeft
                 Middle = ledMiddle
-                BottomLeft = None
+                BottomLeft = ledBottomLeft
                 BottomRight = ledBottomRight
                 BottomChar = None
             }
