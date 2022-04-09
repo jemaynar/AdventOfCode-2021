@@ -29,8 +29,6 @@ module Day8
             (8, 7)
         ]
 
-    let digitsWithLengthEqualToSix = seq { 0, 6, 9 }
-
     let parseLine (inputLine: string) =
         if inputLine |> String.IsNullOrWhiteSpace then
             Option.None
@@ -68,36 +66,45 @@ module Day8
         let mapDigit = getDigit signalEntry
 
         let oneChars = match mapDigit 1 with | Some(x) -> Seq.toArray x | None -> Array.empty
+        let fourChars = match mapDigit 4 with | Some(x) -> Seq.toArray x | None -> Array.empty
         let sevenChars = match mapDigit 7 with | Some(x) -> Seq.toArray x | None -> Array.empty
 
         let signalEntriesForZeroSixAndNine = getDigitsWithLength signalEntry 6
 
-        let ledTopRight =
-            signalEntriesForZeroSixAndNine
+        let charsThatOccurTwiceInZeroSixAndNine =
+             signalEntriesForZeroSixAndNine
                 |> Seq.map(Seq.toList)
                 |> Seq.concat
                 |> Seq.countBy id
                 |> Seq.filter(fun o -> snd o = 2)
-                |> Seq.map(fst)
+                |> Seq.map(fst)           
+
+        let ledTopRight =
+            charsThatOccurTwiceInZeroSixAndNine
                 |> Seq.filter(fun f -> oneChars |> Array.contains(f))
                 |> Seq.tryItem 0
-        let ledTop = sevenChars |> Array.except oneChars |> Array.tryItem 0
-        let ledBottomRight = oneChars |> Seq.filter(fun f -> f <> Option.get ledTopRight) |> Seq.tryItem 0
+        let ledTop =
+            sevenChars
+                |> Array.except oneChars
+                |> Array.tryItem 0
+        let ledBottomRight =
+            oneChars
+                 |> Seq.except(seq { Option.get ledTopRight })
+                 |> Seq.tryItem 0
         let ledMiddle =
-            signalEntriesForZeroSixAndNine
-                |> Seq.map(Seq.toList)
-                |> Seq.concat
-                |> Seq.countBy id
-                |> Seq.filter(fun o -> snd o = 2)
-                |> Seq.map(fst)
-                |> Seq.filter(fun o -> Some o <> ledTopRight && Some o <> ledBottomRight)
+            charsThatOccurTwiceInZeroSixAndNine
+                |> Seq.except(seq { Option.get ledTopRight; Option.get ledBottomRight })
+                |> Seq.tryItem 0
+        let ledTopLeft =
+            fourChars
+                |> Seq.except(seq { Option.get ledTopRight; Option.get ledBottomRight; Option.get ledMiddle })
                 |> Seq.tryItem 0
 
         let result =
             {
                 Top = ledTop
                 TopRight = ledTopRight
-                TopLeft = None
+                TopLeft = ledTopLeft
                 Middle = ledMiddle
                 BottomLeft = None
                 BottomRight = ledBottomRight

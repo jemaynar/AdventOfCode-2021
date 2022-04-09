@@ -392,3 +392,34 @@ module UnitTests.Day8Tests
 
         let matchedResult = match result.Middle with | Some(x) -> x | None -> '_'
         Assert.Equal<char>('f', matchedResult)
+
+    [<Fact>]
+    let ``getDigitalLedPositions: when 7 is dab and 1 is ab when signal patterns with length 6 are cefabd, cdfgeb, and cagedb then when 4 is eafb TopLeft is e`` () =
+        let signalEntry =
+            {
+                UniqueSignalPattern =
+                    [|
+                        "acedgfb"
+                        "cdfbe"
+                        "gcdfa"
+                        "fbcad"
+                        "dab"
+                        "cefabd"
+                        "cdfgeb"
+                        "eafb"
+                        "cagedb"
+                        "ab"
+                    |]
+                FourDigitOutput =
+                      [|
+                          "cdfeb"
+                          "fcadb"
+                          "cdfeb"
+                          "cdbaf"
+                      |]
+            }
+
+        let result = getDigitalLedPositions signalEntry
+
+        let matchedResult = match result.TopLeft with | Some(x) -> x | None -> '_'
+        Assert.Equal<char>('e', matchedResult)
