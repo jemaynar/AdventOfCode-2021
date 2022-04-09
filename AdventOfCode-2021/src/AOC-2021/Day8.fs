@@ -29,6 +29,8 @@ module Day8
             (8, 7)
         ]
 
+    let digitsWithLengthEqualToSix = seq { 0, 6, 9 }
+
     let parseLine (inputLine: string) =
         if inputLine |> String.IsNullOrWhiteSpace then
             Option.None
@@ -51,6 +53,10 @@ module Day8
                 |> Seq.filter(fun x -> x.Length = digitsToLengthMap.[digit])
                 |> Seq.tryItem 0
 
+    let getDigitsWithLength signalEntry digitLength =
+        signalEntry.UniqueSignalPattern
+            |> Seq.filter(fun x -> x.Length = digitLength)
+
     let getKnownDigitCount signalEntries =
         signalEntries
             |> Seq.map(fun s -> s.FourDigitOutput)
@@ -64,15 +70,28 @@ module Day8
         let oneChars = match mapDigit 1 with | Some(x) -> Seq.toArray x | None -> Array.empty
         let sevenChars = match mapDigit 7 with | Some(x) -> Seq.toArray x | None -> Array.empty
 
+        let signalEntriesForZeroSixAndNine = getDigitsWithLength signalEntry 6
+
+        let ledTopRight =
+            signalEntriesForZeroSixAndNine
+                |> Seq.map(Seq.toList)
+                |> Seq.concat
+                |> Seq.countBy id
+                |> Seq.filter(fun o -> snd o = 2)
+                |> Seq.map(fst)
+                |> Seq.filter(fun f -> oneChars |> Array.contains(f))
+                |> Seq.tryItem 0
         let ledTop = sevenChars |> Array.except oneChars |> Array.tryItem 0
+        let ledBottomRight = oneChars |> Seq.filter(fun f -> f <> Option.get ledTopRight) |> Seq.tryItem 0
+
         let result =
             {
                 Top = ledTop
-                TopRight = None
+                TopRight = ledTopRight
                 TopLeft = None
                 Middle = None
                 BottomLeft = None
-                BottomRight = None
+                BottomRight = ledBottomRight
                 BottomChar = None
             }
             

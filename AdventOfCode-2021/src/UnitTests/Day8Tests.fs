@@ -299,3 +299,65 @@ module UnitTests.Day8Tests
 
         let matchedResult = match result.Top with | Some(x) -> x | None -> '_'
         Assert.Equal<char>('d', matchedResult)
+
+    [<Fact>]
+    let ``getDigitalLedPositions: when 7 is dab and 1 is ab when signal patterns with length 6 are cefabd, cdfgeb, and cagedb then BottomRight is b`` () =
+        let signalEntry =
+            {
+                UniqueSignalPattern =
+                    [|
+                        "acedgfb"
+                        "cdfbe"
+                        "gcdfa"
+                        "fbcad"
+                        "dab"
+                        "cefabd"
+                        "cdfgeb"
+                        "eafb"
+                        "cagedb"
+                        "ab"
+                    |]
+                FourDigitOutput =
+                      [|
+                          "cdfeb"
+                          "fcadb"
+                          "cdfeb"
+                          "cdbaf"
+                      |]
+            }
+
+        let result = getDigitalLedPositions signalEntry
+
+        let matchedResult = match result.BottomRight with | Some(x) -> x | None -> '_'
+        Assert.Equal<char>('b', matchedResult)
+
+    [<Fact>]
+    let ``getDigitalLedPositions: when 7 is dab and 1 is ab when signal patterns with length 6 are cefabd, cdfgeb, and cagedb then TopRight is a`` () =
+        let signalEntry =
+            {
+                UniqueSignalPattern =
+                    [|
+                        "acedgfb"
+                        "cdfbe"
+                        "gcdfa"
+                        "fbcad"
+                        "dab"
+                        "cefabd"
+                        "cdfgeb"
+                        "eafb"
+                        "cagedb"
+                        "ab"
+                    |]
+                FourDigitOutput =
+                      [|
+                          "cdfeb"
+                          "fcadb"
+                          "cdfeb"
+                          "cdbaf"
+                      |]
+            }
+
+        let result = getDigitalLedPositions signalEntry
+
+        let matchedResult = match result.TopRight with | Some(x) -> x | None -> '_'
+        Assert.Equal<char>('a', matchedResult)
