@@ -44,13 +44,17 @@ module Day8
 
             Some signal
 
-    let getDigit signalEntry digit =
-         if digitsToLengthMap.ContainsKey digit = false then
-             Option.None
-         else
-             signalEntry.UniqueSignalPattern
+    let getKnownDigitString signalEntry digit =
+        if digitsToLengthMap.ContainsKey digit then
+            signalEntry.UniqueSignalPattern
                 |> Seq.filter(fun x -> x.Length = digitsToLengthMap.[digit])
                 |> Seq.tryItem 0
+        else
+            None
+
+    let getKnownDigitCharArray signalEntry digit =
+        let mapDigit = getKnownDigitString signalEntry
+        match mapDigit digit with | Some(x) -> Seq.toArray x | None -> Array.empty
 
     let getDigitsWithLength signalEntry digitLength =
         signalEntry.UniqueSignalPattern
@@ -64,11 +68,9 @@ module Day8
             |> Seq.length
 
     let mapDigitalLedPositions signalEntry =
-        let mapDigit = getDigit signalEntry
-
-        let oneChars = match mapDigit 1 with | Some(x) -> Seq.toArray x | None -> Array.empty
-        let fourChars = match mapDigit 4 with | Some(x) -> Seq.toArray x | None -> Array.empty
-        let sevenChars = match mapDigit 7 with | Some(x) -> Seq.toArray x | None -> Array.empty
+        let oneChars = getKnownDigitCharArray signalEntry 1
+        let fourChars = getKnownDigitCharArray signalEntry 4
+        let sevenChars = getKnownDigitCharArray signalEntry 7
 
         let signalEntriesForZeroSixAndNine = getDigitsWithLength signalEntry 6
 
@@ -78,7 +80,7 @@ module Day8
                 |> Seq.concat
                 |> Seq.countBy id
                 |> Seq.filter(fun o -> snd o = times)
-                |> Seq.map(fst)           
+                |> Seq.map(fst)
 
         let ledTopRight =
             charsOccurrencesInInZeroSixAndNine 2

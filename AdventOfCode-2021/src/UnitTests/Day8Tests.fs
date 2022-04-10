@@ -104,7 +104,7 @@ module UnitTests.Day8Tests
         Assert.Equal<int>(26, result)
 
     [<Fact>]
-    let ``getDigit: when digit is 2 then returns then returns Option.None`` () =
+    let ``getKnownDigitString: when digit is 2 then returns then returns Option.None`` () =
         let signalEntry =
             {
                 UniqueSignalPattern =
@@ -129,12 +129,12 @@ module UnitTests.Day8Tests
                       |]
             }
 
-        let result = getDigit signalEntry 2
+        let result = getKnownDigitString signalEntry 2
 
         Assert.Equal<Option<string>>(None, result)
 
     [<Fact>]
-    let ``getDigit: when digit is 1 then returns unique signal pattern with length 2 (ab)`` () =
+    let ``getKnownDigitString: when digit is 1 then returns unique signal pattern with length 2 (ab)`` () =
         let signalEntry =
             {
                 UniqueSignalPattern =
@@ -159,7 +159,7 @@ module UnitTests.Day8Tests
                       |]
             }
 
-        let result = getDigit signalEntry 1
+        let result = getKnownDigitString signalEntry 1
 
         Assert.Equal<string>(
             "ab",
@@ -168,7 +168,7 @@ module UnitTests.Day8Tests
                 | None -> System.String.Empty)
 
     [<Fact>]
-    let ``getDigit: when digit is 4 then returns unique signal pattern with length 4 (eafb)`` () =
+    let ``getKnownDigitString: when digit is 4 then returns unique signal pattern with length 4 (eafb)`` () =
         let signalEntry =
             {
                 UniqueSignalPattern =
@@ -193,7 +193,7 @@ module UnitTests.Day8Tests
                       |]
             }
 
-        let result = getDigit signalEntry 4
+        let result = getKnownDigitString signalEntry 4
 
         Assert.Equal<string>(
             "eafb",
@@ -202,7 +202,7 @@ module UnitTests.Day8Tests
                 | None -> System.String.Empty)
 
     [<Fact>]
-    let ``getDigit: when digit is 7 then returns unique signal pattern with length 3 (dab)`` () =
+    let ``getKnownDigitString: when digit is 7 then returns unique signal pattern with length 3 (dab)`` () =
         let signalEntry =
             {
                 UniqueSignalPattern =
@@ -227,7 +227,7 @@ module UnitTests.Day8Tests
                       |]
             }
 
-        let result = getDigit signalEntry 7
+        let result = getKnownDigitString signalEntry 7
 
         Assert.Equal<string>(
             "dab",
@@ -236,7 +236,7 @@ module UnitTests.Day8Tests
                 | None -> System.String.Empty)
 
     [<Fact>]
-    let ``getDigit: when digit is 8 then returns unique signal pattern with length 7 (acedgfb)`` () =
+    let ``getKnownDigitString: when digit is 8 then returns unique signal pattern with length 7 (acedgfb)`` () =
         let signalEntry =
             {
                 UniqueSignalPattern =
@@ -261,7 +261,7 @@ module UnitTests.Day8Tests
                       |]
             }
 
-        let result = getDigit signalEntry 8
+        let result = getKnownDigitString signalEntry 8
 
         Assert.Equal<string>(
             "acedgfb",
