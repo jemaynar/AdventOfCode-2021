@@ -52,7 +52,7 @@ module Day8
         else
             None
 
-    let getKnownDigitCharArray signalEntry digit =
+    let getKnownDigitChars signalEntry digit =
         let mapDigit = getKnownDigitString signalEntry
         match mapDigit digit with | Some(x) -> Seq.toArray x | None -> Array.empty
 
@@ -68,9 +68,9 @@ module Day8
             |> Seq.length
 
     let mapDigitalLedPositions signalEntry =
-        let oneChars = getKnownDigitCharArray signalEntry 1
-        let fourChars = getKnownDigitCharArray signalEntry 4
-        let sevenChars = getKnownDigitCharArray signalEntry 7
+        let oneChars = getKnownDigitChars signalEntry 1
+        let fourChars = getKnownDigitChars signalEntry 4
+        let sevenChars = getKnownDigitChars signalEntry 7
 
         let signalEntriesForZeroSixAndNine = getDigitsWithLength signalEntry 6
 
