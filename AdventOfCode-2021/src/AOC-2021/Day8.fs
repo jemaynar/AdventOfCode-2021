@@ -62,7 +62,7 @@ module Day8
             |> Seq.filter(fun x -> lengthToKnownDigitsMap.ContainsKey x.Length)
             |> Seq.length
 
-    let getDigitalLedPositions signalEntry =
+    let mapDigitalLedPositions signalEntry =
         let mapDigit = getDigit signalEntry
 
         let oneChars = match mapDigit 1 with | Some(x) -> Seq.toArray x | None -> Array.empty
