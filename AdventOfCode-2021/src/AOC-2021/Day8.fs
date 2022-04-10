@@ -124,6 +124,9 @@ module Day8
             
         result
 
+    let mapCharsToInt digitalLedMap digitalString =
+        5
+
     let mapFourDigitOutputInt digitalLedMap fourDigitOutputArray =
         5353
 

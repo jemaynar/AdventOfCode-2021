@@ -487,6 +487,25 @@ module UnitTests.Day8Tests
         Assert.Equal<char>('c', matchedResult)
 
     [<Fact>]
+    let ``mapCharsToInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when digialString is "cdfeb" then result is 5`` () =
+        let digitalLedMap =
+            {
+                Top = Some 'd'
+                TopRight = Some 'a' 
+                TopLeft = Some 'e'
+                Middle = Some 'f'
+                BottomLeft = Some 'g'
+                BottomRight = Some 'b'
+                Bottom = Some 'c'
+            }
+
+        let digitalString = "cdfeb"
+
+        let result = mapCharsToInt digitalLedMap digitalString
+
+        Assert.Equal<int>(5, result)
+
+    [<Fact>]
     let ``mapFourDigitOutputInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when fourDigitOutputArray is [| "cdfeb"; "fcadb"; "cdfeb"; "cdbaf" |] then result is 5353`` () =
         let digitalLedMap =
             {
