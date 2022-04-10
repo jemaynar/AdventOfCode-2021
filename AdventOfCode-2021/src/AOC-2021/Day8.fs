@@ -103,6 +103,10 @@ module Day8
             charsOccurrencesInInZeroSixAndNine 2
                 |> Seq.except(seq { Option.get ledMiddle; Option.get ledTopRight })
                 |> Seq.tryItem 0
+        let ledBottom =
+            charsOccurrencesInInZeroSixAndNine 3
+                |> Seq.except(seq { Option.get ledBottomRight; Option.get ledTop; Option.get ledTopLeft })
+                |> Seq.tryItem 0
 
         let result =
             {
@@ -112,7 +116,7 @@ module Day8
                 Middle = ledMiddle
                 BottomLeft = ledBottomLeft
                 BottomRight = ledBottomRight
-                Bottom = None
+                Bottom = ledBottom
             }
             
         result
