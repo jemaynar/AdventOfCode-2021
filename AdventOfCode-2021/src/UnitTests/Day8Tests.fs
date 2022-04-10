@@ -503,7 +503,11 @@ module UnitTests.Day8Tests
 
         let result = mapCharsToInt digitalLedMap digitalString
 
-        Assert.Equal<int>(5, result)
+        Assert.Equal<int>(
+            5,
+            match result with
+                | Some(result) -> result
+                | None -> -1)
 
     [<Fact>]
     let ``mapCharsToInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when digitalString is "fcadb" then result is 3`` () =
@@ -522,7 +526,11 @@ module UnitTests.Day8Tests
 
         let result = mapCharsToInt digitalLedMap digitalString
 
-        Assert.Equal<int>(3, result)
+        Assert.Equal<int>(
+            3,
+            match result with
+                | Some(result) -> result
+                | None -> -1)
 
     [<Fact>]
     let ``mapCharsToInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when digitalString is "dafgc" then result is 2`` () =
@@ -541,7 +549,11 @@ module UnitTests.Day8Tests
 
         let result = mapCharsToInt digitalLedMap digitalString
 
-        Assert.Equal<int>(2, result)
+        Assert.Equal<int>(
+            2,
+            match result with
+                | Some(result) -> result
+                | None -> -1)
 
     [<Fact>]
     let ``mapCharsToInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when digitalString is "ab" then result is 1`` () =
@@ -560,7 +572,11 @@ module UnitTests.Day8Tests
 
         let result = mapCharsToInt digitalLedMap digitalString
 
-        Assert.Equal<int>(1, result)
+        Assert.Equal<int>(
+            1,
+            match result with
+                | Some(result) -> result
+                | None -> -1)
 
     [<Fact>]
     let ``mapCharsToInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when digitalString is "dab" then result is 7`` () =
@@ -579,7 +595,11 @@ module UnitTests.Day8Tests
 
         let result = mapCharsToInt digitalLedMap digitalString
 
-        Assert.Equal<int>(7, result)
+        Assert.Equal<int>(
+            7,
+            match result with
+                | Some(result) -> result
+                | None -> -1)
 
     [<Fact>]
     let ``mapCharsToInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when digitalString is "afab" then result is 4`` () =
@@ -598,7 +618,11 @@ module UnitTests.Day8Tests
 
         let result = mapCharsToInt digitalLedMap digitalString
 
-        Assert.Equal<int>(4, result)
+        Assert.Equal<int>(
+            4,
+            match result with
+                | Some(result) -> result
+                | None -> -1)
 
     [<Fact>]
     let ``mapCharsToInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when digitalString is "abcdefg" then result is 8`` () =
@@ -617,7 +641,80 @@ module UnitTests.Day8Tests
 
         let result = mapCharsToInt digitalLedMap digitalString
 
-        Assert.Equal<int>(8, result)
+        Assert.Equal<int>(
+            8,
+            match result with
+                | Some(result) -> result
+                | None -> -1)
+
+    [<Fact>]
+    let ``mapCharsToInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when digitalString is "deagcb" then result is 0`` () =
+        let digitalLedMap =
+            {
+                Top = Some 'd'
+                TopRight = Some 'a' 
+                TopLeft = Some 'e'
+                Middle = Some 'f'
+                BottomLeft = Some 'g'
+                BottomRight = Some 'b'
+                Bottom = Some 'c'
+            }
+
+        let digitalString = "deagcb"
+
+        let result = mapCharsToInt digitalLedMap digitalString
+
+        Assert.Equal<int>(
+            0,
+            match result with
+                | Some(result) -> result
+                | None -> -1)
+
+    [<Fact>]
+    let ``mapCharsToInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when digitalString is "defabc" then result is 9`` () =
+        let digitalLedMap =
+            {
+                Top = Some 'd'
+                TopRight = Some 'a' 
+                TopLeft = Some 'e'
+                Middle = Some 'f'
+                BottomLeft = Some 'g'
+                BottomRight = Some 'b'
+                Bottom = Some 'c'
+            }
+
+        let digitalString = "defabc"
+
+        let result = mapCharsToInt digitalLedMap digitalString
+
+        Assert.Equal<int>(
+            9,
+            match result with
+                | Some(result) -> result
+                | None -> -1)
+
+    [<Fact>]
+    let ``mapCharsToInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when digitalString is "defagc" then result is 6`` () =
+        let digitalLedMap =
+            {
+                Top = Some 'd'
+                TopRight = Some 'a' 
+                TopLeft = Some 'e'
+                Middle = Some 'f'
+                BottomLeft = Some 'g'
+                BottomRight = Some 'b'
+                Bottom = Some 'c'
+            }
+
+        let digitalString = "defagc"
+
+        let result = mapCharsToInt digitalLedMap digitalString
+
+        Assert.Equal<int>(
+            6,
+            match result with
+                | Some(result) -> result
+                | None -> -1)
 
     [<Fact>]
     let ``mapFourDigitOutputInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when fourDigitOutputArray is [| "cdfeb"; "fcadb"; "cdfeb"; "cdbaf" |] then result is 5353`` () =

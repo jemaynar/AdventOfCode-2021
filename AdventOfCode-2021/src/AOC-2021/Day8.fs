@@ -127,12 +127,16 @@ module Day8
     let mapCharsToInt (digitalLedMap: DigitalLedPosition) (digitalString: string) =
         let ledChars = digitalString |> Seq.toArray
         match ledChars.Length with
-            | 2 | 3 | 4 | 7 -> lengthToKnownDigitsMap.[ledChars.Length]
+            | 2 | 3 | 4 | 7 -> Some lengthToKnownDigitsMap.[ledChars.Length]
             | 5 -> 
-                if ledChars |> Seq.contains(Option.get digitalLedMap.BottomLeft) then 2
-                elif ledChars |> Seq.contains(Option.get digitalLedMap.TopLeft) then 5
-                else 3
-            | _ -> 0
+                if ledChars |> Seq.contains(Option.get digitalLedMap.BottomLeft) then Some 2
+                elif ledChars |> Seq.contains(Option.get digitalLedMap.TopLeft) then Some 5
+                else Some 3
+            | 6 ->
+                if ledChars |> Seq.contains(Option.get digitalLedMap.Middle) = false then Some 0
+                elif ledChars |> Seq.contains(Option.get digitalLedMap.BottomLeft) = false then Some 9
+                else Some 6
+            | _ -> None
 
     let mapFourDigitOutputInt digitalLedMap fourDigitOutputArray =
         5353
