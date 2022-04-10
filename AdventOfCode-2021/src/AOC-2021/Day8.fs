@@ -2,6 +2,7 @@ module Day8
     open System
 
     type SignalEntry = { UniqueSignalPattern: string[]; FourDigitOutput: string[] }
+
     type DigitalLedPosition =
         {
             Top: Option<char>
