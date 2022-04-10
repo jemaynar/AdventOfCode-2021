@@ -124,6 +124,9 @@ module Day8
             
         result
 
+    let mapFourDigitOutput signalEntry =
+        0
+
     module Part1 =
         let Execute: unit =
             printfn "\nDay 8 / Part 1 Result:"
