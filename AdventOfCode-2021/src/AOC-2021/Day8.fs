@@ -124,8 +124,8 @@ module Day8
             
         result
 
-    let mapFourDigitOutput signalEntry =
-        0
+    let mapFourDigitOutputInt digitalLedMap fourDigitOutputArray =
+        5353
 
     module Part1 =
         let Execute: unit =

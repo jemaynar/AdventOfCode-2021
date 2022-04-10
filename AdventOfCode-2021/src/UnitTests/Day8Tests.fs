@@ -485,3 +485,22 @@ module UnitTests.Day8Tests
 
         let matchedResult = match result.Bottom with | Some(x) -> x | None -> '_'
         Assert.Equal<char>('c', matchedResult)
+
+    [<Fact>]
+    let ``mapFourDigitOutputInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when fourDigitOutputArray is [| "cdfeb"; "fcadb"; "cdfeb"; "cdbaf" |] then result is 5353`` () =
+        let digitalLedMap =
+            {
+                Top = Some 'd'
+                TopRight = Some 'a' 
+                TopLeft = Some 'e'
+                Middle = Some 'f'
+                BottomLeft = Some 'g'
+                BottomRight = Some 'b'
+                Bottom = Some 'c'
+            }
+
+        let fourDigitOutputArray = [| "cdfeb"; "fcadb"; "cdfeb"; "cdbaf" |]
+
+        let result = mapFourDigitOutputInt digitalLedMap fourDigitOutputArray
+
+        Assert.Equal<int>(5353, result)
