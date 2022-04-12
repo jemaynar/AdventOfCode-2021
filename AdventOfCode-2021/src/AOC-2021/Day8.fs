@@ -35,8 +35,9 @@ module Day8
             Option.None
         else
             let signalSections =
-                "|" |> inputLine.Split
-                |> Array.map(fun x -> x.Trim())
+                "|"
+                    |> inputLine.Split
+                    |> Array.map(fun x -> x.Trim())
 
             let signalPattern = signalSections |> Array.head
             let signalOutput = signalSections |> Array.last
@@ -160,6 +161,15 @@ module Day8
     module Part2 =
         let Execute: unit =
             printfn "\nDay 8 / Part 2 Result:"
+
+        let result =
+            Common.getData ".\Data\input8.txt"
+                |> Seq.map(parseLine)
+                |> Seq.choose id
+                |> Seq.map(fun se -> mapFourDigitOutputInt <| mapDigitalLedPositions se <| se.FourDigitOutput)
+                |> Seq.sum
+
+        printfn "\nSum of all output values: %t" <| Common.printReadableNumber result
 
     let Execute: unit =
         Part1.Execute
