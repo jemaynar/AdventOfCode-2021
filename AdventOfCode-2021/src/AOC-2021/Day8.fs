@@ -139,7 +139,11 @@ module Day8
             | _ -> None
 
     let mapFourDigitOutputInt digitalLedMap fourDigitOutputArray =
-        5353
+        fourDigitOutputArray
+            |> Seq.choose(fun x -> mapCharsToInt digitalLedMap x)
+            |> Seq.map(fun x -> string(x))
+            |> Seq.reduce(fun acc elem -> acc + elem)
+            |> int
 
     module Part1 =
         let Execute: unit =
