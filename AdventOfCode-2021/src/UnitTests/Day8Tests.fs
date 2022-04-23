@@ -516,7 +516,38 @@ module UnitTests.Day8Tests
 
         let matchedResult = match result.Top with | Some(x) -> x | None -> '_'
         Assert.Equal<char>('d', matchedResult)
-    
+        
+    [<Fact>]
+    let ``mapDigitalLedPositions: when 7 is cbd and 1 is bc when signal patterns with length 6 are fbegcd, adcefb, and fgdeca then BottomRight is c`` () =
+        let signalEntry =
+            {
+                UniqueSignalPattern =
+                    [|
+                        "fbegcd"
+                        "cbd"
+                        "adcefb"
+                        "dageb"
+                        "afcb"
+                        "bc"
+                        "aefdc"
+                        "ecdab"
+                        "fgdeca"
+                        "fcdbega"
+                    |]
+                FourDigitOutput =
+                    [|
+                        "efabcd"
+                        "cedba"
+                        "gadfec"
+                        "cb"
+                    |]
+            }
+
+        let result = mapDigitalLedPositions signalEntry
+
+        let matchedResult = match result.BottomRight with | Some(x) -> x | None -> '_'
+        Assert.Equal<char>('c', matchedResult)
+
     [<Fact>]
     let ``mapCharsToInt: when digitalLedMap is { Top = 'd'; TopRight = 'a'; TopLeft = 'e'; Middle = 'f'; BottomLeft = 'g'; BottomRight = 'b'; Bottom = 'c' } when digitalString is "cdfeb" then result is 5`` () =
         let digitalLedMap =
