@@ -98,6 +98,7 @@ module Day8
         let ledMiddle =
             charsOccurrencesInInZeroSixAndNine 2
                 |> Seq.except(seq { Option.get ledTopRight; Option.get ledBottomRight })
+                |> Seq.filter(fun c -> fourChars |> Seq.contains(c))
                 |> Seq.tryItem 0
         let ledTopLeft =
             fourChars
