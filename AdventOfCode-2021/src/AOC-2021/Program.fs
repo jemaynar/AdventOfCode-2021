@@ -8,4 +8,5 @@ let main argv =
     Day6.Execute
     Day7.Execute
     Day8.Execute
+    Day9.Execute
     0
