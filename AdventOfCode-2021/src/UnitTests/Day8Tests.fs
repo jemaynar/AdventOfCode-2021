@@ -516,7 +516,7 @@ module UnitTests.Day8Tests
 
         let matchedResult = match result.Top with | Some(x) -> x | None -> '_'
         Assert.Equal<char>('d', matchedResult)
-        
+
     [<Fact>]
     let ``mapDigitalLedPositions: when 7 is cbd and 1 is bc when signal patterns with length 6 are fbegcd, adcefb, and fgdeca then BottomRight is c`` () =
         let signalEntry =
